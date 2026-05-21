@@ -1,0 +1,201 @@
+@import "tailwindcss";
+
+:root {
+  font-family: Inter, system-ui, sans-serif;
+  background: #ffffff;
+  color: #020617;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #ffffff;
+}
+
+button,
+a {
+  transition: all 0.2s ease;
+}
+
+.container-custom {
+  width: min(1180px, 92%);
+  margin: 0 auto;
+}
+
+.bg-blue-gradient {
+  background:
+    radial-gradient(circle at top left, rgba(56, 189, 248, 0.25), transparent 35%),
+    linear-gradient(135deg, #061a40 0%, #0b3d91 50%, #020617 100%);
+}
+
+.text-gradient-blue {
+  background: linear-gradient(90deg, #38bdf8, #ffffff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* =========================
+   Shared Rich Text Styles
+========================= */
+
+.prose,
+.article-content {
+  line-height: 1.85;
+  color: #334155;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.article-content h1,
+.article-content h2,
+.article-content h3,
+.article-content h4 {
+  color: #020617;
+  font-weight: 800;
+  line-height: 1.25;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  scroll-margin-top: 120px;
+}
+
+.prose h1,
+.article-content h1 {
+  font-size: 2rem;
+}
+
+.prose h2,
+.article-content h2 {
+  font-size: 1.35rem;
+}
+
+.prose h3,
+.article-content h3 {
+  font-size: 1rem;
+}
+
+.prose p,
+.article-content p {
+  margin-bottom: 1.25rem;
+}
+
+.prose ul,
+.prose ol,
+.article-content ul,
+.article-content ol {
+  margin: 1rem 0 1rem 1.5rem;
+  padding-left: 1.25rem;
+}
+
+.prose ul,
+.article-content ul {
+  list-style-type: disc;
+}
+
+.prose ol,
+.article-content ol {
+  list-style-type: decimal;
+}
+
+.prose li,
+.article-content li {
+  margin-bottom: 0.35rem;
+  padding-left: 0.25rem;
+}
+
+.prose li p,
+.article-content li p {
+  margin: 0.25rem 0;
+}
+
+.prose blockquote,
+.article-content blockquote {
+  margin: 2rem 0;
+  border-left: 5px solid #0b3d91;
+  background: #eaf2ff;
+  padding: 1rem 1.25rem;
+  font-style: italic;
+  color: #1e293b;
+}
+
+.prose a,
+.article-content a {
+  color: #0b3d91;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.prose img,
+.article-content img {
+  max-width: 100%;
+  height: auto;
+  margin: 2rem 0;
+  border-radius: 1.5rem;
+}
+
+/* =========================
+   Tiptap Editor Styles
+========================= */
+
+.ProseMirror {
+  min-height: 650px;
+  height: auto;
+  overflow: visible;
+  outline: none;
+}
+
+.ProseMirror p.is-editor-empty:first-child::before {
+  color: #94a3b8;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+/* =========================
+   Share Buttons
+========================= */
+
+.share-btn,
+.share-btn-dark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  color: #0b3d91;
+}
+
+.share-btn {
+  height: 42px;
+  width: 42px;
+  background: #ffffff;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+}
+
+.share-btn-dark {
+  height: 40px;
+  width: 40px;
+  background: #eaf2ff;
+}
+
+.share-btn:hover,
+.share-btn-dark:hover {
+  background: #0b3d91;
+  color: #ffffff;
+}
+
+.article-content h2,
+.article-content h3 {
+  scroll-margin-top: 120px;
+}
+
+.article-content .heading-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.75rem;
+  color: #0b3d91;
+  font-weight: 900;
+}
