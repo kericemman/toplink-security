@@ -306,7 +306,7 @@ const ArticleDetails = () => {
               </div>
             </div>
 
-            <div className="overflow-hidden rounded-3xl bg-white shadow-xl">
+            <div className="overflow-hidden rounded-l bg-white shadow-xl">
               {article.coverImage?.url ? (
                 <img
                   src={article.coverImage.url}

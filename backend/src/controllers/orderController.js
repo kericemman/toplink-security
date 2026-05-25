@@ -58,3 +58,16 @@ exports.downloadProduct = asyncHandler(async (req, res) => {
     productTitle: order.product.title,
   });
 });
+
+exports.deleteOrder = asyncHandler(async (req, res) => {
+  const order = await Order.findById(req.params.id);
+
+  if (!order) {
+    res.statusCode = 404;
+    throw new Error("Order not found");
+  }
+
+  await order.deleteOne();
+
+  return apiResponse(res, 200, "Order deleted successfully");
+});

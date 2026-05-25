@@ -32,13 +32,14 @@ const Footer = () => {
     { name: "About Us", path: "/about" },
     { name: "Security Library", path: "/store" },
     { name: "Insights", path: "/blog" },
-    { name: "Contact", path: "/contact" },
+    { name: "Contact", path: "/contact" }
   ];
 
   const services = [
-    { name: "Security Assessments", path: "/services/assessments" },
-    { name: "Awareness Training", path: "/services/training" },
-    { name: "Preparedness Solutions", path: "/services/preparedness" },
+  
+    { name: "Risk Assessment", path: "/services/risk-assessment" },
+    { name: "Security Training", path: "/services/security-training" },
+    { name: "Safety Planning", path: "/services/safety-planning" },
     { name: "Consultation", path: "/contact" },
   ];
 
@@ -78,7 +79,7 @@ const Footer = () => {
             </p>
             
             {/* Social Links */}
-            <div className="flex gap-3">
+            {/* <div className="flex gap-3">
               {socialLinks.map((social) => (
                 <a
                   key={social.label}
@@ -91,7 +92,7 @@ const Footer = () => {
                   <social.icon size={18} />
                 </a>
               ))}
-            </div>
+            </div> */}
           </div>
 
           {/* Quick Links */}

@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { getAdminOrders } from "../../services/orderService";
 import { formatCurrency } from "../../utils/formatCurrency";
 import { formatDate } from "../../utils/formatDate";
+import { Trash2 } from "lucide-react";
+import { getAdminOrders, deleteOrder } from "../../services/orderService";
 
 const AdminOrders = () => {
   const [orders, setOrders] = useState([]);
@@ -23,6 +24,21 @@ const AdminOrders = () => {
   useEffect(() => {
     fetchOrders();
   }, []);
+
+  const handleDelete = async (id) => {
+    const confirmDelete = window.confirm("Delete this order?");
+
+    if (!confirmDelete) return;
+
+    try {
+        await deleteOrder(id);
+        toast.success("Order deleted");
+
+        setOrders((prev) => prev.filter((order) => order._id !== id));
+    } catch (error) {
+        toast.error(error?.response?.data?.message || "Delete failed");
+    }
+    };
 
   return (
     <div>
@@ -45,6 +61,7 @@ const AdminOrders = () => {
                   <th className="px-5 py-4">Status</th>
                   <th className="px-5 py-4">Reference</th>
                   <th className="px-5 py-4">Date</th>
+                  <th className="px-5 py-4">Actions</th>
                 </tr>
               </thead>
 
@@ -89,6 +106,15 @@ const AdminOrders = () => {
                     <td className="px-5 py-4 text-sm text-slate-600">
                       {formatDate(order.createdAt)}
                     </td>
+
+                    <td className="px-5 py-4">
+                        <button
+                            onClick={() => handleDelete(order._id)}
+                            className="rounded-lg bg-red-50 p-2 text-red-600 hover:bg-red-100"
+                        >
+                            <Trash2 size={17} />
+                        </button>
+                        </td>
                   </tr>
                 ))}
               </tbody>

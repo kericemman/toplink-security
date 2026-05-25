@@ -7,6 +7,9 @@ import { initializePayment } from "../services/paymentService";
 import { formatCurrency } from "../utils/formatCurrency";
 
 const ProductDetails = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const { slug } = useParams();
 
   const [product, setProduct] = useState(null);

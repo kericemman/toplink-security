@@ -6,7 +6,7 @@ const ArticleCard = ({ article }) => {
   return (
     <Link
       to={`/blog/${article.slug}`}
-      className="group overflow-hidden rounded-3xl border border-blue-100 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
+      className="group overflow-hidden rounded-l border border-blue-100 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
     >
       <div className="h-52 bg-[#EAF2FF]">
         {article.coverImage?.url ? (

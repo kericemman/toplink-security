@@ -97,10 +97,6 @@ const Blog = () => {
             </p>
           </div>
 
-          <div className="mt-12">
-            <ArticleFilters filters={filters} setFilters={setFilters} />
-          </div>
-
           {loading ? (
             <div className="mt-12 grid gap-6 md:grid-cols-3">
               {[1, 2, 3].map((item) => (
@@ -123,6 +119,22 @@ const Blog = () => {
                   Showing {articles.length} of {pagination.total} articles
                 </p>
               )}
+
+              <div className="mt-14 border-t border-slate-200 pt-10">
+                <div className="mx-auto max-w-4xl">
+                  <div className="mb-5 text-center">
+                    <h3 className="text-xl font-bold text-slate-900">
+                      Explore More Articles
+                    </h3>
+
+                    <p className="mt-2 text-sm text-slate-500">
+                      Search and filter security insights by topic.
+                    </p>
+                  </div>
+
+                  <ArticleFilters filters={filters} setFilters={setFilters} />
+                </div>
+              </div>
             </>
           ) : (
             <div className="mt-12">
@@ -131,6 +143,22 @@ const Blog = () => {
                 title="No articles yet"
                 description="Check back soon for new security insights."
               />
+
+              <div className="mt-14 border-t border-slate-200 pt-10">
+                <div className="mx-auto max-w-4xl">
+                  <div className="mb-5 text-center">
+                    <h3 className="text-xl font-bold text-slate-900">
+                      Explore More Articles
+                    </h3>
+
+                    <p className="mt-2 text-sm text-slate-500">
+                      Search and filter security insights by topic.
+                    </p>
+                  </div>
+
+                  <ArticleFilters filters={filters} setFilters={setFilters} />
+                </div>
+              </div>
             </div>
           )}
         </div>

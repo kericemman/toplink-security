@@ -7,16 +7,19 @@ import { getProducts } from "../services/productService";
 import { initializePayment } from "../services/paymentService";
 
 const Store = () => {
-    useEffect(() => {
-        window.scrollTo(0, 0);
-      }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const [products, setProducts] = useState([]);
   const [pagination, setPagination] = useState(null);
   const [loading, setLoading] = useState(true);
+
   const [buyer, setBuyer] = useState({
     customerName: "",
     customerEmail: "",
   });
+
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   const [filters, setFilters] = useState({
@@ -90,13 +93,10 @@ const Store = () => {
             Security Library
           </p>
 
-          
-
-          
-        </div>
-
-        <div className="mt-12">
-          <ProductFilters filters={filters} setFilters={setFilters} />
+          <p className="mt-5 leading-8 text-slate-600">
+            Expert-written books and practical resources designed to help you
+            understand risk, improve preparedness, and protect what matters most.
+          </p>
         </div>
 
         {loading ? (
@@ -125,6 +125,23 @@ const Store = () => {
                 Showing {products.length} of {pagination.total} resources
               </p>
             )}
+
+            <div className="mt-14 border-t border-slate-200 pt-10">
+              <div className="mx-auto max-w-4xl">
+                <div className="mb-5 text-center">
+                  <h3 className="text-xl font-bold text-slate-900">
+                    Explore More Resources
+                  </h3>
+
+                  <p className="mt-2 text-sm text-slate-500">
+                    Search and filter books by topic, category, or newest
+                    releases.
+                  </p>
+                </div>
+
+                <ProductFilters filters={filters} setFilters={setFilters} />
+              </div>
+            </div>
           </>
         ) : (
           <div className="mt-12">
@@ -133,6 +150,23 @@ const Store = () => {
               title="No books available yet"
               description="Our security experts are currently preparing valuable resources."
             />
+
+            <div className="mt-14 border-t border-slate-200 pt-10">
+              <div className="mx-auto max-w-4xl">
+                <div className="mb-5 text-center">
+                  <h3 className="text-xl font-bold text-slate-900">
+                    Explore More Resources
+                  </h3>
+
+                  <p className="mt-2 text-sm text-slate-500">
+                    Search and filter books by topic, category, or newest
+                    releases.
+                  </p>
+                </div>
+
+                <ProductFilters filters={filters} setFilters={setFilters} />
+              </div>
+            </div>
           </div>
         )}
       </div>
@@ -144,9 +178,11 @@ const Store = () => {
               <p className="text-sm font-bold uppercase tracking-wide text-[#0B3D91]">
                 Complete Purchase
               </p>
+
               <h2 className="mt-2 text-2xl font-black text-[#020617]">
                 {selectedProduct.title}
               </h2>
+
               <p className="mt-2 text-slate-600">
                 Enter your details to continue to secure checkout.
               </p>
@@ -157,6 +193,7 @@ const Store = () => {
                 <label className="mb-2 block text-sm font-semibold text-slate-700">
                   Full Name *
                 </label>
+
                 <input
                   name="customerName"
                   value={buyer.customerName}
@@ -171,6 +208,7 @@ const Store = () => {
                 <label className="mb-2 block text-sm font-semibold text-slate-700">
                   Email Address *
                 </label>
+
                 <input
                   name="customerEmail"
                   type="email"

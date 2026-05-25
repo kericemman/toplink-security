@@ -5,7 +5,7 @@ import Button from "../common/Button";
 
 const ProductCard = ({ product, onBuy }) => {
   return (
-    <div className="overflow-hidden rounded-3xl border border-blue-100 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
+    <div className="overflow-hidden  border border-blue-100 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
       <Link to={`/store/${product.slug}`} className="block h-52 bg-[#EAF2FF]">
         {product.coverImage?.url ? (
           <img
@@ -40,10 +40,12 @@ const ProductCard = ({ product, onBuy }) => {
             {formatCurrency(product.price, product.currency)}
           </p>
 
-          <Button type="button" onClick={() => onBuy(product)}>
-            <ShoppingCart size={17} />
-            Buy
-          </Button>
+          <Link
+            to={`/store/${product.slug}`}
+            className="rounded-xl  px-5 py-3 text-sm font-semibold text-[#0B3D91]"
+          >
+            View Details
+          </Link>
         </div>
       </div>
     </div>
