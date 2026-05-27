@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Mail, MapPin, Phone, ShieldCheck, ChevronRight } from "lucide-react";
-import { FaFacebook, FaInstagram, FaLinkedinIn, FaTwitter } from "react-icons/fa6";
+import { FaFacebook, FaInstagram, FaLinkedinIn, FaTwitter, FaWhatsapp } from "react-icons/fa6";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { subscribeToNewsletter } from "../../services/subscriberService";
@@ -44,10 +44,9 @@ const Footer = () => {
   ];
 
   const socialLinks = [
-    { icon: FaFacebook, href: "https://facebook.com", label: "Facebook" },
-    { icon: FaTwitter, href: "https://twitter.com", label: "Twitter" },
-    { icon: FaLinkedinIn, href: "https://linkedin.com", label: "LinkedIn" },
-    { icon: FaInstagram, href: "https://instagram.com", label: "Instagram" },
+    
+    { icon: FaLinkedinIn, href: "https://www.linkedin.com/in/cyprian-musanya-a5776812b?utm_source=share_via&utm_content=profile&utm_medium=member_android", label: "LinkedIn" },   
+    { icon: FaWhatsapp, href: "https://wa.me/254725614183", label: "WhatsApp" },
   ];
 
   return (
@@ -79,7 +78,7 @@ const Footer = () => {
             </p>
             
             {/* Social Links */}
-            {/* <div className="flex gap-3">
+            <div className="flex gap-3">
               {socialLinks.map((social) => (
                 <a
                   key={social.label}
@@ -92,7 +91,7 @@ const Footer = () => {
                   <social.icon size={18} />
                 </a>
               ))}
-            </div> */}
+            </div>
           </div>
 
           {/* Quick Links */}

@@ -484,6 +484,8 @@ const ArticleDetails = () => {
                 </Link>
               ))}
             </div>
+
+            
           </div>
         </section>
       )}

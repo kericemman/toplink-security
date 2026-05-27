@@ -62,7 +62,7 @@ const AdminLayout = () => {
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-slate-900 to-slate-700 text-white">
             <ShieldCheck size={16} />
           </div>
-          <h2 className="text-base font-semibold text-slate-900">TopLink Admin</h2>
+          <h2 className="text-base font-semibold text-slate-900">TopLink Security</h2>
         </div>
         <p className="mt-2 text-xs text-slate-500">{user?.email}</p>
       </div>
@@ -131,7 +131,7 @@ const AdminLayout = () => {
               <ShieldCheck size={16} />
             </div>
             <div>
-              <h2 className="text-sm font-semibold text-slate-900">TopLink Admin</h2>
+              <h2 className="text-sm font-semibold text-slate-900">TopLink Security</h2>
               <p className="text-xs text-slate-500">{user?.email?.split('@')[0]}</p>
             </div>
           </div>

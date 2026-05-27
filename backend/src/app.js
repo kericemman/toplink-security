@@ -23,10 +23,7 @@ const app = express();
 app.set("trust proxy", 1);
 
 app.use(cors({
-  origin: [
-    "https://toplinksecurity.com",
-    "https://www.toplinksecurity.com"
-  ],
+  origin: process.env.CLIENT_URL,
   credentials: true
 }));
 
