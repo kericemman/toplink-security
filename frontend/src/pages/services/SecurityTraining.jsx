@@ -7,16 +7,16 @@ import {
 import ServicePageTemplate from "../../components/services/ServicePageTemplate";
 
 import { useEffect } from "react";
-import image from "../../assets/3.jpg";
+import image from "../../assets/services/security-training.jpg";
 const SecurityTraining = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
       }, []);
   return (
     <ServicePageTemplate
-      eyebrow="Security Awareness Training"
-      title="Build a security-conscious team that notices, reports, and responds."
-      description="TopLink Security delivers practical awareness training that helps teams recognize threats, improve reporting discipline, and apply security measures in everyday work environments."
+      eyebrow="Security Awareness & Capability Development"
+      title="Build a workforce that recognizes risk and acts with confidence."
+      description="Build a high-performance culture of security across your workforce by improving threat recognition, strengthening reporting discipline, and embedding proactive behaviors in everyday operations."
       image={image}
       badge="Awareness that changes behavior"
       primaryCta="Request Training"

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import EmptyState from "../components/common/EmptyState";
 import ProductCard from "../components/store/ProductCard";
@@ -28,7 +28,7 @@ const Store = () => {
     sort: "newest",
   });
 
-  const fetchProducts = async () => {
+  const fetchProducts = useCallback(async () => {
     try {
       setLoading(true);
 
@@ -47,12 +47,12 @@ const Store = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [filters.category, filters.search, filters.sort]);
 
   useEffect(() => {
     const timer = setTimeout(fetchProducts, 400);
     return () => clearTimeout(timer);
-  }, [filters]);
+  }, [fetchProducts]);
 
   const handleBuyClick = (product) => {
     setSelectedProduct(product);
@@ -86,31 +86,27 @@ const Store = () => {
   };
 
   return (
-    <section className="bg-white py-20">
+    <section className="resource-page bg-white py-20 lg:py-28">
       <div className="container-custom">
-        <div className="mx-auto max-w-3xl text-center">
-          <p className="mb-3 text-sm font-bold uppercase tracking-wide text-[#0B3D91]">
-            Security Library
-          </p>
-
-          <p className="mt-5 leading-8 text-slate-600">
-            Expert-written books and practical resources designed to help you
-            understand risk, improve preparedness, and protect what matters most.
-          </p>
+        <div className="grid gap-10 border-b border-slate-300 pb-14 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
+          <div><p className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#0CA4B8]">Resource Library</p><h1 className="mt-5 text-4xl font-extrabold leading-[1.08] text-[#0B2F50] md:text-6xl">Professional tools for informed security decisions.</h1></div>
+          <p className="border-l-2 border-[#B99753] pl-7 text-lg leading-8 text-slate-600">Access practical books, templates, and operational frameworks designed to move security leaders from theory into disciplined execution.</p>
         </div>
 
+        <div className="mt-12"><ProductFilters filters={filters} setFilters={setFilters} /></div>
+
         {loading ? (
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
+          <div className="mt-14 grid gap-10 md:grid-cols-3">
             {[1, 2, 3].map((item) => (
               <div
                 key={item}
-                className="h-96 animate-pulse rounded-3xl bg-blue-50"
+                className="h-96 animate-pulse bg-[#F1F0EC]"
               />
             ))}
           </div>
         ) : products.length > 0 ? (
           <>
-            <div className="mt-12 grid gap-7 md:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-14 grid gap-x-8 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
               {products.map((product) => (
                 <ProductCard
                   key={product._id}
@@ -126,60 +122,28 @@ const Store = () => {
               </p>
             )}
 
-            <div className="mt-14 border-t border-slate-200 pt-10">
-              <div className="mx-auto max-w-4xl">
-                <div className="mb-5 text-center">
-                  <h3 className="text-xl font-bold text-slate-900">
-                    Explore More Resources
-                  </h3>
-
-                  <p className="mt-2 text-sm text-slate-500">
-                    Search and filter books by topic, category, or newest
-                    releases.
-                  </p>
-                </div>
-
-                <ProductFilters filters={filters} setFilters={setFilters} />
-              </div>
-            </div>
           </>
         ) : (
           <div className="mt-12">
             <EmptyState
-              icon="📚"
+              icon={null}
               title="No books available yet"
               description="Our security experts are currently preparing valuable resources."
             />
 
-            <div className="mt-14 border-t border-slate-200 pt-10">
-              <div className="mx-auto max-w-4xl">
-                <div className="mb-5 text-center">
-                  <h3 className="text-xl font-bold text-slate-900">
-                    Explore More Resources
-                  </h3>
-
-                  <p className="mt-2 text-sm text-slate-500">
-                    Search and filter books by topic, category, or newest
-                    releases.
-                  </p>
-                </div>
-
-                <ProductFilters filters={filters} setFilters={setFilters} />
-              </div>
-            </div>
           </div>
         )}
       </div>
 
       {selectedProduct && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 px-4">
-          <div className="w-full max-w-lg rounded-3xl bg-white p-7 shadow-2xl">
+          <div className="w-full max-w-lg border-t-4 border-[#0CA4B8] bg-white p-8 shadow-2xl">
             <div className="mb-6">
-              <p className="text-sm font-bold uppercase tracking-wide text-[#0B3D91]">
+              <p className="text-xs font-extrabold uppercase tracking-[0.16em] text-[#0CA4B8]">
                 Complete Purchase
               </p>
 
-              <h2 className="mt-2 text-2xl font-black text-[#020617]">
+              <h2 className="mt-3 text-2xl font-extrabold text-[#0B2F50]">
                 {selectedProduct.title}
               </h2>
 
@@ -200,7 +164,7 @@ const Store = () => {
                   onChange={handleBuyerChange}
                   required
                   placeholder="Your full name"
-                  className="w-full rounded-xl border border-slate-200 px-4 py-3 outline-none focus:border-[#0B3D91]"
+                  className="w-full border-0 border-b border-slate-300 px-0 py-3 outline-none focus:border-[#0CA4B8]"
                 />
               </div>
 
@@ -216,7 +180,7 @@ const Store = () => {
                   onChange={handleBuyerChange}
                   required
                   placeholder="you@example.com"
-                  className="w-full rounded-xl border border-slate-200 px-4 py-3 outline-none focus:border-[#0B3D91]"
+                  className="w-full border-0 border-b border-slate-300 px-0 py-3 outline-none focus:border-[#0CA4B8]"
                 />
               </div>
 
@@ -224,14 +188,14 @@ const Store = () => {
                 <button
                   type="button"
                   onClick={() => setSelectedProduct(null)}
-                  className="flex-1 rounded-xl border border-slate-200 px-5 py-3 font-semibold text-slate-700 hover:bg-slate-50"
+                  className="flex-1 border border-slate-300 px-5 py-3 text-xs font-extrabold uppercase tracking-[0.08em] text-slate-700 hover:bg-slate-50"
                 >
                   Cancel
                 </button>
 
                 <button
                   type="submit"
-                  className="flex-1 rounded-xl bg-[#0B3D91] px-5 py-3 font-semibold text-white hover:bg-[#061A40]"
+                  className="flex-1 bg-[#0B2F50] px-5 py-3 text-xs font-extrabold uppercase tracking-[0.08em] text-white hover:bg-[#0CA4B8]"
                 >
                   Pay Now
                 </button>

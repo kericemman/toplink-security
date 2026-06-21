@@ -8,5 +8,3 @@ export const colors = {
   white: "#FFFFFF",
   muted: "#64748B",
 };
-
-#0B3D91

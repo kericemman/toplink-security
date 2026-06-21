@@ -3,10 +3,11 @@ const {
   initializePayment,
   verifyPayment,
 } = require("../controllers/paystackController");
+const paymentRateLimiter = require("../middlewares/paymentRateLimiter");
 
 const router = express.Router();
 
-router.post("/initialize", initializePayment);
-router.get("/verify/:reference", verifyPayment);
+router.post("/initialize", paymentRateLimiter, initializePayment);
+router.post("/verify", paymentRateLimiter, verifyPayment);
 
 module.exports = router;

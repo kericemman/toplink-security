@@ -5,6 +5,7 @@ const slugifyText = require("../utils/slugifyText");
 const Subscriber = require("../models/Subscriber");
 const { sendEmail } = require("../services/emailService");
 const { newBlogEmail } = require("../templates/newBlogEmail");
+const { escapeRegex, getPagination } = require("../utils/query");
 
 
 const notifySubscribers = async (article) => {
@@ -98,10 +99,11 @@ exports.getArticles = asyncHandler(async (req, res) => {
   if (category && category !== "All") query.category = category;
 
   if (search) {
+    const safeSearch = escapeRegex(String(search).trim().slice(0, 100));
     query.$or = [
-      { title: { $regex: search, $options: "i" } },
-      { excerpt: { $regex: search, $options: "i" } },
-      { content: { $regex: search, $options: "i" } },
+      { title: { $regex: safeSearch, $options: "i" } },
+      { excerpt: { $regex: safeSearch, $options: "i" } },
+      { content: { $regex: safeSearch, $options: "i" } },
     ];
   }
 
@@ -111,21 +113,21 @@ exports.getArticles = asyncHandler(async (req, res) => {
     title: { title: 1 },
   };
 
-  const skip = (Number(page) - 1) * Number(limit);
+  const pagination = getPagination(page, limit, 50);
 
   const articles = await Article.find(query)
     .populate("author", "name email")
     .sort(sortOptions[sort] || sortOptions.newest)
-    .skip(skip)
-    .limit(Number(limit));
+    .skip(pagination.skip)
+    .limit(pagination.limit);
 
   const total = await Article.countDocuments(query);
 
   return apiResponse(res, 200, "Articles fetched successfully", {
     articles,
     pagination: {
-      page: Number(page),
-      pages: Math.ceil(total / Number(limit)),
+      page: pagination.page,
+      pages: Math.ceil(total / pagination.limit),
       total,
     },
   });
@@ -186,6 +188,8 @@ exports.updateArticle = asyncHandler(async (req, res) => {
     throw new Error("Article not found");
   }
 
+  const wasDraft = article.status !== "published";
+
   const {
     title,
     excerpt,
@@ -227,13 +231,11 @@ exports.updateArticle = asyncHandler(async (req, res) => {
     }
   }
 
-  const wasDraft = article.status !== "published";
-
   const updatedArticle = await article.save();
 
   if (wasDraft && updatedArticle.status === "published") {
-    notifySubscribers(updatedArticle);
-    }
+    await notifySubscribers(updatedArticle);
+  }
 
   return apiResponse(res, 200, "Article updated successfully", updatedArticle);
 });

@@ -1,68 +1,49 @@
-import { ArrowRight, ShieldCheck } from "lucide-react";
+import { ArrowRight, BarChart3, CheckCircle2, Compass, Shield } from "lucide-react";
 import Button from "../common/Button";
+import heroImage from "../../assets/services/physical-security.jpg";
 
-const Hero = () => {
-  return (
-    <section className="bg-[#020617] py-24 text-white">
-      <div className="container-custom grid items-center gap-12 md:grid-cols-2">
-        <div>
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-300">
-            <ShieldCheck size={16} />
-            20+ years security experience
-          </div>
+const proofPoints = [
+  { icon: Shield, title: "20+ Years", text: "Field-led security and risk advisory experience." },
+  { icon: Compass, title: "Independent", text: "Objective advice aligned with your interests." },
+  { icon: BarChart3, title: "Strategic", text: "Board-level clarity for complex decisions." },
+  { icon: CheckCircle2, title: "Practical", text: "Actionable measures built for operations." },
+];
 
-          <h1 className="text-2xl font-black leading-tight md:text-4xl">
-            Strong Security Starts With Awareness and Control.
-          </h1>
-
-          <p className="mt-6 max-w-xl text-lg leading-8 text-slate-300">
-            TopLink Security provides intelligence-led risk assessments,
-            physical security reviews, awareness training, and preparedness
-            planning designed to reduce vulnerabilities before they become
-            losses.
-          </p>
-
-          <div className="mt-8 flex flex-wrap gap-4">
-            <Button to="/store" variant="secondary">
-             Explore Resources
-            </Button>
-
-            <Button to="/blog" variant="outline">
-              Read Articles
-            </Button>
+const Hero = () => (
+  <section className="bg-[#F8F7F3] pt-24 lg:pt-28">
+    <div className="grid min-h-[700px] lg:grid-cols-[minmax(0,1fr)_360px]">
+      <div className="grid lg:grid-rows-[1fr_210px]">
+        <div className="flex items-center py-16 lg:py-20">
+          <div className="mx-auto w-[min(880px,calc(100%-40px))]">
+            <p className="mb-6 text-xs font-extrabold uppercase tracking-[0.22em] text-[#0CA4B8]">Risk &amp; Security Advisory Services</p>
+            <h1 className="max-w-4xl text-4xl font-extrabold leading-[1.08] text-[#0B2F50] sm:text-5xl lg:text-7xl">
+              Strong Security Starts With Understanding Risk and Taking Informed Action.
+            </h1>
+            <div className="mt-8 h-0.5 w-12 bg-[#B99753]" />
+            <p className="mt-7 max-w-2xl text-lg leading-8 text-slate-600">
+              Independent risk and security advisory for organizations, executives, and security leaders facing complex operational decisions.
+            </p>
+            <div className="mt-9">
+              <Button to="/contact" variant="lightOutline">Book a Discussion <ArrowRight size={17} /></Button>
+            </div>
           </div>
         </div>
-
-        <div className="rounded-3xl border border-white/10 bg-white/5 p-8 shadow-2xl">
-          <p className="mb-6 text-sm font-semibold uppercase tracking-wide text-white/70">
-            Security Knowledge
-          </p>
-
-          <h2 className="text-2xl font-bold">Strong Security Starts With Awareness and Control.</h2>
-
-          <p className="mt-4 leading-7 text-slate-300">
-            Physical security and risk management resources, consulting, and
-            training built on structured assessments, prevention, and practical
-            decision-making.
-          </p>
-
-          <div className="mt-8 grid gap-4">
-            {["Risk Awareness", "Security Training", "Physical Controls"].map(
-              (item) => (
-                <div
-                  key={item}
-                  className="flex items-center justify-between rounded-xl bg-white/10 p-4"
-                >
-                  <span>{item}</span>
-                  <ArrowRight size={18} />
-                </div>
-              )
-            )}
-          </div>
-        </div>
+        <img src={heroImage} alt="Modern corporate environment" className="h-full min-h-52 w-full object-cover" />
       </div>
-    </section>
-  );
-};
+
+      <aside className="grid bg-[#0B2F50] px-8 py-10 text-white sm:grid-cols-2 lg:grid-cols-1 lg:px-10 lg:py-12">
+        {proofPoints.map((point) => (
+          <div key={point.title} className="flex gap-4 border-b border-white/20 py-6 first:pt-0 last:border-b-0 last:pb-0 sm:px-4 lg:px-0">
+            <point.icon className="mt-1 shrink-0 text-[#B99753]" size={27} strokeWidth={1.5} />
+            <div>
+              <h2 className="text-sm font-extrabold uppercase tracking-[0.1em] text-[#D4B66E]">{point.title}</h2>
+              <p className="mt-2 text-sm leading-6 text-slate-300">{point.text}</p>
+            </div>
+          </div>
+        ))}
+      </aside>
+    </div>
+  </section>
+);
 
 export default Hero;

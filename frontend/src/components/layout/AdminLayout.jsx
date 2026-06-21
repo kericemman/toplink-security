@@ -1,5 +1,5 @@
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   BarChart3,
   BookOpen,
@@ -26,24 +26,79 @@ const adminLinks = [
   { name: "Subscribers", path: "/admin/subscribers", icon: Users },
 ];
 
+const SidebarContent = ({ email, onClose, onLogout }) => (
+  <div className="flex h-full flex-col">
+    <div className="border-b border-slate-100 pb-6">
+      <div className="flex items-center gap-2">
+        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-slate-900 to-slate-700 text-white">
+          <ShieldCheck size={16} />
+        </div>
+        <h2 className="text-base font-semibold text-slate-900">
+          TopLink Security
+        </h2>
+      </div>
+      <p className="mt-2 text-xs text-slate-500">{email}</p>
+    </div>
+
+    <nav className="flex-1 space-y-1 py-6">
+      {adminLinks.map((link) => {
+        const Icon = link.icon;
+
+        return (
+          <NavLink
+            key={link.name}
+            to={link.path}
+            end={link.path === "/admin"}
+            onClick={onClose}
+            className={({ isActive }) =>
+              `group flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200 ${
+                isActive
+                  ? "bg-slate-100 text-slate-900"
+                  : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+              }`
+            }
+          >
+            <Icon
+              size={18}
+              className="transition-transform duration-200 group-hover:scale-105"
+            />
+            <span>{link.name}</span>
+          </NavLink>
+        );
+      })}
+    </nav>
+
+    <div className="space-y-1 border-t border-slate-100 pt-4">
+      <NavLink
+        to="/"
+        onClick={onClose}
+        className="group flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-slate-600 transition-all duration-200 hover:bg-slate-50 hover:text-slate-900"
+      >
+        <Home
+          size={18}
+          className="transition-transform duration-200 group-hover:scale-105"
+        />
+        <span>Back to Website</span>
+      </NavLink>
+
+      <button
+        onClick={onLogout}
+        className="group flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-red-600 transition-all duration-200 hover:bg-red-50"
+      >
+        <LogOut
+          size={18}
+          className="transition-transform duration-200 group-hover:scale-105"
+        />
+        <span>Logout</span>
+      </button>
+    </div>
+  </div>
+);
+
 const AdminLayout = () => {
   const { logout, user } = useAuth();
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 1024);
-      if (window.innerWidth >= 1024) {
-        setMobileMenuOpen(false);
-      }
-    };
-    
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
 
   const handleLogout = () => {
     logout();
@@ -53,73 +108,6 @@ const AdminLayout = () => {
   const closeMobileMenu = () => {
     setMobileMenuOpen(false);
   };
-
-  const SidebarContent = () => (
-    <div className="flex h-full flex-col">
-      {/* Header */}
-      <div className="border-b border-slate-100 pb-6">
-        <div className="flex items-center gap-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-slate-900 to-slate-700 text-white">
-            <ShieldCheck size={16} />
-          </div>
-          <h2 className="text-base font-semibold text-slate-900">TopLink Security</h2>
-        </div>
-        <p className="mt-2 text-xs text-slate-500">{user?.email}</p>
-      </div>
-
-      {/* Navigation */}
-      <nav className="flex-1 space-y-1 py-6">
-        {adminLinks.map((link) => {
-          const Icon = link.icon;
-
-          return (
-            <NavLink
-              key={link.name}
-              to={link.path}
-              end={link.path === "/admin"}
-              onClick={closeMobileMenu}
-              className={({ isActive }) =>
-                `group flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200 ${
-                  isActive
-                    ? "bg-slate-100 text-slate-900"
-                    : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
-                }`
-              }
-            >
-              <Icon 
-                size={18} 
-                className="transition-transform duration-200 group-hover:scale-105" 
-              />
-              <span>{link.name}</span>
-              {({ isActive }) => isActive && (
-                <span className="ml-auto h-1 w-1 rounded-full bg-slate-900" />
-              )}
-            </NavLink>
-          );
-        })}
-      </nav>
-
-      {/* Footer Links */}
-      <div className="border-t border-slate-100 pt-4 space-y-1">
-        <NavLink
-          to="/"
-          onClick={closeMobileMenu}
-          className="group flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-slate-600 transition-all duration-200 hover:bg-slate-50 hover:text-slate-900"
-        >
-          <Home size={18} className="transition-transform duration-200 group-hover:scale-105" />
-          <span>Back to Website</span>
-        </NavLink>
-
-        <button
-          onClick={handleLogout}
-          className="group flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-red-600 transition-all duration-200 hover:bg-red-50"
-        >
-          <LogOut size={18} className="transition-transform duration-200 group-hover:scale-105" />
-          <span>Logout</span>
-        </button>
-      </div>
-    </div>
-  );
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -150,12 +138,16 @@ const AdminLayout = () => {
         {/* Desktop Sidebar */}
         <aside className="hidden lg:block lg:sticky lg:top-0 lg:h-screen lg:overflow-y-auto">
           <div className="flex h-full flex-col bg-white p-6">
-            <SidebarContent />
+            <SidebarContent
+              email={user?.email}
+              onClose={closeMobileMenu}
+              onLogout={handleLogout}
+            />
           </div>
         </aside>
 
         {/* Mobile Sidebar Overlay */}
-        {mobileMenuOpen && isMobile && (
+        {mobileMenuOpen && (
           <>
             <div
               className="fixed inset-0 z-40 bg-black/20 backdrop-blur-sm lg:hidden"
@@ -171,7 +163,11 @@ const AdminLayout = () => {
                     <X size={20} />
                   </button>
                 </div>
-                <SidebarContent />
+                <SidebarContent
+                  email={user?.email}
+                  onClose={closeMobileMenu}
+                  onLogout={handleLogout}
+                />
               </div>
             </aside>
           </>

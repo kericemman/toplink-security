@@ -17,6 +17,49 @@ import {
 import { subscribeToNewsletter } from "../services/subscriberService";
 import { formatDate } from "../utils/formatDate";
 import { FaFacebook, FaLinkedin, FaTwitter } from "react-icons/fa";
+import sanitizeHtml from "../utils/sanitizeHtml";
+
+const extractHeadings = (htmlContent) => {
+  const tempDiv = document.createElement("div");
+  tempDiv.innerHTML = htmlContent;
+
+  let headingCount = 0;
+  let listCount = 0;
+
+  return Array.from(tempDiv.querySelectorAll("h2, h3, ol > li")).map(
+    (item, index) => {
+      const tag = item.tagName.toLowerCase();
+
+      if (tag === "h2" || tag === "h3") {
+        headingCount += 1;
+        listCount = 0;
+      }
+
+      if (tag === "li") listCount += 1;
+
+      return {
+        id: `toc-item-${index}`,
+        text: item.textContent,
+        level: tag,
+        number:
+          tag === "li" && headingCount > 0
+            ? `${headingCount}.${listCount}`
+            : `${headingCount}`,
+      };
+    }
+  );
+};
+
+const addHeadingIdsToContent = (htmlContent) => {
+  const tempDiv = document.createElement("div");
+  tempDiv.innerHTML = htmlContent;
+
+  tempDiv.querySelectorAll("h2, h3, ol > li").forEach((item, index) => {
+    item.setAttribute("id", `toc-item-${index}`);
+  });
+
+  return tempDiv.innerHTML;
+};
 
 const ArticleDetails = () => {
   const { slug } = useParams();
@@ -28,7 +71,9 @@ const ArticleDetails = () => {
   const [readProgress, setReadProgress] = useState(0);
 
   const [showSubscribeModal, setShowSubscribeModal] = useState(false);
-  const [hasAccess, setHasAccess] = useState(false);
+  const [hasAccess, setHasAccess] = useState(
+    () => localStorage.getItem("toplink_article_access") === "true"
+  );
   const [subscriberForm, setSubscriberForm] = useState({
     name: "",
     email: "",
@@ -36,78 +81,37 @@ const ArticleDetails = () => {
   const [subscribing, setSubscribing] = useState(false);
 
   useEffect(() => {
-    const subscribed = localStorage.getItem("toplink_article_access");
-    setHasAccess(subscribed === "true");
-  }, []);
+    let active = true;
 
-  const extractHeadings = (htmlContent) => {
-    const tempDiv = document.createElement("div");
-    tempDiv.innerHTML = htmlContent;
+    const fetchArticle = async () => {
+      try {
+        setLoading(true);
+        const result = await getArticleBySlug(slug);
+        const safeContent = sanitizeHtml(result.content || "");
+        const toc = extractHeadings(safeContent);
+        const contentWithIds = addHeadingIdsToContent(safeContent);
 
-    let headingCount = 0;
-    let listCount = 0;
+        if (!active) return;
+        setTableOfContents(toc);
+        setArticle({ ...result, content: contentWithIds });
 
-    return Array.from(tempDiv.querySelectorAll("h2, h3, ol > li")).map(
-      (item, index) => {
-        const tag = item.tagName.toLowerCase();
-
-        if (tag === "h2" || tag === "h3") {
-          headingCount += 1;
-          listCount = 0;
+        const related = await getRelatedArticles(result._id, result.category);
+        if (active) setRelatedArticles(related || []);
+      } catch (error) {
+        if (active) {
+          toast.error(error?.response?.data?.message || "Article not found");
         }
-
-        if (tag === "li") {
-          listCount += 1;
-        }
-
-        return {
-          id: `toc-item-${index}`,
-          text: item.textContent,
-          level: tag,
-          number:
-            tag === "li" && headingCount > 0
-              ? `${headingCount}.${listCount}`
-              : `${headingCount}`,
-        };
+      } finally {
+        if (active) setLoading(false);
       }
-    );
-  };
+    };
 
-  const addHeadingIdsToContent = (htmlContent) => {
-    const tempDiv = document.createElement("div");
-    tempDiv.innerHTML = htmlContent;
-
-    tempDiv.querySelectorAll("h2, h3, ol > li").forEach((item, index) => {
-      item.setAttribute("id", `toc-item-${index}`);
-    });
-
-    return tempDiv.innerHTML;
-  };
-
-  const fetchArticle = async () => {
-    try {
-      setLoading(true);
-
-      const result = await getArticleBySlug(slug);
-
-      const toc = extractHeadings(result.content || "");
-      const contentWithIds = addHeadingIdsToContent(result.content || "");
-
-      setTableOfContents(toc);
-      setArticle({ ...result, content: contentWithIds });
-
-      const related = await getRelatedArticles(result._id, result.category);
-      setRelatedArticles(related || []);
-    } catch (error) {
-      toast.error(error?.response?.data?.message || "Article not found");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
     window.scrollTo(0, 0);
     fetchArticle();
+
+    return () => {
+      active = false;
+    };
   }, [slug]);
 
   useEffect(() => {
@@ -204,12 +208,12 @@ const ArticleDetails = () => {
 
   if (loading) {
     return (
-      <section className="bg-white py-24">
+      <section className="bg-[#F8F7F3] py-24">
         <div className="container-custom animate-pulse">
-          <div className="h-10 w-40 rounded bg-blue-50" />
+          <div className="h-10 w-40 bg-slate-200" />
           <div className="mt-10 grid gap-10 lg:grid-cols-2">
-            <div className="h-80 rounded-3xl bg-blue-50" />
-            <div className="h-80 rounded-3xl bg-blue-50" />
+            <div className="h-80 bg-slate-200" />
+            <div className="h-80 bg-slate-200" />
           </div>
         </div>
       </section>
@@ -219,12 +223,12 @@ const ArticleDetails = () => {
   if (!article) {
     return (
       <section className="bg-white py-24 text-center">
-        <h1 className="text-3xl font-black text-[#020617]">
+        <h1 className="text-3xl font-extrabold text-[#0B2F50]">
           Article not found
         </h1>
         <Link
           to="/blog"
-          className="mt-8 inline-flex rounded-xl bg-[#0B3D91] px-5 py-3 font-semibold text-white"
+          className="mt-8 inline-flex bg-[#0B2F50] px-5 py-3 font-semibold text-white"
         >
           Back to Blog
         </Link>
@@ -234,11 +238,11 @@ const ArticleDetails = () => {
 
   return (
     <article className="bg-white">
-      <section className="bg-[#EAF2FF] py-10">
+      <section className="border-b border-slate-200 bg-[#F8F7F3] py-16 lg:py-20">
         <div className="container-custom">
           <Link
             to="/blog"
-            className="mb-8 inline-flex items-center gap-2 font-semibold text-[#0B3D91]"
+            className="mb-10 inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-[0.1em] text-[#0CA4B8]"
           >
             <ArrowLeft size={18} />
             Back to Articles
@@ -246,11 +250,11 @@ const ArticleDetails = () => {
 
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <div>
-              <p className="mb-4 inline-flex rounded-full bg-white px-4 py-2 text-xs font-bold uppercase tracking-wide text-[#0B3D91]">
+              <p className="mb-5 inline-flex border-l-2 border-[#B99753] pl-4 text-xs font-extrabold uppercase tracking-[0.16em] text-[#0B2F50]">
                 {article.category}
               </p>
 
-              <h1 className="text-2xl font-black leading-tight text-[#020617] md:text-4xl">
+              <h1 className="text-4xl font-extrabold leading-[1.1] text-[#0B2F50] md:text-6xl">
                 {article.title}
               </h1>
 
@@ -306,7 +310,7 @@ const ArticleDetails = () => {
               </div>
             </div>
 
-            <div className="overflow-hidden rounded-l bg-white shadow-xl">
+            <div className="overflow-hidden border-t-2 border-[#0B2F50] bg-white">
               {article.coverImage?.url ? (
                 <img
                   src={article.coverImage.url}
@@ -314,7 +318,7 @@ const ArticleDetails = () => {
                   className="h-[320px] w-full object-cover"
                 />
               ) : (
-                <div className="flex h-[420px] items-center justify-center text-[#0B3D91]">
+                <div className="flex h-[420px] items-center justify-center text-[#0CA4B8]">
                   <BookOpen size={90} />
                 </div>
               )}
@@ -323,7 +327,7 @@ const ArticleDetails = () => {
         </div>
       </section>
 
-      <section className="py-8">
+      <section className="py-16 lg:py-20">
         <div className="container-custom grid gap-10 lg:grid-cols-[70%_30%]">
           <main id="article-content" className="relative min-w-0 pr-0 lg:pr-6">
             <div
@@ -338,12 +342,12 @@ const ArticleDetails = () => {
             )}
 
             {!hasAccess && (
-              <div className="relative z-10 -mt-20 rounded-3xl border border-blue-100 bg-white p-8 text-center shadow-xl">
-                <p className="text-sm font-bold uppercase tracking-wide text-[#0B3D91]">
+              <div className="relative z-10 -mt-20 border-t-2 border-[#0B2F50] bg-[#F8F7F3] p-8 text-center shadow-lg">
+                <p className="text-xs font-extrabold uppercase tracking-[0.16em] text-[#0CA4B8]">
                   Continue Reading
                 </p>
 
-                <h3 className="mt-3 text-sm md:text-lg font-light text-[#020617]">
+                <h3 className="mt-3 text-lg font-semibold text-[#0B2F50]">
                   Subscribe for free to unlock the full article.
                 </h3>
 
@@ -351,7 +355,7 @@ const ArticleDetails = () => {
 
                 <button
                   onClick={() => setShowSubscribeModal(true)}
-                  className="mt-6 rounded-xl bg-[#0B3D91] text-sm px-6 py-3 font-light text-white hover:bg-[#061A40]"
+                  className="mt-6 bg-[#0B2F50] px-6 py-3 text-xs font-extrabold uppercase tracking-[0.1em] text-white hover:bg-[#0CA4B8]"
                 >
                   Subscribe to Continue
                 </button>
@@ -360,16 +364,16 @@ const ArticleDetails = () => {
           </main>
 
           <aside className="hidden lg:block">
-            <div className="sticky top-28 rounded-3xl border border-blue-100 bg-white p-6 shadow-sm">
+            <div className="sticky top-28 border-t-2 border-[#0B2F50] bg-[#F8F7F3] p-6">
               <div className="mb-5">
-                <div className="mb-2 flex items-center justify-between text-sm font-bold text-[#0B3D91]">
+                <div className="mb-2 flex items-center justify-between text-xs font-extrabold uppercase tracking-[0.08em] text-[#0B2F50]">
                   <span>Reading Progress</span>
                   <span>{readProgress}%</span>
                 </div>
 
-                <div className="h-2 overflow-hidden rounded-full bg-blue-50">
+                <div className="h-1 overflow-hidden bg-slate-200">
                   <div
-                    className="h-full rounded-full bg-[#0B3D91]"
+                    className="h-full bg-[#0CA4B8]"
                     style={{ width: `${readProgress}%` }}
                   />
                 </div>
@@ -444,11 +448,11 @@ const ArticleDetails = () => {
       </section>
 
       {relatedArticles.length > 0 && hasAccess && (
-        <section className="border-t border-blue-100 bg-[#F8FAFC] py-16">
+        <section className="border-t border-slate-200 bg-[#F1F0EC] py-20">
           <div className="container-custom">
             <div className="mb-8 flex items-center gap-2">
-              <BookOpen size={22} className="text-[#0B3D91]" />
-              <h2 className="text-3xl font-black text-[#020617]">
+              <BookOpen size={22} className="text-[#0CA4B8]" />
+              <h2 className="text-3xl font-extrabold text-[#0B2F50]">
                 Related Articles
               </h2>
             </div>
@@ -458,7 +462,7 @@ const ArticleDetails = () => {
                 <Link
                   key={related._id}
                   to={`/blog/${related.slug}`}
-                  className="overflow-hidden rounded-3xl bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
+                  className="overflow-hidden border-t-2 border-[#0B2F50] bg-white transition"
                 >
                   {related.coverImage?.url && (
                     <img
@@ -469,11 +473,11 @@ const ArticleDetails = () => {
                   )}
 
                   <div className="p-6">
-                    <p className="mb-2 text-xs font-bold uppercase text-[#0B3D91]">
+                    <p className="mb-2 text-xs font-extrabold uppercase tracking-[0.1em] text-[#0CA4B8]">
                       {related.category}
                     </p>
 
-                    <h3 className="line-clamp-2 text-lg font-black text-[#020617]">
+                    <h3 className="line-clamp-2 text-lg font-extrabold text-[#0B2F50]">
                       {related.title}
                     </h3>
 
@@ -492,13 +496,13 @@ const ArticleDetails = () => {
 
       {showSubscribeModal && !hasAccess && (
         <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/70 px-4">
-          <div className="w-full max-w-lg rounded-3xl bg-white p-8 shadow-2xl">
+          <div className="w-full max-w-lg border-t-4 border-[#0CA4B8] bg-white p-8 shadow-2xl">
             <div className="text-center">
-              <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-50 text-[#0B3D91]">
+              <div className="mx-auto flex h-16 w-16 items-center justify-center border border-[#0CA4B8] text-[#0B2F50]">
                 <BookOpen size={34} />
               </div>
 
-              <p className="mt-5 text-sm font-bold uppercase tracking-wide text-[#0B3D91]">
+              <p className="mt-5 text-xs font-extrabold uppercase tracking-[0.16em] text-[#0CA4B8]">
                 Free Security Updates
               </p>
 

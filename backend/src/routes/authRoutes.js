@@ -6,11 +6,12 @@ const {
 } = require("../controllers/authController");
 
 const { protect } = require("../middlewares/authMiddleware");
+const authRateLimiter = require("../middlewares/authRateLimiter");
 
 const router = express.Router();
 
-router.post("/register", register);
-router.post("/login", login);
+router.post("/register", authRateLimiter, register);
+router.post("/login", authRateLimiter, login);
 router.get("/me", protect, getMe);
 
 module.exports = router;

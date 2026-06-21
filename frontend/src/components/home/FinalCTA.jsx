@@ -2,20 +2,21 @@ import Button from "../common/Button";
 
 const FinalCTA = () => {
   return (
-    <section className="bg-blue-gradient py-8 text-white">
-      <div className="container-custom text-center">
-        <h2 className="mx-auto max-w-3xl text-2xl font-black md:text-4xl">
-          Strong Security Starts With Awareness, Structure, and Preparedness.
+    <section className="bg-[#0B2F50] py-16 text-white">
+      <div className="container-custom grid items-center gap-8 lg:grid-cols-[1fr_auto]">
+        <div>
+        <h2 className="max-w-3xl text-3xl font-extrabold md:text-4xl">
+          Ready to Benchmark Your Current Security Posture?
         </h2>
 
-        <p className="mx-auto mt-5 max-w-2xl text-blue-100">
-          Begin your journey to better security with practical guidance,
-          structured assessments, and professional support.
+        <p className="mt-5 max-w-2xl leading-7 text-slate-300">
+          If you are upgrading corporate security, protecting high-profile executives, or addressing specific compliance gaps, let&apos;s map out your path forward.
         </p>
 
-        <div className="mt-8">
+        </div>
+        <div>
           <Button to="/contact" variant="secondary">
-            Schedule Your Consultation
+            Book Your Risk Governance Discussion
           </Button>
         </div>
       </div>

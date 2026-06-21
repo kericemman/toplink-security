@@ -2,6 +2,7 @@ const Product = require("../models/Product");
 const asyncHandler = require("../utils/asyncHandler");
 const apiResponse = require("../utils/apiResponse");
 const slugifyText = require("../utils/slugifyText");
+const { escapeRegex, getPagination } = require("../utils/query");
 
 exports.createProduct = asyncHandler(async (req, res) => {
   const {
@@ -74,10 +75,11 @@ exports.getProducts = asyncHandler(async (req, res) => {
   }
 
   if (search) {
+    const safeSearch = escapeRegex(String(search).trim().slice(0, 100));
     query.$or = [
-      { title: { $regex: search, $options: "i" } },
-      { description: { $regex: search, $options: "i" } },
-      { shortDescription: { $regex: search, $options: "i" } },
+      { title: { $regex: safeSearch, $options: "i" } },
+      { description: { $regex: safeSearch, $options: "i" } },
+      { shortDescription: { $regex: safeSearch, $options: "i" } },
     ];
   }
 
@@ -89,20 +91,21 @@ exports.getProducts = asyncHandler(async (req, res) => {
     title: { title: 1 },
   };
 
-  const skip = (Number(page) - 1) * Number(limit);
+  const pagination = getPagination(page, limit, 50);
 
   const products = await Product.find(query)
+    .select("-file")
     .sort(sortOptions[sort] || sortOptions.newest)
-    .skip(skip)
-    .limit(Number(limit));
+    .skip(pagination.skip)
+    .limit(pagination.limit);
 
   const total = await Product.countDocuments(query);
 
   return apiResponse(res, 200, "Products fetched successfully", {
     products,
     pagination: {
-      page: Number(page),
-      pages: Math.ceil(total / Number(limit)),
+      page: pagination.page,
+      pages: Math.ceil(total / pagination.limit),
       total,
     },
   });
@@ -118,7 +121,7 @@ exports.getProductBySlug = asyncHandler(async (req, res) => {
   const product = await Product.findOne({
     slug: req.params.slug,
     status: "published",
-  });
+  }).select("-file");
 
   if (!product) {
     res.statusCode = 404;

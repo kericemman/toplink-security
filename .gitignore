@@ -1,6 +1,19 @@
-cat > .gitignore <<'EOF'
-node_modules
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+coverage/
+
+# Local environment and credentials
 .env
-dist
+.env.*
+!.env.example
+!example.env
+
+# Logs and editor files
+*.log
 .DS_Store
-EOF
+.idea/
+.vscode/

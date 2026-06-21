@@ -6,7 +6,7 @@ import {
 } from "lucide-react";
 import ServicePageTemplate from "../../components/services/ServicePageTemplate";
 
-import image from "../../assets/1.jpg";
+import image from "../../assets/services/risk-assessment.jpg";
 import { useEffect } from "react";
 
 const RiskAssessment = () => {
@@ -15,11 +15,11 @@ const RiskAssessment = () => {
       }, []);
   return (
     <ServicePageTemplate
-      eyebrow="Risk & Vulnerability Assessments"
-      title="Identify security gaps before they become losses."
-      description="TopLink Security helps organizations assess physical security exposure, identify vulnerabilities, and prioritize practical mitigation measures based on likelihood, impact, and operational reality."
+      eyebrow="Security Risk Assessments"
+      title="Turn risk evidence into defensible business decisions."
+      description="Identify threats, evaluate asset exposure, and gain a clear, data-driven understanding of your risk landscape to secure leadership alignment, support insurance requirements, and prioritize investment."
       image={image}
-      badge="Intelligence-led assessment"
+      badge="Governance-ready risk clarity"
       primaryCta="Request Assessment"
       features={[
         {

@@ -13,7 +13,7 @@ const App = () => {
     <>
       {!isAdminRoute && <Navbar />}
 
-      <main>
+      <main className={!isAdminRoute && location.pathname !== "/" ? "pt-20 lg:pt-24" : ""}>
         <AppRoutes />
       </main>
 

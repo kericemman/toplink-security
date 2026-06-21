@@ -1,18 +1,18 @@
 const SectionTitle = ({ eyebrow, title, description, center = true }) => {
   return (
-    <div className={`${center ? "mx-auto text-center" : ""} max-w-3xl`}>
+    <div className={`${center ? "mx-auto text-center" : ""} max-w-4xl`}>
       {eyebrow && (
-        <p className="mb-3 text-sm font-bold uppercase tracking-wide text-[#0B3D91]">
+        <p className="mb-4 text-xs font-extrabold uppercase tracking-[0.18em] text-[#0CA4B8]">
           {eyebrow}
         </p>
       )}
 
-      <h2 className="text-3xl font-bold tracking-tight text-[#020617] md:text-4xl">
+      <h2 className="text-3xl font-extrabold leading-tight text-[#0B2F50] md:text-5xl">
         {title}
       </h2>
 
       {description && (
-        <p className="mt-4 text-base leading-7 text-slate-600">
+        <p className="mt-5 text-base leading-8 text-slate-600 md:text-lg">
           {description}
         </p>
       )}

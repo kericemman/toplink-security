@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { X, Mail, ShieldCheck } from "lucide-react";
 import EmptyState from "../components/common/EmptyState";
@@ -37,7 +37,7 @@ const Blog = () => {
     }
   }, []);
 
-  const fetchArticles = async () => {
+  const fetchArticles = useCallback(async () => {
     try {
       setLoading(true);
 
@@ -54,12 +54,12 @@ const Blog = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [filters]);
 
   useEffect(() => {
     const timer = setTimeout(fetchArticles, 400);
     return () => clearTimeout(timer);
-  }, [filters]);
+  }, [fetchArticles]);
 
   const handleSubscribe = async (e) => {
     e.preventDefault();
@@ -84,31 +84,27 @@ const Blog = () => {
 
   return (
     <>
-      <section className="bg-white py-20">
+      <section className="bg-white py-10 lg:py-20">
         <div className="container-custom">
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="mb-3 text-sm font-bold uppercase tracking-wide text-[#0B3D91]">
-              Security Insights
-            </p>
-
-            <p className="mt-5 leading-8 text-slate-600">
-              Practical guidance on physical security, risk management,
-              preparedness, and emerging security concerns.
-            </p>
+          <div className="grid gap-10  pb-14 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
+            <div><p className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#0CA4B8]">Security Insights</p><h1 className="mt-5 text-4xl font-extrabold leading-[1.08] text-[#0B2F50] md:text-6xl">Perspective for leaders navigating risk, security, and resilience.</h1></div>
+            <p className="border-l-2 border-[#B99753] pl-7 text-lg leading-8 text-slate-600">Actionable analysis covering enterprise security risk management, physical asset protection, crisis preparedness, leadership, and emerging challenges.</p>
           </div>
 
+          <div className="mt-12"><ArticleFilters filters={filters} setFilters={setFilters} /></div>
+
           {loading ? (
-            <div className="mt-12 grid gap-6 md:grid-cols-3">
+            <div className="mt-14 grid gap-10 md:grid-cols-3">
               {[1, 2, 3].map((item) => (
                 <div
                   key={item}
-                  className="h-96 animate-pulse rounded-3xl bg-blue-50"
+                  className="h-96 animate-pulse bg-[#F1F0EC]"
                 />
               ))}
             </div>
           ) : articles.length > 0 ? (
             <>
-              <div className="mt-12 grid gap-7 md:grid-cols-2 lg:grid-cols-3">
+              <div className="mt-14 grid gap-x-8 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
                 {articles.map((article) => (
                   <ArticleCard key={article._id} article={article} />
                 ))}
@@ -120,45 +116,15 @@ const Blog = () => {
                 </p>
               )}
 
-              <div className="mt-14 border-t border-slate-200 pt-10">
-                <div className="mx-auto max-w-4xl">
-                  <div className="mb-5 text-center">
-                    <h3 className="text-xl font-bold text-slate-900">
-                      Explore More Articles
-                    </h3>
-
-                    <p className="mt-2 text-sm text-slate-500">
-                      Search and filter security insights by topic.
-                    </p>
-                  </div>
-
-                  <ArticleFilters filters={filters} setFilters={setFilters} />
-                </div>
-              </div>
             </>
           ) : (
             <div className="mt-12">
               <EmptyState
-                icon="📝"
+                icon={null}
                 title="No articles yet"
                 description="Check back soon for new security insights."
               />
 
-              <div className="mt-14 border-t border-slate-200 pt-10">
-                <div className="mx-auto max-w-4xl">
-                  <div className="mb-5 text-center">
-                    <h3 className="text-xl font-bold text-slate-900">
-                      Explore More Articles
-                    </h3>
-
-                    <p className="mt-2 text-sm text-slate-500">
-                      Search and filter security insights by topic.
-                    </p>
-                  </div>
-
-                  <ArticleFilters filters={filters} setFilters={setFilters} />
-                </div>
-              </div>
             </div>
           )}
         </div>
@@ -166,20 +132,20 @@ const Blog = () => {
 
       {showSubscribeModal && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 px-4">
-          <div className="relative w-full max-w-lg overflow-hidden rounded-3xl bg-white shadow-2xl">
+          <div className="relative w-full max-w-lg overflow-hidden bg-white shadow-2xl">
             <button
               onClick={() => setShowSubscribeModal(false)}
-              className="absolute right-4 top-4 rounded-full bg-white/10 p-2 text-white hover:bg-white/20"
+              className="absolute right-4 top-4 border border-white/30 p-2 text-white hover:bg-white/10"
             >
               <X size={20} />
             </button>
 
             <div className="bg-blue-gradient px-8 py-10 text-white">
-              <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10">
+              <div className="mb-5 flex h-14 w-14 items-center justify-center border border-white/30">
                 <ShieldCheck size={30} />
               </div>
 
-              <h2 className="text-3xl font-black">
+              <h2 className="text-3xl font-extrabold">
                 Get New Security Insights First
               </h2>
 
@@ -195,8 +161,8 @@ const Blog = () => {
                   Email Address
                 </label>
 
-                <div className="flex items-center gap-3 rounded-xl border border-slate-200 px-4 py-3 focus-within:border-[#0B3D91]">
-                  <Mail size={18} className="text-[#0B3D91]" />
+                <div className="flex items-center gap-3 border-b border-slate-300 px-0 py-3 focus-within:border-[#0CA4B8]">
+                  <Mail size={18} className="text-[#0CA4B8]" />
                   <input
                     type="email"
                     value={subscriberEmail}
@@ -211,7 +177,7 @@ const Blog = () => {
               <button
                 type="submit"
                 disabled={subscribing}
-                className="rounded-xl bg-[#0B3D91] px-5 py-4 font-semibold text-white hover:bg-[#061A40] disabled:opacity-60"
+                className="bg-[#0B2F50] px-5 py-4 text-xs font-extrabold uppercase tracking-[0.1em] text-white hover:bg-[#0CA4B8] disabled:opacity-60"
               >
                 {subscribing ? "Subscribing..." : "Subscribe Now"}
               </button>
@@ -219,7 +185,7 @@ const Blog = () => {
               <button
                 type="button"
                 onClick={() => setShowSubscribeModal(false)}
-                className="text-sm font-semibold text-slate-500 hover:text-[#0B3D91]"
+                className="text-sm font-semibold text-slate-500 hover:text-[#0CA4B8]"
               >
                 Maybe later
               </button>

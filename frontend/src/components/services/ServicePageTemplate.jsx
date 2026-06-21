@@ -1,12 +1,7 @@
-import { CheckCircle, ArrowRight, ShieldCheck } from "lucide-react";
+import { CheckCircle, ArrowRight } from "lucide-react";
 import Button from "../common/Button";
 
 const ServicePageTemplate = ({
-  eyebrow,
-  title,
-  description,
-  image,
-  badge,
   features = [],
   modules = [],
   process = [],
@@ -16,75 +11,25 @@ const ServicePageTemplate = ({
 }) => {
   return (
     <>
-      <section className="bg-blue-gradient py-24 text-white">
-        <div className="container-custom grid items-center gap-12 lg:grid-cols-2">
-          <div>
-            <p className="mb-4 inline-flex rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm font-semibold text-blue-100">
-              {eyebrow}
-            </p>
-
-            <h1 className="text-2xl font-black leading-tight md:text-4xl">
-              {title}
-            </h1>
-
-            <p className="mt-6 max-w-xl text-sm md:text-base leading-8 text-blue-100">
-              {description}
-            </p>
-
-            <div className="mt-8 flex flex-wrap gap-4">
-              <Button to="/contact" variant="secondary">
-                {primaryCta}
-              </Button>
-              <Button to="/store" variant="outline">
-                Visit Store
-              </Button>
-            </div>
-          </div>
-
-          <div className="relative">
-            {image ? (
-              <img
-                src={image}
-                alt={title}
-                className="h-[430px] w-full rounded-3xl object-cover shadow-2xl"
-              />
-            ) : (
-              <div className="flex h-[430px] items-center justify-center rounded-3xl border border-white/10 bg-white/10 shadow-2xl">
-                <ShieldCheck size={82} className="text-sky-300" />
-              </div>
-            )}
-
-            {badge && (
-              <div className="absolute -bottom-6 left-6 rounded-2xl bg-white p-5 text-[#020617] shadow-xl">
-                <p className="text-sm font-semibold text-slate-500">
-                  TopLink Focus
-                </p>
-                <p className="mt-1 font-black text-[#0B3D91]">{badge}</p>
-              </div>
-            )}
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-white py-10">
+      <section className="bg-white py-24">
         <div className="container-custom">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="mb-3 text-sm font-bold uppercase tracking-wide text-[#0B3D91]">
+            <p className="mb-3 text-xs font-extrabold uppercase tracking-[0.18em] text-[#B99753]">
               What We Cover
             </p>
             
           </div>
 
-          <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-12 grid border-y border-slate-300 md:grid-cols-2 lg:grid-cols-4">
             {features.map((item) => (
               <div
                 key={item.title}
-                className="rounded-3xl border border-blue-100 bg-white p-7 shadow-sm"
+                className="border-b border-slate-300 p-7 last:border-b-0 md:border-r lg:border-b-0 lg:last:border-r-0"
               >
-                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 text-[#0B3D91]">
+                <div className="mb-5 flex h-12 w-12 items-center justify-center border border-[#0CA4B8] text-[#0B2F50]">
                   <item.icon size={24} />
                 </div>
-                <h3 className="text-xl font-black text-[#020617]">
+                <h3 className="text-xl font-extrabold text-[#0B2F50]">
                   {item.title}
                 </h3>
                 <p className="mt-3 leading-7 text-slate-600">{item.text}</p>
@@ -95,10 +40,10 @@ const ServicePageTemplate = ({
       </section>
 
       {modules.length > 0 && (
-        <section className="bg-[#EAF2FF] py-10">
+        <section className="border-y border-slate-200 bg-[#F1F0EC] py-24">
           <div className="container-custom grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
             <div>
-              <p className="mb-3 text-sm font-bold uppercase tracking-wide text-[#0B3D91]">
+              <p className="mb-3 text-xs font-extrabold uppercase tracking-[0.18em] text-[#B99753]">
                 Key Areas
               </p>
               
@@ -110,7 +55,7 @@ const ServicePageTemplate = ({
 
             <div className="grid gap-4 md:grid-cols-2">
               {modules.map((item) => (
-                <div key={item} className="rounded-2xl bg-white p-5 shadow-sm">
+                <div key={item} className="border-l-2 border-[#0CA4B8] bg-white p-5">
                   <div className="flex gap-3">
                     <CheckCircle className="shrink-0 text-[#0B3D91]" size={20} />
                     <p className="font-semibold text-[#020617]">{item}</p>
@@ -123,22 +68,22 @@ const ServicePageTemplate = ({
       )}
 
       {process.length > 0 && (
-        <section className="bg-white py-10">
+        <section className="bg-white py-24">
           <div className="container-custom">
             <div className="mx-auto max-w-3xl text-center">
-              <p className="mb-3 text-sm font-bold uppercase tracking-wide text-[#0B3D91]">
+              <p className="mb-3 text-xs font-extrabold uppercase tracking-[0.18em] text-[#B99753]">
                 Our Process
               </p>
               
             </div>
 
-            <div className="mt-12 grid gap-6 md:grid-cols-3">
+            <div className="mt-12 grid border-y border-slate-300 md:grid-cols-3">
               {process.map((item, index) => (
-                <div key={item.title} className="rounded-3xl bg-blue-50 p-7">
-                  <p className="text-sm font-black text-[#0B3D91]">
-                    Step {index + 1}
+                <div key={item.title} className="border-b border-slate-300 p-8 last:border-b-0 md:border-b-0 md:border-r md:last:border-r-0">
+                  <p className="text-4xl font-medium text-[#0CA4B8]">
+                    {String(index + 1).padStart(2, "0")}
                   </p>
-                  <h3 className="mt-2 text-xl font-black text-[#020617]">
+                  <h3 className="mt-5 text-xl font-extrabold text-[#0B2F50]">
                     {item.title}
                   </h3>
                   <p className="mt-3 leading-7 text-slate-600">{item.text}</p>
@@ -149,7 +94,7 @@ const ServicePageTemplate = ({
         </section>
       )}
 
-      <section className="bg-[#020617] py-20 text-white">
+      <section className="bg-[#0B2F50] py-20 text-white">
         <div className="container-custom text-center">
           <h2 className="mx-auto max-w-3xl text-2xl font-black md:text-4xl">
             {ctaTitle}

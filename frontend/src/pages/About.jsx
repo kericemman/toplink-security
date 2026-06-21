@@ -1,287 +1,93 @@
-import {
-  AlertTriangle,
-  BookOpen,
-  CheckCircle,
-  Eye,
-  FileSearch,
-  GraduationCap,
-  ShieldCheck,
-  Target,
-  Users,
-} from "lucide-react";
-import Button from "../components/common/Button";
+import { ArrowRight, CheckCircle2, Compass, Scale, ShieldCheck, Target } from "lucide-react";
 import { useEffect } from "react";
+import Button from "../components/common/Button";
+import image from "../assets/services/risk-assessment.jpg";
 
 const principles = [
-  {
-    icon: ShieldCheck,
-    title: "Integrity",
-    text: "We provide honest, practical security guidance built on real-world experience.",
-  },
-  {
-    icon: Eye,
-    title: "Awareness",
-    text: "Strong security begins when people understand the risks around them.",
-  },
-  {
-    icon: Target,
-    title: "Preparedness",
-    text: "We help organizations prepare before threats become costly incidents.",
-  },
-  {
-    icon: Users,
-    title: "Empowerment",
-    text: "Our goal is to give people the knowledge and tools to protect what matters.",
-  },
+  { icon: Scale, title: "Independent", text: "Objective advice focused on your risk priorities—not product sales or guard services." },
+  { icon: Compass, title: "Strategic", text: "A board-level perspective that connects security exposure to business objectives." },
+  { icon: Target, title: "Practical", text: "Recommendations designed around real operations, resources, and accountability." },
 ];
 
-const process = [
-  {
-    icon: FileSearch,
-    title: "Assess",
-    text: "We identify vulnerabilities, weak controls, exposure points, and operational risks.",
-  },
-  {
-    icon: AlertTriangle,
-    title: "Prioritize",
-    text: "We help you understand which risks need urgent attention and which can be planned over time.",
-  },
-  {
-    icon: CheckCircle,
-    title: "Strengthen",
-    text: "We recommend practical controls, training, and systems that fit your real environment.",
-  },
+const approach = [
+  ["01", "Clarify", "Understand the organization, critical assets, operating environment, and decision context."],
+  ["02", "Assess", "Identify threats, vulnerabilities, existing controls, and the consequences of disruption."],
+  ["03", "Advise", "Prioritize proportionate measures and provide a defensible path from exposure to action."],
 ];
 
 const About = () => {
-    useEffect(() => {
-        window.scrollTo(0, 0);
-      }, []);
+  useEffect(() => window.scrollTo(0, 0), []);
+
   return (
     <>
-      <section className="bg-blue-gradient py-24 text-white">
-        <div className="container-custom grid items-center gap-12 lg:grid-cols-2">
+      <section className="border-b border-slate-200 bg-[#F8F7F3] py-20 lg:py-28">
+        <div className="container-custom grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
           <div>
-            <p className="mb-4 inline-flex rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm font-semibold text-blue-100">
-              About TopLink Security
-            </p>
-
-            <h1 className="text-2xl font-black leading-tight md:text-4xl">
-              Security becomes stronger when people understand risk before it
-              becomes a crisis.
-            </h1>
-
-            <p className="mt-6 max-w-xl text-sm md:text-lg leading-8 text-blue-100">
-              TopLink Security bridges professional security expertise with
-              practical, accessible resources for organizations, schools,
-              businesses, and individuals that want to stay informed, prepared,
-              and protected.
-            </p>
-
-            <div className="mt-8 flex gap-4 text-center text-sm md:text-base">
-              <Button to="/contact" variant="secondary">
-                Book Consultation
-              </Button>
-              <Button to="/store" variant="outline">
-               Read Insights
-              </Button>
-            </div>
+            <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#0CA4B8]">About TopLink Security</p>
+            <h1 className="mt-5 max-w-4xl text-4xl font-extrabold leading-[1.08] text-[#0B2F50] md:text-6xl">Experience that turns complex security risk into clear leadership action.</h1>
           </div>
+          <div className="border-l-2 border-[#B99753] pl-7">
+            <p className="text-lg leading-8 text-slate-600">TopLink Security is an independent risk and security advisory practice helping leaders protect critical assets, strengthen governance, and build resilient operations.</p>
+          </div>
+        </div>
+      </section>
 
+      <section className="bg-white py-20 lg:py-28">
+        <div className="container-custom grid gap-14 lg:grid-cols-2 lg:items-center">
           <div className="relative">
-            <div className="rounded-3xl border border-white/10 bg-white/10 p-4 shadow-2xl backdrop-blur">
-              <div className="flex min-h-[420px] items-center justify-center rounded-2xl bg-white/10">
-                <div className="p-8 text-center">
-                  <ShieldCheck className="mx-auto text-sky-300" size={70} />
-                  <h2 className="mt-6 text-2xl font-black">
-                    20+ Years of Security Experience
-                  </h2>
-                  <p className="mt-4 leading-7 text-blue-100">
-                    Practical knowledge shaped by law enforcement, risk
-                    assessment, prevention, training, and real operational
-                    security work.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="absolute -bottom-6 -left-6 hidden rounded-2xl bg-white p-5 text-[#020617] shadow-xl md:block">
-              <p className="text-3xl font-black text-[#0B3D91]">200+</p>
-              <p className="text-sm font-semibold text-slate-600">
-                Professionals Trained
-              </p>
+            <img src={image} alt="Security advisors reviewing organizational risk" className="h-[520px] w-full object-cover" />
+            <div className="absolute bottom-0 right-0 w-56 bg-[#0B2F50] p-7 text-white">
+              <p className="text-5xl font-extrabold">20+</p>
+              <p className="mt-2 text-sm leading-6 text-slate-300">Years of field-led security experience</p>
             </div>
           </div>
-        </div>
-      </section>
-
-      <section className="bg-white py-8">
-        <div className="container-custom grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="rounded-3xl bg-[#EAF2FF] p-4 shadow-sm">
-            <p className="text-sm font-bold uppercase tracking-wide text-[#0B3D91]">
-              Who We Are
-            </p>
-
-        
-
-            <p className="mt-5 leading-8 text-slate-700">
-              TopLink Security is your trusted resource for comprehensive safety solutions designed to protect schools, businesses, and individuals. With over 20 years of experience in law enforcement, I bring deep expertise in risk assessment and proactive security strategies that help you stay ahead of potential threats.
-
-At TopLink Security, we believe that true security begins with knowledge and preparedness. Our mission is to empower you with actionable insights and practical tools to safeguard what matters most, whether it's your home, your business, or your community.
-
-We are committed to providing clear, effective guidance on a wide range of security topics, from physical security tips to crime prevention strategies and best practices for maintaining a secure environment.
-            </p>
-
-            
-          </div>
-
-          <div className="grid gap-6">
-            <div className="rounded-3xl border border-blue-100 bg-white p-7 shadow-sm">
-              <BookOpen className="text-[#0B3D91]" size={34} />
-              <h3 className="mt-4 text-xl font-black text-[#020617]">
-                Education First
-              </h3>
-              <p className="mt-3 leading-7 text-slate-600">
-                We help close that gap through structured assessments, security
-              awareness training, physical security planning, and digital
-              resources that turn complex security ideas into practical steps.
-              </p>
-            </div>
-
-            <div className="rounded-3xl border border-blue-100 bg-white p-7 shadow-sm">
-              <GraduationCap className="text-[#0B3D91]" size={34} />
-              <h3 className="mt-4 text-xl font-black text-[#020617]">
-                Built for Organizations and Teams
-              </h3>
-              <p className="mt-3 leading-7 text-slate-600">
-                From schools and NGOs to businesses and private security teams,
-                our approach helps people identify risks, improve reporting
-                discipline, and strengthen everyday security habits.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-[#EAF2FF] py-8">
-        <div className="container-custom">
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="mb-3 text-sm font-bold uppercase tracking-wide text-[#0B3D91]">
-              Our Principles
-            </p>
-            
-            <p className="mt-5 leading-8 text-slate-600">
-              Security is not only about reacting to incidents. It is about
-              building a culture of awareness, responsibility, and preparedness.
-            </p>
-          </div>
-
-          <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {principles.map((item) => {
-              const Icon = item.icon;
-
-              return (
-                <div
-                  key={item.title}
-                  className="rounded-3xl bg-white p-7 shadow-sm"
-                >
-                  <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 text-[#0B3D91]">
-                    <Icon size={24} />
-                  </div>
-
-                  <h3 className="text-xl font-black text-[#020617]">
-                    {item.title}
-                  </h3>
-
-                  <p className="mt-3 leading-7 text-slate-600">{item.text}</p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-white py-8">
-        <div className="container-custom grid items-center gap-12 lg:grid-cols-2">
-          <div className="grid gap-5">
-            {process.map((item, index) => {
-              const Icon = item.icon;
-
-              return (
-                <div
-                  key={item.title}
-                  className="rounded-3xl border border-blue-100 bg-white p-7 shadow-sm"
-                >
-                  <div className="flex gap-5">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#0B3D91] text-white">
-                      <Icon size={22} />
-                    </div>
-
-                    <div>
-                      <p className="text-sm font-bold text-[#0B3D91]">
-                        Step {index + 1}
-                      </p>
-                      <h3 className="mt-1 text-xl font-black text-[#020617]">
-                        {item.title}
-                      </h3>
-                      <p className="mt-2 leading-7 text-slate-600">
-                        {item.text}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
           <div>
-            <p className="mb-3 text-sm font-bold uppercase tracking-wide text-[#0B3D91]">
-              How We Help
-            </p>
+            <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#B99753]">The Authority Behind TopLink</p>
+            <h2 className="mt-4 text-3xl font-extrabold leading-tight text-[#0B2F50] md:text-5xl">Risk insight grounded in operational reality.</h2>
+            <div className="mt-6 space-y-5 text-lg leading-8 text-slate-600">
+              <p>Led by industry veteran Cyprian, TopLink bridges the gap between established risk frameworks and the practical demands of business operations.</p>
+              <p>We support boards, executives, security directors, and operational leaders with an objective perspective that uncovers hidden exposure, strengthens accountability, and turns security investment into a defensible business decision.</p>
+              <p>Our work is deliberately independent. We do not sell guarding or security hardware, allowing every recommendation to remain focused on risk, proportionality, and organizational value.</p>
+            </div>
+            <div className="mt-8"><Button to="/contact" variant="lightOutline">Start a Security Conversation <ArrowRight size={17} /></Button></div>
+          </div>
+        </div>
+      </section>
 
-            
-
-            <p className="mt-6 leading-8 text-slate-600">
-              Many security problems remain hidden because teams become used to
-              weak controls, poor reporting habits, exposed access points, or
-              outdated procedures. TopLink Security helps bring those risks into
-              clear view.
-            </p>
-
-            <p className="mt-5 leading-8 text-slate-600">
-              Our work is focused on giving leaders and teams a structured way
-              to see risk, understand exposure, and take practical action
-              without confusion.
-            </p>
-
-            <div className="mt-8">
-              <Button to="/contact">Start a Security Conversation</Button>
+      <section className="border-y border-slate-200 bg-[#F1F0EC] py-20">
+        <div className="container-custom">
+          <div className="grid gap-12 lg:grid-cols-[0.75fr_1.25fr]">
+            <div><p className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#B99753]">Our Principles</p><h2 className="mt-4 text-3xl font-extrabold text-[#0B2F50] md:text-4xl">Clear advice. Strong governance. Practical resilience.</h2></div>
+            <div className="grid border-y border-slate-300 md:grid-cols-3">
+              {principles.map((item) => (
+                <div key={item.title} className="border-b border-slate-300 p-7 last:border-b-0 md:border-b-0 md:border-r md:last:border-r-0">
+                  <item.icon className="text-[#0CA4B8]" strokeWidth={1.6} />
+                  <h3 className="mt-5 text-xl font-extrabold text-[#0B2F50]">{item.title}</h3>
+                  <p className="mt-3 text-sm leading-7 text-slate-600">{item.text}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      <section className="bg-[#020617] py-8 text-white">
-        <div className="container-custom text-center">
-          <h2 className="mx-auto max-w-3xl text-3xl font-black md:text-5xl">
-            Stay informed. Stay prepared. Stay secure.
-          </h2>
-
-          <p className="mx-auto mt-5 max-w-2xl leading-8 text-slate-300">
-            Whether you are protecting a school, business, workplace, community,
-            or personal environment, TopLink Security is here to guide you with
-            practical knowledge and professional support.
-          </p>
-
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <Button to="/contact" variant="secondary">
-              Request Consultation
-            </Button>
-
-            <Button to="/blog" variant="outline">
-              Read Security Insights
-            </Button>
+      <section className="bg-white py-20 lg:py-28">
+        <div className="container-custom">
+          <div className="max-w-3xl"><p className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#0CA4B8]">How We Work</p><h2 className="mt-4 text-3xl font-extrabold text-[#0B2F50] md:text-5xl">A disciplined path from uncertainty to action.</h2></div>
+          <div className="mt-12 grid border-y border-slate-300 md:grid-cols-3">
+            {approach.map(([number, title, text]) => (
+              <div key={number} className="border-b border-slate-300 p-8 last:border-b-0 md:border-b-0 md:border-r md:last:border-r-0">
+                <p className="text-4xl font-medium text-[#0CA4B8]">{number}</p><h3 className="mt-6 text-2xl font-extrabold text-[#0B2F50]">{title}</h3><p className="mt-4 leading-7 text-slate-600">{text}</p>
+              </div>
+            ))}
           </div>
+        </div>
+      </section>
+
+      <section className="bg-[#0B2F50] py-16 text-white">
+        <div className="container-custom flex flex-col justify-between gap-8 lg:flex-row lg:items-center">
+          <div><ShieldCheck className="text-[#D4B66E]" /><h2 className="mt-5 text-3xl font-extrabold md:text-4xl">Strengthen security with an independent perspective.</h2><p className="mt-3 max-w-2xl text-slate-300">Bring clarity to your current exposure, priorities, and governance obligations.</p></div>
+          <Button to="/contact" variant="secondary">Book a Discussion <CheckCircle2 size={17} /></Button>
         </div>
       </section>
     </>

@@ -1,7 +1,6 @@
-import { createContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getMe, loginUser } from "../services/authService";
-
-export const AuthContext = createContext(null);
+import AuthContext from "./authContext";
 
 const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(() => {
@@ -13,7 +12,7 @@ const AuthContextProvider = ({ children }) => {
     return localStorage.getItem("toplink_token") || null;
   });
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(() => Boolean(token));
 
   const login = async (payload) => {
     const result = await loginUser(payload);
@@ -35,26 +34,36 @@ const AuthContextProvider = ({ children }) => {
     setUser(null);
   };
 
-  const refreshUser = async () => {
-    try {
-      if (!token) return;
-
-      const result = await getMe();
-      setUser(result.user);
-      localStorage.setItem("toplink_user", JSON.stringify(result.user));
-    } catch (error) {
-      logout();
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
+    if (!token) return;
+
+    let active = true;
+
+    const refreshUser = async () => {
+      try {
+        const result = await getMe();
+
+        if (active) {
+          setUser(result.user);
+          localStorage.setItem("toplink_user", JSON.stringify(result.user));
+        }
+      } catch {
+        if (active) {
+          localStorage.removeItem("toplink_token");
+          localStorage.removeItem("toplink_user");
+          setToken(null);
+          setUser(null);
+        }
+      } finally {
+        if (active) setLoading(false);
+      }
+    };
+
     refreshUser();
 
-    if (!token) {
-      setLoading(false);
-    }
+    return () => {
+      active = false;
+    };
   }, [token]);
 
   return (

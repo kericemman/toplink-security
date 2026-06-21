@@ -3,10 +3,8 @@ import toast from "react-hot-toast";
 import {
   FileText,
   BookOpen,
-  Package,
   MessageSquare,
   Users,
-  Inbox,
   TrendingUp,
   ShoppingBag,
   DollarSign,

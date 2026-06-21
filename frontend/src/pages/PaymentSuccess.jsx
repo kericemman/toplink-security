@@ -15,7 +15,7 @@ const PaymentSuccess = () => {
   const [loading, setLoading] = useState(true);
   const [downloading, setDownloading] = useState(false);
   const [order, setOrder] = useState(null);
-  const [downloadUrl, setDownloadUrl] = useState("");
+  const [downloadToken, setDownloadToken] = useState("");
 
   useEffect(() => {
     const confirmPayment = async () => {
@@ -29,7 +29,7 @@ const PaymentSuccess = () => {
         const result = await verifyPayment(reference);
 
         setOrder(result.order);
-        setDownloadUrl(result.downloadUrl || "");
+        setDownloadToken(result.downloadToken || "");
         toast.success("Payment verified successfully");
       } catch (error) {
         toast.error(
@@ -47,13 +47,16 @@ const PaymentSuccess = () => {
     try {
       setDownloading(true);
 
-      const result = await downloadOrderProduct(reference);
-
-      if (result.downloadUrl) {
-        window.open(result.downloadUrl, "_blank");
-      } else {
-        toast.error("Download link not available");
-      }
+      const result = await downloadOrderProduct(reference, downloadToken);
+      const objectUrl = URL.createObjectURL(result.data);
+      const link = document.createElement("a");
+      link.href = objectUrl;
+      link.download =
+        result.headers["x-download-filename"] || "toplink-resource";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
     } catch (error) {
       toast.error(error?.response?.data?.message || "Download failed");
     } finally {
@@ -139,7 +142,7 @@ const PaymentSuccess = () => {
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
             <button
               onClick={handleDownload}
-              disabled={downloading || !downloadUrl}
+              disabled={downloading || !downloadToken}
               className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#0B3D91] px-5 py-3 text-sm font-semibold text-white hover:bg-[#061A40] disabled:cursor-not-allowed disabled:opacity-60"
             >
               <Download size={18} />

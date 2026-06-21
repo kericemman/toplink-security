@@ -95,29 +95,16 @@ const Contact = () => {
   };
 
   return (
-    <section className="bg-white py-20">
+    <section className="contact-page bg-white py-20 lg:py-28">
       <div className="container-custom">
-        <div className="mx-auto max-w-3xl text-center">
-          <p className="mb-3 text-sm font-bold uppercase tracking-wide text-[#0B3D91]">
-            Contact TopLink Security
-          </p>
-
-          <h1 className="text-2xl font-black text-[#020617] md:text-4xl">
-            Speak With a 
-            <br/>
-            Security Specialist
-          </h1>
-
-          <p className="mt-5 leading-8 text-slate-600">
-            Whether you need a vulnerability assessment, security awareness
-            training, or guidance on strengthening physical controls, send your
-            request and we’ll respond professionally.
-          </p>
+        <div className="grid gap-10 border-b border-slate-300 pb-14 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+          <div><p className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#0CA4B8]">Contact TopLink Security</p><h1 className="mt-5 text-4xl font-extrabold leading-[1.08] text-[#0B2F50] md:text-6xl">Begin a confidential security conversation.</h1></div>
+          <p className="border-l-2 border-[#B99753] pl-7 text-lg leading-8 text-slate-600">Tell us what you are protecting, the decision you are facing, or the risk you need to understand. We will help define the right next step.</p>
         </div>
 
-        <div className="mt-14 grid gap-10 lg:grid-cols-[1.2fr_0.8fr]">
-          <div className="rounded-3xl border border-blue-100 bg-white p-6 shadow-sm md:p-8">
-            <div className="mb-8 flex flex-wrap gap-3">
+        <div className="mt-14 grid gap-12 lg:grid-cols-[1.25fr_0.75fr]">
+          <div className="border-t-2 border-[#0B2F50] bg-white py-8">
+            <div className="mb-10 flex flex-wrap border-b border-slate-300">
               {tabs.map((tab) => (
                 <button
                   key={tab.id}
@@ -126,10 +113,10 @@ const Contact = () => {
                     setActiveTab(tab.id);
                     resetForm();
                   }}
-                  className={`rounded-xl px-4 py-3 text-sm font-semibold ${
+                  className={`border-b-2 px-5 py-4 text-xs font-extrabold uppercase tracking-[0.08em] transition ${
                     activeTab === tab.id
-                      ? "bg-[#0B3D91] text-white"
-                      : "bg-blue-50 text-[#0B3D91] hover:bg-blue-100"
+                      ? "border-[#0CA4B8] text-[#0B2F50]"
+                      : "border-transparent text-slate-500 hover:text-[#0B2F50]"
                   }`}
                 >
                   {tab.label}
@@ -235,7 +222,10 @@ const Contact = () => {
                     <option value="">Select service</option>
                     <option value="Risk Assessment">Risk Assessment</option>
                     <option value="Physical Security Planning">
-                      Physical Security Planning
+                      Physical Security Strategy &amp; Planning
+                    </option>
+                    <option value="Executive Protection and Travel Risk">
+                      Executive Protection &amp; Travel Risk Management
                     </option>
                     <option value="Safety Planning">Safety Planning</option>
                     <option value="General Security Consultation">
@@ -316,51 +306,52 @@ const Contact = () => {
             </form>
           </div>
 
-          <aside className="rounded-3xl bg-[#EAF2FF] p-8">
-            <h2 className="text-2xl font-black text-[#020617]">
+          <aside className="bg-[#0B2F50] p-8 text-white lg:p-10">
+            <p className="text-xs font-extrabold uppercase tracking-[0.16em] text-[#D4B66E]">Direct Contact</p>
+            <h2 className="mt-4 text-2xl font-extrabold text-white">
               Contact Information
             </h2>
 
             <div className="mt-8 grid gap-6">
               <div className="flex gap-4">
-                <div className="rounded-xl  p-3 text-[#0B3D91]">
+                <div className="p-3 text-[#0CA4B8]">
                   <MapPin size={22} />
                 </div>
                 <div>
-                  <h3 className="font-bold text-[#020617]">Location</h3>
-                  <p className="text-slate-600">Nairobi, Kenya</p>
+                  <h3 className="font-bold text-white">Location</h3>
+                  <p className="text-slate-300">Nairobi, Kenya</p>
                 </div>
               </div>
 
               <div className="flex gap-4">
-                <div className="rounded-xl  p-3 text-[#0B3D91]">
+                <div className="p-3 text-[#0CA4B8]">
                   <Mail size={22} />
                 </div>
                 <div>
-                  <h3 className="font-bold text-[#020617]">Email</h3>
-                  <p className="text-slate-600">info@toplinksecurity.com</p>
+                  <h3 className="font-bold text-white">Email</h3>
+                  <p className="text-slate-300">info@toplinksecurity.com</p>
                 </div>
               </div>
 
               <div className="flex gap-4">
-                <div className="rounded-xl  p-3 text-[#0B3D91]">
+                <div className="p-3 text-[#0CA4B8]">
                   <Phone size={22} />
                 </div>
                 <div>
-                  <h3 className="font-bold text-[#020617]">Phone</h3>
-                  <p className="text-slate-600">+254 725 614 183</p>
+                  <h3 className="font-bold text-white">Phone</h3>
+                  <p className="text-slate-300">+254 725 614 183</p>
                 </div>
               </div>
 
               <div className="flex gap-4">
-                <div className="rounded-xl  p-3 text-[#0B3D91]">
+                <div className="p-3 text-[#0CA4B8]">
                   <Clock size={22} />
                 </div>
                 <div>
-                  <h3 className="font-bold text-[#020617]">Business Hours</h3>
-                  <p className="text-slate-600">Monday - Friday</p>
-                  <p className="text-slate-600">9:00 AM - 5:00 PM EAT</p>
-                  <p className="mt-2 text-sm text-slate-500">
+                  <h3 className="font-bold text-white">Business Hours</h3>
+                  <p className="text-slate-300">Monday - Friday</p>
+                  <p className="text-slate-300">9:00 AM - 5:00 PM EAT</p>
+                  <p className="mt-2 text-sm text-slate-400">
                     Typical response time: 24 hours for general inquiries.
                   </p>
                 </div>

@@ -1,20 +1,30 @@
 export const services = [
   {
-    title: "Risk & Vulnerability Assessments",
+    title: "Security Risk Assessments",
     description:
-      "Identify physical security gaps, evaluate exposure, and prioritize mitigation strategies using structured assessment methods.",
+      "Identify threats, evaluate asset exposure, and gain a clear, data-driven understanding of your risk landscape to secure board alignment and insurance approval.",
     path: "/services/risk-assessment",
+    image: "risk-assessment",
   },
   {
-    title: "Security Awareness Training",
+    title: "Physical Security Strategy & Planning",
     description:
-      "Equip teams with the awareness, reporting discipline, and readiness needed to apply security measures effectively.",
+      "Develop cost-effective protection measures and operational frameworks designed to safeguard your personnel, property, and information.",
+    path: "/services/physical-security-strategy",
+    image: "physical-security",
+  },
+  {
+    title: "Security Awareness & Capability Development",
+    description:
+      "Build a high-performance culture of security across your workforce, improving threat reporting discipline and embedding proactive behaviors.",
     path: "/services/security-training",
+    image: "security-training",
   },
   {
-    title: "Physical Security Planning",
+    title: "Executive Protection & Travel Risk Management",
     description:
-      "Turn assessment findings into implementable security controls that suit your environment and operations.",
-    path: "/services/safety-planning",
+      "Safeguard key personnel with tailored threat assessments, journey management planning, and security guidance that fulfills your corporate duty of care.",
+    path: "/services/executive-protection",
+    image: "executive-protection",
   },
 ];

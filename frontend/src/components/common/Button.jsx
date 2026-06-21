@@ -2,16 +2,16 @@ import { Link } from "react-router-dom";
 
 const Button = ({ children, to, variant = "primary", type = "button", ...props }) => {
   const base =
-    "inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold shadow-sm";
+    "inline-flex items-center justify-center gap-2 rounded-sm px-6 py-3.5 text-xs font-extrabold uppercase tracking-[0.08em]";
 
   const variants = {
-    primary: "bg-[#0B3D91] text-white hover:bg-[#061A40]",
-    secondary: "bg-white text-[#0B3D91] hover:bg-blue-50",
-    dark: "bg-[#020617] text-white hover:bg-[#061A40]",
+    primary: "bg-[#0B2F50] text-white hover:bg-[#0CA4B8]",
+    secondary: "bg-white text-[#0B2F50] hover:bg-[#E9F7F8]",
+    dark: "bg-[#0B2F50] text-white hover:bg-[#0CA4B8]",
     outline:
-      "border border-white/30 bg-white/10 text-white hover:bg-white hover:text-[#0B3D91]",
+      "border border-white/50 bg-transparent text-white hover:bg-white hover:text-[#0B2F50]",
     lightOutline:
-      "border border-blue-200 bg-white text-[#0B3D91] hover:bg-blue-50",
+      "border border-[#0B2F50] bg-transparent text-[#0B2F50] hover:bg-[#0B2F50] hover:text-white",
   };
 
   if (to) {
