@@ -23,6 +23,12 @@ const publicOrder = (order) => ({
     : null,
 });
 
+const getPublicSiteUrl = () =>
+  (process.env.PUBLIC_SITE_URL || process.env.CLIENT_URL)
+    .split(",")[0]
+    .trim()
+    .replace(/\/$/, "");
+
 const transactionMatchesOrder = (transaction, order) => {
   const verifiedOrderId = transaction.metadata?.orderId;
 
@@ -37,7 +43,7 @@ const transactionMatchesOrder = (transaction, order) => {
 const sendOrderNotifications = async (order) => {
   if (!order.product?.file?.url) return;
 
-  const siteUrl = process.env.PUBLIC_SITE_URL || process.env.CLIENT_URL;
+  const siteUrl = getPublicSiteUrl();
   const resourceUrl = `${siteUrl}/payment/success?reference=${encodeURIComponent(order.reference)}`;
 
   await Promise.allSettled([
@@ -122,7 +128,7 @@ exports.initializePayment = asyncHandler(async (req, res) => {
       reference,
       callbackUrl:
         process.env.PAYSTACK_CALLBACK_URL ||
-        `${process.env.PUBLIC_SITE_URL || process.env.CLIENT_URL}/payment/success`,
+        `${getPublicSiteUrl()}/payment/success`,
       metadata: {
         orderId: order._id.toString(),
         productId: product._id.toString(),

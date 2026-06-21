@@ -1,10 +1,7 @@
 const requiredInAllEnvironments = ["MONGO_URI", "JWT_SECRET"];
 const requiredInProduction = [
   "CLIENT_URL",
-  "PUBLIC_SITE_URL",
-  "DOWNLOAD_TOKEN_SECRET",
   "PAYSTACK_SECRET_KEY",
-  "PAYSTACK_CALLBACK_URL",
   "CLOUDINARY_CLOUD_NAME",
   "CLOUDINARY_API_KEY",
   "CLOUDINARY_API_SECRET",
@@ -27,7 +24,7 @@ const validateEnv = () => {
   }
 
   if (
-    process.env.NODE_ENV === "production" &&
+    process.env.DOWNLOAD_TOKEN_SECRET &&
     process.env.DOWNLOAD_TOKEN_SECRET === process.env.JWT_SECRET
   ) {
     throw new Error("DOWNLOAD_TOKEN_SECRET must differ from JWT_SECRET");

@@ -1,6 +1,7 @@
 require("dotenv").config();
 
 const express = require("express");
+const mongoose = require("mongoose");
 const cors = require("cors");
 const helmet = require("helmet");
 const morgan = require("morgan");
@@ -67,6 +68,15 @@ app.get("/api/health", (req, res) => {
   res.status(200).json({
     success: true,
     message: "Server healthy",
+  });
+});
+
+app.get("/api/ready", (req, res) => {
+  const databaseReady = mongoose.connection.readyState === 1;
+
+  res.status(databaseReady ? 200 : 503).json({
+    success: databaseReady,
+    message: databaseReady ? "Server ready" : "Database unavailable",
   });
 });
 

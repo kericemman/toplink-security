@@ -1,7 +1,16 @@
+const crypto = require("node:crypto");
 const jwt = require("jsonwebtoken");
 
-const getSecret = () =>
-  process.env.DOWNLOAD_TOKEN_SECRET || process.env.JWT_SECRET;
+const getSecret = () => {
+  if (process.env.DOWNLOAD_TOKEN_SECRET) {
+    return process.env.DOWNLOAD_TOKEN_SECRET;
+  }
+
+  return crypto
+    .createHmac("sha256", process.env.JWT_SECRET)
+    .update("toplink-security:download-token:v1")
+    .digest("hex");
+};
 
 const createDownloadToken = (order) =>
   jwt.sign(
@@ -25,4 +34,3 @@ const verifyDownloadToken = (token) => {
 };
 
 module.exports = { createDownloadToken, verifyDownloadToken };
-

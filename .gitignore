@@ -3,6 +3,8 @@ node_modules/
 
 # Build output
 dist/
+dist-next/
+dist-previous/
 build/
 coverage/
 
@@ -14,6 +16,7 @@ coverage/
 
 # Logs and editor files
 *.log
+.pm2/
 .DS_Store
 .idea/
 .vscode/

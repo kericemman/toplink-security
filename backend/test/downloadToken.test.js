@@ -32,3 +32,18 @@ test("tampered download tokens are rejected", () => {
 
   assert.throws(() => verifyDownloadToken(`${token}tampered`));
 });
+
+test("a separate signing key is derived when the optional secret is absent", () => {
+  const configuredSecret = process.env.DOWNLOAD_TOKEN_SECRET;
+  delete process.env.DOWNLOAD_TOKEN_SECRET;
+
+  const order = {
+    _id: { toString: () => "order-fallback" },
+    reference: "TL-fallback-reference",
+  };
+  const payload = verifyDownloadToken(createDownloadToken(order));
+
+  process.env.DOWNLOAD_TOKEN_SECRET = configuredSecret;
+  assert.equal(payload.orderId, "order-fallback");
+  assert.equal(payload.purpose, "product-download");
+});
