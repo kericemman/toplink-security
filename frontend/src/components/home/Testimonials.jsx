@@ -3,12 +3,11 @@ import { testimonials } from "../../data/testimonials";
 
 const Testimonials = () => {
   return (
-    <section className="border-t border-slate-200 bg-[#F8F7F3] py-24">
+    <section className="border-t border-slate-200 bg-[#F8F7F3] py-15">
       <div className="container-custom">
         <SectionTitle
-          eyebrow="Trusted by Professionals"
-          title="Confident security decisions start with trusted advice"
-          description="Perspectives from professionals who have used TopLink methodologies to strengthen assessment, reporting, and leadership alignment."
+          // eyebrow="Trusted by Professionals"
+          title="Trusted by Professionals"
         />
 
         <div className="mt-12 grid border-y border-slate-300 md:grid-cols-3">

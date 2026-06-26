@@ -1,12 +1,12 @@
-import { ArrowRight, BarChart3, CheckCircle2, Compass, Shield } from "lucide-react";
+import { ArrowRight, CheckCircle} from "lucide-react";
 import Button from "../common/Button";
 import heroImage from "../../assets/services/physical-security.jpg";
 
 const proofPoints = [
-  { icon: Shield, title: "20+ Years", text: "Field-led security and risk advisory experience." },
-  { icon: Compass, title: "Independent", text: "Objective advice aligned with your interests." },
-  { icon: BarChart3, title: "Strategic", text: "Board-level clarity for complex decisions." },
-  { icon: CheckCircle2, title: "Practical", text: "Actionable measures built for operations." },
+  { icon: CheckCircle, title: "20+ Years", text: "Field-led security and risk advisory experience." },
+  { icon: CheckCircle, title: "Transparent", text: "Straight forward advisory services." },
+  { icon: CheckCircle, title: "Strategic", text: "Board-level clarity for complex decisions." },
+  { icon: CheckCircle, title: "Practical", text: "Actionable measures built for operations." },
 ];
 
 const Hero = () => (

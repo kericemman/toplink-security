@@ -20,6 +20,9 @@ const Navbar = () => {
           <span className="flex h-14 w-14 items-center justify-center overflow-hidden">
             <img src="/assets/logo-transparent.png" alt="" className="h-full w-full object-contain" />
           </span>
+          <span className="text-lg font-black uppercase leading-none tracking-[0.08em] text-[#0B2F50] sm:text-xl">
+            TopLink Security
+          </span>
         </Link>
 
         <nav className="hidden items-center gap-7 lg:flex">
