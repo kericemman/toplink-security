@@ -1,6 +1,13 @@
 import { Link } from "react-router-dom";
 
-const Button = ({ children, to, variant = "primary", type = "button", ...props }) => {
+const Button = ({
+  children,
+  to,
+  variant = "primary",
+  type = "button",
+  className = "",
+  ...props
+}) => {
   const base =
     "inline-flex items-center justify-center gap-2 rounded-sm px-6 py-3.5 text-xs font-extrabold uppercase tracking-[0.08em]";
 
@@ -16,14 +23,14 @@ const Button = ({ children, to, variant = "primary", type = "button", ...props }
 
   if (to) {
     return (
-      <Link to={to} className={`${base} ${variants[variant]}`}>
+      <Link to={to} className={`${base} ${variants[variant]} ${className}`} {...props}>
         {children}
       </Link>
     );
   }
 
   return (
-    <button type={type} className={`${base} ${variants[variant]}`} {...props}>
+    <button type={type} className={`${base} ${variants[variant]} ${className}`} {...props}>
       {children}
     </button>
   );

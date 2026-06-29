@@ -3,7 +3,7 @@ import { testimonials } from "../../data/testimonials";
 
 const Testimonials = () => {
   return (
-    <section className="border-t border-slate-200 bg-[#F8F7F3] py-15">
+    <section className="border-t border-slate-200 bg-[#F8F7F3] py-10">
       <div className="container-custom">
         <SectionTitle
           // eyebrow="Trusted by Professionals"

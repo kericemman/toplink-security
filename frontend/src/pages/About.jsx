@@ -1,7 +1,6 @@
 import { ArrowRight, CheckCircle2, Compass, Scale, ShieldCheck, Target } from "lucide-react";
 import { useEffect } from "react";
 import Button from "../components/common/Button";
-import image from "../assets/services/risk-assessment.jpg";
 
 const principles = [
   { icon: Scale, title: "Independent", text: "Objective advice focused on your risk priorities—not product sales or guard services." },
@@ -35,7 +34,7 @@ const About = () => {
       <section className="bg-white py-20 lg:py-28">
         <div className="container-custom grid gap-14 lg:grid-cols-2 lg:items-center">
           <div className="relative">
-            <img src={image} alt="Security advisors reviewing organizational risk" className="h-[520px] w-full object-cover" />
+            <img src="/assets/logo.jpeg" alt="Security advisors reviewing organizational risk" className="h-[520px] w-full object-cover" />
             <div className="absolute bottom-0 right-0 w-56 bg-[#0B2F50] p-7 text-white">
               <p className="text-5xl font-extrabold">20+</p>
               <p className="mt-2 text-sm leading-6 text-slate-300">Years of field-led security experience</p>

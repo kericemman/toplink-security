@@ -3,9 +3,9 @@ import Button from "../common/Button";
 
 const AdvisorySections = () => (
   <>
-    <section className="border-y border-slate-200 bg-[#F8F7F3] py-24 text-[#0B2F50]">
+    <section className="border-y border-slate-200 bg-[#F8F7F3] py-10 text-[#0B2F50]">
       <div className="container-custom grid lg:grid-cols-2">
-        <div className="border-b border-slate-300 p-8 md:p-12 lg:border-b-0 lg:border-r">
+        <div className="border-b border-slate-300 p-4 md:p-12 lg:border-b-0 lg:border-r">
           <Wrench className="text-[#0CA4B8]" size={32} />
           <h2 className="mt-4 text-3xl font-extrabold"> Resources &amp; Frameworks</h2>
           <p className="mt-7 text-xs font-extrabold uppercase tracking-[0.18em] text-[#B99753]">Tools and Knowledge for Advanced Risk Management</p>
