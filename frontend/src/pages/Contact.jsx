@@ -98,8 +98,8 @@ const Contact = () => {
     <section className="contact-page bg-white py-20 lg:py-28">
       <div className="container-custom">
         <div className="grid gap-10 border-b border-slate-300 pb-14 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
-          <div><p className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#0CA4B8]">Contact TopLink Security</p><h1 className="mt-5 text-4xl font-extrabold leading-[1.08] text-[#0B2F50] md:text-6xl">Begin a confidential security conversation.</h1></div>
-          <p className="border-l-2 border-[#B99753] pl-7 text-lg leading-8 text-slate-600">Tell us what you are protecting, the decision you are facing, or the risk you need to understand. We will help define the right next step.</p>
+          <div><p className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#0CA4B8]">Contact TopLink Security</p><h1 className="mt-5 text-4xl font-extrabold leading-[1.08] text-[#0B2F50] md:text-6xl">Start the conversation that leads to better security decisions.</h1></div>
+          <p className="border-l-2 border-[#B99753] pl-7 text-lg leading-8 text-slate-600">Whether you're protecting people, assets, operations, or preparing for a critical decision, we're here to help you understand your risks, evaluate your options, and identify the right next step.</p>
         </div>
 
         <div className="mt-14 grid gap-12 lg:grid-cols-[1.25fr_0.75fr]">

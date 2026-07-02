@@ -23,13 +23,14 @@ const deliverables = [
 ];
 
 const benefits = [
-  "Improve readiness for travel, events, and external engagements",
-  "Support continuity of leadership and critical business activities",
-  "Reduce exposure to avoidable travel-related incidents",
-  "Improve coordination during unexpected events",
-  "Strengthen organizational duty of care arrangements",
-  "Increase confidence when operating in unfamiliar or changing environments",
-  "Support informed decisions regarding travel and operational activities",
+  "Safer movement, stronger continuity, and clearer duty of care.",
+  "Improved readiness for travel, events, and external engagements",
+  "Stronger continuity of leadership and critical business activities",
+  "Reduced exposure to avoidable travel-related incidents",
+  "Better coordination during unexpected events",
+  "Stronger organizational duty of care arrangements",
+  "Increased confidence when operating in unfamiliar or changing environments",
+  "More informed decisions regarding travel and operational activities"
 ];
 
 const idealFor = [
@@ -80,16 +81,15 @@ const ExecutiveProtection = () => (
       {
         id: "what-we-evaluate",
         eyebrow: "What We Evaluate",
-        title: "Our engagements evaluate areas including:",
         description:
-          "We examine how individual exposure, movement requirements, destination conditions, event plans, emergency coordination, and existing arrangements shape the overall risk picture.",
+          "Our assessment examines how individual exposure, movement requirements, destination conditions, event plans, emergency coordination, and existing protective arrangements shape the risk picture, including:",
         items: evaluationAreas,
         variant: "stone",
       },
       {
         id: "what-you-receive",
         eyebrow: "What You Receive",
-        title: "Clear guidance for safer movement and stronger preparedness.",
+        title: "Executive-ready guidance for secure travel, movement, and protective planning.",
         items: deliverables,
         variant: "white",
       },
@@ -103,23 +103,24 @@ const ExecutiveProtection = () => (
       {
         id: "ideal-for",
         eyebrow: "Ideal For",
-        title: "Organizations responsible for exposed personnel, travel, events, or critical engagements.",
+        title: "Organizations and leadership responsible for exposed personnel, travel, events, or critical engagements.",
         items: idealFor,
         variant: "white",
       },
     ]}
     approach={{
       eyebrow: "Our Approach",
-      title: "Practical, intelligence-informed protection aligned with business realities.",
+      title: "An intelligence-informed approach to executive protection aligned with business realities.",
       paragraphs: [
-        "TopLink Security applies a practical and intelligence-informed approach to executive protection.",
-        "Every engagement is tailored to the individual’s role, operating environment, travel requirements, and specific circumstances.",
+        "TopLink Security develops executive protection strategies that reflect each client's risk profile, operating environment, and operational requirements.",
+        "Every engagement is tailored to the individual's role, operating environment, travel requirements, and specific circumstances.",
+
         "We help organizations balance protection requirements with operational realities, ensuring that safeguards remain proportionate, discreet, and supportive of business activities.",
       ],
     }}
     cta={{
-      eyebrow: "Ready to Improve Protection for Key Personnel?",
-      title: "Book a Risk Governance Discussion",
+      eyebrow: "Ready to Strengthen Protection for Key Personnel?",
+      title: "Every important security decision starts with a clear understanding of risk.",
       buttonLabel: "Book a Risk Governance Discussion",
     }}
   />

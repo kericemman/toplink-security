@@ -38,8 +38,7 @@ const idealFor = [
   "Manufacturing facilities",
   "Educational institutions",
   "NGOs and development organizations",
-  "Commercial property owners",
-  "Organizations undergoing expansion, transformation, or significant operational change",
+  "Commercial property owners"
 ];
 
 const RiskAssessment = () => (
@@ -71,9 +70,7 @@ const RiskAssessment = () => (
       {
         id: "what-we-assess",
         eyebrow: "What We Assess",
-        title: "Our assessments examine key areas including:",
-        description:
-          "We look at the exposures, vulnerabilities, controls, governance arrangements, and compliance considerations that shape the organization’s security risk profile.",
+        title: "Our assessments evaluate the factors that influence your organization's security risk profile, including:",
         items: assessmentAreas,
         variant: "stone",
       },
@@ -87,7 +84,7 @@ const RiskAssessment = () => (
       {
         id: "benefits",
         eyebrow: "Benefits to Your Organization",
-        title: "Better risk decisions, stronger accountability, and improved resilience.",
+        title: "Improve decision making, strengthen accountability, and build organizational resilience.",
         items: benefits,
         variant: "dark",
       },
@@ -101,7 +98,7 @@ const RiskAssessment = () => (
     ]}
     approach={{
       eyebrow: "Our Approach",
-      title: "Independent, risk-based advisory shaped around your operating reality.",
+      title: "Independent, risk based advisory tailored to your organization’s operating environment and business priorities.",
       paragraphs: [
         "TopLink Security provides independent, risk-based advisory services designed to help organizations make informed security decisions.",
         "Our recommendations are tailored to your organization’s risk profile, operating environment, and business priorities.",
@@ -109,8 +106,8 @@ const RiskAssessment = () => (
       ],
     }}
     cta={{
-      eyebrow: "Ready to Identify Your Most Significant Security Exposures?",
-      title: "Book a Risk Governance Discussion",
+      eyebrow: "Ready to Gain Clarity on Your Security Risks?",
+      title: "Every important security decision starts with a clear understanding of risk.",
       buttonLabel: "Book a Risk Governance Discussion",
     }}
   />

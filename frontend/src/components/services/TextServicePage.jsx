@@ -96,7 +96,7 @@ const TextServicePage = ({
         <div className="container-custom grid gap-12 lg:grid-cols-[minmax(0,0.92fr)_320px] lg:items-start">
           <div>
             <SectionLabel>{eyebrow}</SectionLabel>
-            <h1 className="mt-5 max-w-5xl text-4xl font-extrabold leading-[1.08] text-[#0B2F50] md:text-6xl">
+            <h1 className="mt-5 max-w-5xl text-2xl font-extrabold leading-[1.08] text-[#0B2F50] md:text-4xl">
               {title}
             </h1>
             <IntroContent blocks={intro} />
@@ -132,7 +132,7 @@ const TextServicePage = ({
           <section
             key={section.id}
             id={section.id}
-            className={`${sectionBackgrounds[variant]} py-16 lg:py-20`}
+            className={`${sectionBackgrounds[variant]} py-10 lg:py-15`}
           >
             <div className="container-custom grid gap-12 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
               <div>
@@ -141,7 +141,7 @@ const TextServicePage = ({
                 </SectionLabel>
                 {section.title && (
                   <h2
-                    className={`mt-4 text-3xl font-extrabold leading-tight md:text-5xl ${
+                    className={`mt-4 text-2xl font-extrabold leading-tight md:text-4xl ${
                       isDark ? "text-white" : "text-[#0B2F50]"
                     }`}
                   >
@@ -168,12 +168,12 @@ const TextServicePage = ({
       {approach && (
         <section
           id="our-approach"
-          className="border-y border-slate-200 bg-[#F1F0EC] py-16 lg:py-20"
+          className="border-y border-slate-200 bg-[#F1F0EC] py-10 lg:py-15"
         >
           <div className="container-custom grid gap-12 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
             <div>
               <SectionLabel tone="gold">{approach.eyebrow}</SectionLabel>
-              <h2 className="mt-4 text-3xl font-extrabold leading-tight text-[#0B2F50] md:text-5xl">
+              <h2 className="mt-4 text-2xl font-extrabold leading-tight text-[#0B2F50] md:text-4xl">
                 {approach.title}
               </h2>
             </div>
@@ -188,12 +188,12 @@ const TextServicePage = ({
       )}
 
       {cta && (
-        <section className="bg-white py-16">
+        <section className="bg-white py-10 lg:py-15">
           <div className="container-custom bg-[#0B2F50] p-8 text-white md:p-12 lg:p-16">
             <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
               <div>
                 <SectionLabel tone="gold">{cta.eyebrow}</SectionLabel>
-                <h2 className="mt-4 max-w-3xl text-3xl font-extrabold leading-tight md:text-5xl">
+                <h2 className="mt-4 max-w-3xl text-2xl font-extrabold leading-tight md:text-4xl">
                   {cta.title}
                 </h2>
                 {cta.text && (

@@ -21,7 +21,7 @@ const Hero = () => (
             </h1>
             <div className="mt-8 h-0.5 w-12 bg-[#B99753]" />
             <p className="mt-7 max-w-2xl text-base leading-8 text-slate-600 sm:text-lg">
-              Independent risk and security advisory for organizations, executives, and security leaders facing complex operational decisions.
+              Independent risk and security advisory for organizations, executives, and security leaders making critical security decisions.
             </p>
             <div className="mt-9 flex flex-wrap gap-3 text-sm">
               <Button

@@ -23,13 +23,14 @@ const deliverables = [
 ];
 
 const benefits = [
-  "Increase workforce participation in security efforts",
-  "Improve reporting of threats, concerns, and suspicious activity",
-  "Increase ownership and accountability for security responsibilities",
-  "Reinforce consistent security practices across the organization",
-  "Improve communication between employees, management, and security teams",
-  "Reduce vulnerabilities associated with human factors",
-  "Embed security-conscious behaviors into everyday operations",
+  "Active participation, better reporting, and more consistent security behavior.",
+  "Greater workforce participation in security efforts",
+  "Improved reporting of threats, concerns, and suspicious activity",
+  "Increased ownership and accountability for security responsibilities",
+  "More consistent security practices across the organization",
+  "Better communication between employees, management, and security teams",
+  "Reduced vulnerabilities associated with human factors",
+  "Security-conscious behaviors embedded into everyday operations"
 ];
 
 const idealFor = [
@@ -39,8 +40,6 @@ const idealFor = [
   "Manufacturing facilities",
   "Educational institutions",
   "NGOs and development organizations",
-  "Organizations introducing new security initiatives",
-  "Organizations seeking to improve workforce engagement in security",
 ];
 
 const SecurityTraining = () => (
@@ -77,14 +76,14 @@ const SecurityTraining = () => (
         eyebrow: "What We Evaluate",
         title: "Our engagements evaluate areas including:",
         description:
-          "We look beyond training attendance to understand how people recognize risk, report concerns, participate in security, and apply good practice in daily operations.",
+          "Our engagements evaluate the factors that shape your organization's security culture and workforce capability. We examine how people understand security responsibilities, recognize and report risks, participate in security activities, and how leadership, communication, and development programs support a strong security culture.",
         items: evaluationAreas,
         variant: "stone",
       },
       {
         id: "what-you-receive",
         eyebrow: "What You Receive",
-        title: "Practical outputs that strengthen organizational capability.",
+        title: "Actionable deliverables to strengthen security culture, workforce capability, and leadership engagement.",
         items: deliverables,
         variant: "white",
       },
@@ -105,7 +104,7 @@ const SecurityTraining = () => (
     ]}
     approach={{
       eyebrow: "Our Approach",
-      title: "A people-centered path to sustainable security capability.",
+      title: "A people-centered approach to building a strong and sustainable security culture.",
       paragraphs: [
         "TopLink Security applies a people-centered approach to security capability development, recognizing that effective security depends on both systems and human performance.",
         "Our engagements focus on creating practical, sustainable improvements that encourage participation, reinforce accountability, and support long-term cultural development.",
@@ -113,8 +112,8 @@ const SecurityTraining = () => (
       ],
     }}
     cta={{
-      eyebrow: "Ready to Build a More Security-Conscious Workforce?",
-      title: "Book a Risk Governance Discussion",
+      eyebrow: "Ready to Build a More Security-Conscious Organization?",
+      title: "Every important security decision starts with a clear understanding of risk.",
       buttonLabel: "Book a Risk Governance Discussion",
     }}
   />

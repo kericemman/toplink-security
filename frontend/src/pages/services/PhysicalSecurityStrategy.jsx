@@ -30,13 +30,13 @@ const deliverables = [
 ];
 
 const benefits = [
-  "Create a roadmap for building a more effective security function",
-  "Improve consistency across security operations and locations",
-  "Strengthen governance and accountability structures",
-  "Align security activities with organizational priorities",
-  "Improve the return on existing security resources and investments",
-  "Support sustainable growth and operational change",
-  "Enhance leadership confidence in security program performance",
+  "A clear roadmap for building a more effective security function",
+  "Consistent security operations across sites and locations",
+  "Stronger governance and accountability",
+  "Closer alignment between security activities and organizational priorities",
+  "Improved return on existing security resources and investments",
+  "Enhanced support for sustainable growth and operational change",
+  "Increased leadership confidence in security program performance"
 ];
 
 const idealFor = [
@@ -46,7 +46,6 @@ const idealFor = [
   "Manufacturing facilities",
   "Commercial property owners",
   "Educational institutions",
-  "Organizations undergoing growth, restructuring, or expansion",
 ];
 
 const PhysicalSecurityStrategy = () => (
@@ -82,16 +81,16 @@ const PhysicalSecurityStrategy = () => (
       {
         id: "what-we-evaluate",
         eyebrow: "What We Evaluate",
-        title: "Our engagements evaluate key areas including:",
+       
         description:
-          "We examine how security is structured, governed, resourced, implemented, and aligned with the organization’s current and future operating requirements.",
+          "Our engagements evaluate how security is structured, governed, resourced, implemented, and aligned with your organization's current and future operating requirements, including:",
         items: evaluationAreas,
         variant: "stone",
       },
       {
         id: "what-you-receive",
         eyebrow: "What You Receive",
-        title: "Practical outputs for governance, prioritization, and growth.",
+        title: "Practical outputs to guide strategy, governance, and implementation.",
         items: deliverables,
         variant: "white",
       },
@@ -112,7 +111,8 @@ const PhysicalSecurityStrategy = () => (
     ]}
     approach={{
       eyebrow: "Our Approach",
-      title: "Risk-informed and business-aligned physical security strategy.",
+      title: 
+        "Risk-informed, business-aligned advisory tailored to your organization's strategic and operational priorities.",
       paragraphs: [
         "TopLink Security applies a risk-informed and business-aligned approach to physical security strategy development.",
         "We work with leadership teams to ensure security capabilities support organizational priorities, enable operational effectiveness, and remain adaptable to changing business requirements.",
@@ -120,8 +120,8 @@ const PhysicalSecurityStrategy = () => (
       ],
     }}
     cta={{
-      eyebrow: "Ready to Build a More Effective Security Program?",
-      title: "Book a Risk Governance Discussion",
+      eyebrow: "Ready to Build a Security Program That Supports Your Business?",
+      title: "Every important security decision starts with a clear understanding of risk",
       buttonLabel: "Book a Risk Governance Discussion",
     }}
   />

@@ -17,9 +17,9 @@ const Footer = () => {
         <div>
           <Link to="/" className="flex items-center gap-3">
             <span className="h-14 w-14 overflow-hidden"><img src="/assets/logo-transparent.png" alt="" className="h-full w-full object-contain" /></span>
-            <span><strong className="block text-lg uppercase tracking-[0.06em]">TopLink Security</strong><small className="font-bold uppercase tracking-[0.24em] text-[#0CA4B8]">Risk Advisory</small></span>
+            <span><strong className="block text-lg tracking-[0.06em]">TopLink Security</strong><small className="font-bold tracking-[0.24em] text-[#0CA4B8]">Risk Advisory</small></span>
           </Link>
-          <p className="mt-6 max-w-sm text-sm leading-7 text-slate-300">Independent risk and security advisory helping organizations protect critical assets, strengthen governance, and build practical resilience.</p>
+          <p className="mt-6 max-w-sm text-sm leading-7 text-slate-300">Risk and security advisory for organizations protecting people, assets, and business continuity.</p>
           <div className="mt-6 flex gap-3">
             <a href="https://www.linkedin.com/in/cyprian-musanya-a5776812b" target="_blank" rel="noreferrer" aria-label="LinkedIn" className="border border-white/20 p-2.5 hover:border-[#0CA4B8] hover:text-[#0CA4B8]"><FaLinkedinIn /></a>
             <a href="https://wa.me/254725614183" target="_blank" rel="noreferrer" aria-label="WhatsApp" className="border border-white/20 p-2.5 hover:border-[#0CA4B8] hover:text-[#0CA4B8]"><FaWhatsapp /></a>

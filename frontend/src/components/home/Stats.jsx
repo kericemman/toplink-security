@@ -11,10 +11,11 @@ const Stats = () => {
         <div>
           <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-[#0CA4B8]">The Authority Behind TopLink Security</p>
           <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-[#0B2F50] md:text-4xl">
-            Experience that connects risk frameworks to business reality.
+            Experience that helps boards, executives, and security leaders make informed security decisions.
           </h2>
           <p className="mt-6 text-lg leading-8 text-slate-600">
-            Led by industry veteran <a href="https://www.linkedin.com/in/cyprian-musanya-a5776812b" className="text-[#0CA4B8] hover:underline">Cyprian</a>, TopLink Security bridges the gap between complex risk frameworks and practical business operations. We provide boards, C-suite executives, and security directors with an independent, objective perspective to uncover hidden vulnerabilities, reduce corporate liability, and build defensible mitigation strategies.
+            Led by industry veteran <a href="https://www.linkedin.com/in/cyprian-musanya-a5776812b" className="text-[#0CA4B8] hover:underline">Cyprian</a>, TopLink Security helps boards, executives, and security leaders make confident security decisions. We provide an independent perspective to identify hidden risks, protect critical assets, reduce organizational exposure, and ensure security investments support business priorities.
+ 
           </p>
         </div>
       </div>
