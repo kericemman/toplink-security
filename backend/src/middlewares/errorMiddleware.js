@@ -4,7 +4,14 @@ const errorMiddleware = (err, req, res, next) => {
   }
 
   if (process.env.NODE_ENV !== "test") {
-    console.error(err);
+    if (err.name === "PaystackInitializationError") {
+      console.error("Paystack checkout initialization failed", {
+        upstreamStatus: err.upstreamStatus,
+        providerMessage: err.providerMessage,
+      });
+    } else {
+      console.error(err);
+    }
   }
 
   let statusCode = err.statusCode || res.statusCode || 500;
