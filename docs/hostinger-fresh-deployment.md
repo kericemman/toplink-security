@@ -11,7 +11,7 @@ actual installation path.
   content while retaining the existing TopLink logo and Insights preview.
 - Updated shared navigation and footer, public page styling, and internal links
   across the retained site pages. The public resources/store route is hidden.
-- Added direct branded checkout screens for the temporarily US$1 Executive Security Risk
+- Added direct branded checkout screens for the temporarily US$2 Executive Security Risk
   Governance Diagnostic and the US$295 Decision Room session. Each collects
   name, email, and country, then initializes Paystack directly.
 - Kept payment confirmation server-side through Paystack verification and

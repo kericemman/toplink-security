@@ -51,7 +51,7 @@ function CheckoutForm({ service, room }) {
     <input id="country" name="country" autoComplete="country-name" placeholder={room ? "Country" : "Your country"} list={countryListId} required maxLength={100} value={buyer.country} onChange={update} disabled={busy} />
     <datalist id={countryListId}>{countries.map((country) => <option key={country} value={country} />)}</datalist>
     <p ref={errorRef} className="error" id="checkout-error" role="alert" tabIndex={-1} style={{ display: error ? "block" : "none" }}>{error}</p>
-    <button type="submit" disabled={busy}>{busy ? "Opening secure payment…" : room ? "Proceed to payment — US$295" : "Continue to secure payment — US$1"}</button>
+    <button type="submit" disabled={busy}>{busy ? "Opening secure payment…" : room ? "Proceed to payment — US$295" : "Continue to secure payment — US$2"}</button>
     <p className={room ? "note" : "secure-note"}>{room ? "Payment is completed securely on Paystack." : "Payment is completed on the payment provider’s secure checkout."}</p>
   </form>;
 }
@@ -77,7 +77,7 @@ export default function Checkout({ service = "diagnostic" }) {
         <section className="panel" aria-label="Order summary">
           <div className="summary-title">{diagnosticTitle}</div>
           <div className="summary-note">A self-guided diagnostic for one live security risk and its associated governance decision.</div>
-          <div className="price-row"><span className="fixed">One-time fee</span><span className="price">US$1</span></div>
+          <div className="price-row"><span className="fixed">One-time fee</span><span className="price">US$2</span></div>
         </section>
         <CheckoutForm key={service} service={service} room={false} />
         <p className="delivery">After confirmed payment, you will receive access instructions for the Diagnostic and the Risk Governance Decision Guide™. This is self-guided; individual review is not included.</p>

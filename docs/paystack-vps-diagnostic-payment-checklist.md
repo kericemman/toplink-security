@@ -1,6 +1,6 @@
 # TopLink Diagnostic Payment Flow — VPS Production Checklist
 
-The standalone Diagnostic is temporarily US$1 in USD for live testing. The server fixes the price; checkout inputs cannot change it. Replace this test amount with the intended commercial amount after testing.
+The standalone Diagnostic is temporarily US$2 in USD for live testing. The server fixes the price; checkout inputs cannot change it. Replace this test amount with the intended commercial amount after testing.
 
 Diagnostic Landing Page → Secure Checkout (full name, email, country) → Paystack USD Payment → Verified Payment → Secure HTML Diagnostic (Tool 1) → Risk Governance Decision Guide (Tool 2)
 
@@ -37,7 +37,7 @@ that `engagements@toplinksecurity.co.ke` is authorized as a sender. The same
 address receives internal contact, qualification, booking and payment
 notifications.
 
-Prices are fixed server-side: Diagnostic USD 1 (temporary live-test price), Decision Room USD 295, and newly created Decision Review qualifications USD 5,000. Existing engagement records retain their recorded prices. No database price migration is run.
+Prices are fixed server-side: Diagnostic USD 2 (temporary live-test price), Decision Room USD 295, and newly created Decision Review qualifications USD 5,000. Existing engagement records retain their recorded prices. No database price migration is run.
 
 Frontend:
 
@@ -65,7 +65,7 @@ Frontend:
 
 ## Diagnostic credit and professional boundaries
 
-The supplied Tool 1 and Tool 2 are implemented with their original questions, manual governance classifications and interpretation logic. There is no numerical risk score or automatic advisory-service acceptance. The Guide states a possible USD 1 credit toward a USD 5,000 Review (USD 4,999 balance), conditional on same-organization purchase, reference/date, commissioning within 14 calendar days and separate qualification/acceptance. Credit eligibility is reviewed manually; checkout does not automatically apply a discount. The Review/Sprint routes remain separate from the self-guided tools. Update this temporary credit amount when restoring the Diagnostic's commercial price.
+The supplied Tool 1 and Tool 2 are implemented with their original questions, manual governance classifications and interpretation logic. There is no numerical risk score or automatic advisory-service acceptance. The Guide states a possible USD 2 credit toward a USD 5,000 Review (USD 4,998 balance), conditional on same-organization purchase, reference/date, commissioning within 14 calendar days and separate qualification/acceptance. Credit eligibility is reviewed manually; checkout does not automatically apply a discount. The Review/Sprint routes remain separate from the self-guided tools. Update this temporary credit amount when restoring the Diagnostic's commercial price.
 
 ## Important implementation note
 
