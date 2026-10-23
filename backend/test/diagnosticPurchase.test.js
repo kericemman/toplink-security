@@ -106,7 +106,7 @@ const answers = {
 };
 const acceptance = Object.fromEntries([
   "diagnosticReviewed", "termsUnderstood", "advisoryRoleUnderstood", "clientResponsibilityUnderstood",
-  "paystackUsdUnderstood", "intakeRequired", "termsAccepted",
+  "paystackCurrencyUnderstood", "intakeRequired", "termsAccepted",
 ].map((key) => [key, true]));
 
 const purchase = async () => {
@@ -124,7 +124,7 @@ const beginPayment = async (record) => {
 };
 
 const successfulTransaction = (record) => ({
-  reference: record.paymentReference, status: "success", amount: Math.round(record.paymentAmount * 100), currency: "USD",
+  reference: record.paymentReference, status: "success", amount: Math.round(record.paymentAmount * 100), currency: record.paymentCurrency,
   id: 123456, channel: "card", paid_at: new Date().toISOString(),
   metadata: { diagnosticSubmissionId: record._id.toString(), type: "diagnostic-purchase" },
 });
@@ -137,7 +137,7 @@ const paidPurchase = async () => {
   return records.get(record._id.toString());
 };
 
-test("direct Diagnostic checkout uses name, email and country and immediately initializes fixed USD 2 payment", async () => {
+test("direct Diagnostic checkout uses name, email and country and immediately initializes fixed KES 200 payment", async () => {
   const response = await request("/diagnostics/checkout", {
     name: "  Direct Buyer  ", email: "Buyer@Example.test", country: " Kenya ",
     paymentAmount: 1, paymentCurrency: "KES", paymentStatus: "paid", accessToken: "a".repeat(64),
@@ -148,10 +148,10 @@ test("direct Diagnostic checkout uses name, email and country and immediately in
   const record = [...records.values()][0];
   assert.equal(record.name, "Direct Buyer"); assert.equal(record.email, "buyer@example.test");
   assert.equal(record.countryLocation, "Kenya"); assert.equal(record.organization, undefined);
-  assert.equal(record.purchaseKind, "diagnostic"); assert.equal(record.paymentAmount, 2); assert.equal(record.paymentCurrency, "USD");
+  assert.equal(record.purchaseKind, "diagnostic"); assert.equal(record.paymentAmount, 200); assert.equal(record.paymentCurrency, "KES");
   assert.equal(record.paymentStatus, "pending"); assert.equal(record.accessToken, undefined);
   assert.equal(record.acceptedAt, undefined); assert.equal(record.paymentAcceptance.termsAccepted, false);
-  assert.equal(checkouts.length, 1); assert.equal(checkouts[0].amount, 2); assert.equal(checkouts[0].currency, "USD");
+  assert.equal(checkouts.length, 1); assert.equal(checkouts[0].amount, 200); assert.equal(checkouts[0].currency, "KES");
   assert.equal(checkouts[0].metadata.country, "Kenya");
   assert.equal(checkouts[0].metadata.diagnosticSubmissionId, record._id.toString());
   assert.match(checkouts[0].callbackUrl, new RegExp(`/diagnostic/payment/${record.paymentToken}$`));
@@ -174,13 +174,13 @@ test("direct Diagnostic checkout rejects invalid buyer fields before creating a 
   assert.equal(records.size, 0); assert.equal(checkouts.length, 0);
 });
 
-test("a purchase fixes the service and US$2 price without asking for diagnostic answers", async () => {
+test("a purchase fixes the service and KES 200 test price without asking for diagnostic answers", async () => {
   const response = await request("/diagnostics/purchase", {
     ...buyer, paymentAmount: 1, paymentCurrency: "KES", paymentStatus: "paid", accessToken: "a".repeat(64),
   });
   assert.equal(response.status, 201);
-  assert.equal(response.data.paymentAmount, 2);
-  assert.equal(response.data.paymentCurrency, "USD");
+  assert.equal(response.data.paymentAmount, 200);
+  assert.equal(response.data.paymentCurrency, "KES");
   const record = [...records.values()][0];
   assert.equal(record.paymentStatus, "not_started");
   assert.equal(record.accessToken, undefined);
@@ -218,13 +218,13 @@ test("both supplied HTML tools are private, paid-only and do not transmit diagno
   const guide = await request(`/diagnostics/tools/${paid.accessToken}/guide`);
   assert.equal(guide.status, 200);
   assert.match(guide.html, /US\$5,000/);
-  assert.match(guide.html, /US\$2/);
-  assert.match(guide.html, /US\$4,998/);
+  assert.match(guide.html, /KES 200 temporary live-test price/);
+  assert.match(guide.html, /To be confirmed in writing/);
   assert.doesNotMatch(guide.html, /fetch\(|localStorage|sessionStorage/);
   assert.equal((await request(`/diagnostics/tools/${paid.accessToken}/not-a-tool`)).status, 404);
 });
 
-test("Paystack checkout uses the recorded USD price and requires all terms", async () => {
+test("Paystack checkout uses the recorded KES price and requires all terms", async () => {
   const record = await purchase();
   const rejected = await request(`/diagnostics/payment/${record.paymentToken}/initialize`, {
     authorizedClientRepresentative: buyer.name, authorizedClientRole: buyer.titleRole, acceptance: { ...acceptance, termsAccepted: false },
@@ -232,15 +232,15 @@ test("Paystack checkout uses the recorded USD price and requires all terms", asy
   assert.equal(rejected.status, 400);
   assert.equal(checkouts.length, 0);
   await beginPayment(record);
-  assert.equal(checkouts[0].amount, 2);
-  assert.equal(checkouts[0].currency, "USD");
+  assert.equal(checkouts[0].amount, 200);
+  assert.equal(checkouts[0].currency, "KES");
   assert.equal(checkouts[0].metadata.type, "diagnostic-purchase");
 });
 
 test("a mismatched amount, currency, purchase ID or unsuccessful transaction cannot unlock access", async () => {
   const record = await beginPayment(await purchase());
   const variants = [
-    { amount: 300 }, { currency: "KES" }, { status: "failed" },
+    { amount: 300 }, { currency: "USD" }, { status: "failed" },
     { metadata: { diagnosticSubmissionId: "another-purchase" } }, { metadata: {} },
   ];
   for (const variant of variants) {
@@ -301,7 +301,7 @@ test("paid answers stay linked to the purchase and cannot overwrite payment or b
   assert.equal(records.size, 1);
   assert.equal(submitted.email, buyer.email);
   assert.equal(submitted.paymentStatus, "paid");
-  assert.equal(submitted.paymentAmount, 2);
+  assert.equal(submitted.paymentAmount, 200);
   assert.equal(submitted.status, "submitted");
   assert.equal(submitted.riskIssue, answers.riskIssue);
   assert.ok(submitted.submittedAt);

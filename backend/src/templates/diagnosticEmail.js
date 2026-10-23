@@ -52,9 +52,9 @@ exports.clientDiagnosticResultEmail = ({
       paymentAmount
     )}</p>
 
-    ${actionButton(paymentUrl, "Review Terms & Proceed to Paystack USD Payment")}
+    ${actionButton(paymentUrl, "Review Terms & Proceed to Secure Payment")}
 
-    <p>Paystack USD payment is the primary payment route. Kenyan clients who require M-PESA as a secondary option may reply to this email so TopLink can advise on the appropriate alternative.</p>
+    <p>Available payment methods and the charge currency are shown on Paystack checkout before payment.</p>
 
     <p>TopLink Security</p>
   </div>

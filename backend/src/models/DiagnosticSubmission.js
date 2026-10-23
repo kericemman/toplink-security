@@ -128,6 +128,7 @@ const diagnosticSubmissionSchema = new mongoose.Schema(
       termsUnderstood: { type: Boolean, default: false },
       advisoryRoleUnderstood: { type: Boolean, default: false },
       clientResponsibilityUnderstood: { type: Boolean, default: false },
+      paystackCurrencyUnderstood: { type: Boolean, default: false },
       paystackUsdUnderstood: { type: Boolean, default: false },
       intakeRequired: { type: Boolean, default: false },
       termsAccepted: { type: Boolean, default: false },

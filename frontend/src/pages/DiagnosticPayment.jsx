@@ -29,8 +29,8 @@ const acceptanceLabels = [
     "The Client retains responsibility for business decision-making, risk acceptance, authorization and implementation.",
   ],
   [
-    "paystackUsdUnderstood",
-    "Paystack USD payment is the primary payment route and the checkout will show the service and amount.",
+    "paystackCurrencyUnderstood",
+    "Paystack checkout will show the service, amount and currency before payment.",
   ],
   [
     "intakeRequired",
@@ -192,7 +192,7 @@ const DiagnosticPayment = () => {
               {"Engagement Confirmation"}
             </p>
             <h1 className="mt-5 max-w-4xl text-2xl font-extrabold leading-tight text-[var(--site-navy)] md:text-3xl lg:text-4xl">
-              {"Diagnostic Result, Terms & Paystack USD Payment"}
+              {"Diagnostic Result, Terms & Payment"}
             </h1>
             <p className="mt-6 max-w-3xl text-base leading-8 text-[var(--site-muted)] sm:text-lg">
               {"Review the recommended next step, confirm engagement terms, and proceed to Paystack."}
@@ -201,7 +201,7 @@ const DiagnosticPayment = () => {
 
           <div className="site-panel site-panel-dark bg-[var(--site-navy)] p-7 text-white">
             <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-[var(--site-sage)]">
-              Paystack USD Checkout
+              Paystack Secure Checkout
             </p>
             <p className="mt-4 text-xl font-extrabold md:text-2xl">
               {diagnostic.paymentServiceName}
@@ -213,7 +213,7 @@ const DiagnosticPayment = () => {
               )}
             </p>
             <p className="mt-3 text-sm leading-6 text-slate-300">
-              {"USD is the primary payment currency."}
+              {"The checkout will display the applicable amount and currency."}
             </p>
           </div>
         </div>
@@ -324,8 +324,8 @@ const DiagnosticPayment = () => {
                   "Service Page",
                   "Qualification / Engagement Confirmation",
                   "Terms of Engagement",
-                  "Paystack USD Payment",
-                  "Co-op Bank USD settlement account",
+                  "Paystack checkout — KES 200",
+                  "Server-side payment verification",
                   "Payment Confirmation",
                   "Secure Client Intake",
                   "Engagement Commences",
@@ -337,8 +337,8 @@ const DiagnosticPayment = () => {
                 ))}
               </div>
               <p className="mt-5 text-sm leading-6 text-[var(--site-muted)]">
-                M-PESA remains a secondary route for Kenyan clients who request
-                it. Paystack USD remains the primary checkout experience.
+                Available payment methods depend on the merchant account and
+                currency. The checkout displays the methods currently enabled.
               </p>
             </section>
 

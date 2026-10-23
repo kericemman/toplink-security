@@ -1,8 +1,8 @@
 # TopLink Diagnostic Payment Flow — VPS Production Checklist
 
-The standalone Diagnostic is temporarily US$2 in USD for live testing. The server fixes the price; checkout inputs cannot change it. Replace this test amount with the intended commercial amount after testing.
+The standalone Diagnostic is temporarily KES 200 for live testing. The server fixes the price and currency; checkout inputs cannot change them. Replace this test amount with the intended commercial amount after testing.
 
-Diagnostic Landing Page → Secure Checkout (full name, email, country) → Paystack USD Payment → Verified Payment → Secure HTML Diagnostic (Tool 1) → Risk Governance Decision Guide (Tool 2)
+Diagnostic Landing Page → Secure Checkout (full name, email, country) → Paystack KES Payment (available local channels) → Verified Payment → Secure HTML Diagnostic (Tool 1) → Risk Governance Decision Guide (Tool 2)
 
 The Diagnostic is now self-guided, using the supplied HTML instruments. Individual review is not included. Answers are held only in the open document, with JSON/TXT export and print/PDF options. They are not submitted to TopLink, persisted to browser storage or automatically saved. Admin retains buyer and payment records, plus any historic submissions from the previous intake form.
 
@@ -37,7 +37,7 @@ that `engagements@toplinksecurity.co.ke` is authorized as a sender. The same
 address receives internal contact, qualification, booking and payment
 notifications.
 
-Prices are fixed server-side: Diagnostic USD 2 (temporary live-test price), Decision Room USD 295, and newly created Decision Review qualifications USD 5,000. Existing engagement records retain their recorded prices. No database price migration is run.
+Prices are fixed server-side: Diagnostic KES 200 (temporary live-test price), Decision Room USD 295, and newly created Decision Review qualifications USD 5,000. Existing engagement records retain their recorded prices. No database price migration is run.
 
 Frontend:
 
@@ -53,7 +53,7 @@ Frontend:
 - Run one live low-value USD test payment if Paystack supports it for the account.
 - Confirm the transaction appears in the admin Diagnostics tab after webhook verification.
 - Confirm the client receives the payment confirmation email.
-- Confirm both new checkout pages collect exactly full name, email and country, open Paystack without an intermediate page, and show the correct USD amount.
+- Confirm both new checkout pages collect exactly full name, email and country, open Paystack without an intermediate page, and show Diagnostic KES 200 / Decision Room USD 295.
 - Confirm TopLink receives the admin payment notification email.
 - Confirm payment unlocks `/diagnostic/complete/:token` and `/diagnostic/guide/:token`; the email includes the secure entry link.
 - Confirm an unpaid purchase cannot fetch either instrument, including direct API requests. Instrument HTML is delivered from the backend only; it is not part of the public frontend build.
@@ -65,8 +65,8 @@ Frontend:
 
 ## Diagnostic credit and professional boundaries
 
-The supplied Tool 1 and Tool 2 are implemented with their original questions, manual governance classifications and interpretation logic. There is no numerical risk score or automatic advisory-service acceptance. The Guide states a possible USD 2 credit toward a USD 5,000 Review (USD 4,998 balance), conditional on same-organization purchase, reference/date, commissioning within 14 calendar days and separate qualification/acceptance. Credit eligibility is reviewed manually; checkout does not automatically apply a discount. The Review/Sprint routes remain separate from the self-guided tools. Update this temporary credit amount when restoring the Diagnostic's commercial price.
+The supplied Tool 1 and Tool 2 are implemented with their original questions, manual governance classifications and interpretation logic. There is no numerical risk score or automatic advisory-service acceptance. The Guide now identifies KES 200 as a temporary test price and makes clear it is not an automatic credit against the USD 5,000 Review. Any commercial credit must be confirmed separately in writing. The Review/Sprint routes remain separate from the self-guided tools.
 
 ## Important implementation note
 
-The application can force Paystack checkout currency to USD and verify successful transactions server-side. It cannot independently confirm that Paystack has approved settlement into a specific Co-op Bank USD account; that must be confirmed inside the Paystack dashboard before launch.
+The application sends the Diagnostic as KES 200 and verifies successful transactions server-side. Review and Decision Room retain their configured USD prices. Settlement destination and enabled payment channels must be confirmed inside the Paystack dashboard; the application does not restrict channels, so Paystack can present enabled methods for the currency.

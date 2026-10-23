@@ -18,7 +18,7 @@ const {
 } = require("../templates/diagnosticEmail");
 
 const PAYMENT_TOKEN_DAYS = 30;
-const DIAGNOSTIC_PRICE_USD = 2;
+const DIAGNOSTIC_PRICE_KES = 200;
 const DIAGNOSTIC_SERVICE_NAME = "Executive Security Risk Governance Diagnostic™";
 const diagnosticFields = [
   "titleRole", "telephone", "countryLocation", "relationshipToRisk",
@@ -33,7 +33,7 @@ const paymentAcceptanceKeys = [
   "termsUnderstood",
   "advisoryRoleUnderstood",
   "clientResponsibilityUnderstood",
-  "paystackUsdUnderstood",
+  "paystackCurrencyUnderstood",
   "intakeRequired",
   "termsAccepted",
 ];
@@ -227,8 +227,8 @@ exports.createDiagnosticPurchase = asyncHandler(async (req, res) => {
     paymentToken: createPaymentToken(),
     paymentTokenExpiresAt: getTokenExpiryDate(),
     paymentServiceName: DIAGNOSTIC_SERVICE_NAME,
-    paymentAmount: DIAGNOSTIC_PRICE_USD,
-    paymentCurrency: "USD",
+    paymentAmount: DIAGNOSTIC_PRICE_KES,
+    paymentCurrency: "KES",
     status: "purchase_pending",
   });
 
@@ -252,8 +252,8 @@ exports.createDiagnosticCheckout = asyncHandler(async (req, res) => {
     paymentToken: createPaymentToken(),
     paymentTokenExpiresAt: getTokenExpiryDate(),
     paymentServiceName: DIAGNOSTIC_SERVICE_NAME,
-    paymentAmount: DIAGNOSTIC_PRICE_USD,
-    paymentCurrency: "USD",
+    paymentAmount: DIAGNOSTIC_PRICE_KES,
+    paymentCurrency: "KES",
     status: "purchase_pending",
   });
   const checkout = await initializeDiagnosticCheckout(diagnostic);
@@ -512,7 +512,11 @@ exports.initializeDiagnosticPayment = asyncHandler(async (req, res) => {
     throw new Error("Authorized representative name and role are required");
   }
 
-  const allAccepted = paymentAcceptanceKeys.every((key) => acceptance?.[key] === true);
+  const allAccepted = paymentAcceptanceKeys.every((key) =>
+    key === "paystackCurrencyUnderstood"
+      ? acceptance?.paystackCurrencyUnderstood === true || acceptance?.paystackUsdUnderstood === true
+      : acceptance?.[key] === true
+  );
 
   if (!allAccepted) {
     res.statusCode = 400;
