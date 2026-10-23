@@ -36,13 +36,13 @@ const Unsubscribe = () => {
 
   if (loading) {
     return (
-      <section className="bg-[#EAF2FF] py-24">
+      <section className="bg-[var(--site-paper)] py-24">
         <div className="container-custom text-center">
-          <Loader2 className="mx-auto animate-spin text-[#0B3D91]" size={44} />
-          <h1 className="mt-6 text-3xl font-black text-[#020617]">
+          <Loader2 className="mx-auto animate-spin text-[var(--site-navy)]" size={44} />
+          <h1 className="mt-6 text-3xl font-black text-[var(--site-ink)]">
             Processing Request
           </h1>
-          <p className="mt-3 text-slate-600">
+          <p className="mt-3 text-[var(--site-muted)]">
             Please wait while we update your subscription.
           </p>
         </div>
@@ -51,7 +51,7 @@ const Unsubscribe = () => {
   }
 
   return (
-    <section className="bg-[#EAF2FF] py-24">
+    <section className="bg-[var(--site-paper)] py-24">
       <div className="container-custom">
         <div className="mx-auto max-w-xl rounded-3xl bg-white p-8 text-center shadow-sm">
           <div
@@ -62,11 +62,11 @@ const Unsubscribe = () => {
             {success ? <CheckCircle size={44} /> : <XCircle size={44} />}
           </div>
 
-          <h1 className="mt-6 text-3xl font-black text-[#020617]">
+          <h1 className="mt-6 text-3xl font-black text-[var(--site-ink)]">
             {success ? "Unsubscribed" : "Request Failed"}
           </h1>
 
-          <p className="mt-3 text-slate-600">{message}</p>
+          <p className="mt-3 text-[var(--site-muted)]">{message}</p>
 
           <div className="mt-8">
             <Button to="/">Back to Home</Button>

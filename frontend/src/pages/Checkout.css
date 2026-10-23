@@ -1,0 +1,43 @@
+/* Matched to the two supplied checkout HTML files; scoped to keep shared chrome unchanged. */
+.public-site .reference-checkout.html-checkout.html-diagnostic-checkout { all:initial;display:flow-root; }
+.public-site .reference-checkout.html-checkout.html-diagnostic-checkout :where(*) {all:revert;box-sizing:border-box;}
+
+.public-site .reference-checkout.html-checkout.html-diagnostic-checkout{--navy:#142B3B;--paper:#F7F7F3;--soft:#B8D5CE;--teal:#315F5B;--sand:#E9E2D6;--ink:#1c2b33;--muted:#617079;--line:#d8dfdc}
+.public-site .reference-checkout.html-checkout.html-diagnostic-checkout *{box-sizing:border-box}.public-site .reference-checkout.html-checkout.html-diagnostic-checkout{margin:0;background:var(--paper);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+.public-site .reference-checkout.html-checkout.html-diagnostic-checkout main{width:min(100% - 32px,560px);margin:38px auto 52px}.public-site .reference-checkout.html-checkout.html-diagnostic-checkout .eyebrow{color:var(--teal);font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin:0 0 10px}
+.public-site .reference-checkout.html-checkout.html-diagnostic-checkout h1{color:var(--navy);font-size:clamp(27px,5vw,36px);line-height:1.15;margin:0 0 12px}.public-site .reference-checkout.html-checkout.html-diagnostic-checkout .intro,.public-site .reference-checkout.html-checkout.html-diagnostic-checkout .summary-note{color:var(--muted)}
+.public-site .reference-checkout.html-checkout.html-diagnostic-checkout .panel{background:white;border:1px solid var(--line);border-radius:14px;padding:22px;margin-bottom:16px}
+.public-site .reference-checkout.html-checkout.html-diagnostic-checkout .summary-title{font-weight:750;color:var(--navy)}.public-site .reference-checkout.html-checkout.html-diagnostic-checkout .summary-note{font-size:14px}.public-site .reference-checkout.html-checkout.html-diagnostic-checkout .price-row{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--line);margin-top:15px;padding-top:14px}
+.public-site .reference-checkout.html-checkout.html-diagnostic-checkout .price{font-size:28px;font-weight:800;color:var(--navy)}.public-site .reference-checkout.html-checkout.html-diagnostic-checkout .fixed{font-size:13px;color:var(--muted)}
+.public-site .reference-checkout.html-checkout.html-diagnostic-checkout label{display:block;font-size:14px;font-weight:700;color:var(--navy);margin:0 0 6px}
+.public-site .reference-checkout.html-checkout.html-diagnostic-checkout input{display:block;width:100%;min-height:48px;border:1px solid #bdc9c7;border-radius:8px;padding:11px 12px;font:inherit;margin-bottom:16px;background:white}
+.public-site .reference-checkout.html-checkout.html-diagnostic-checkout input:focus{outline:3px solid var(--soft);border-color:var(--teal)}
+.public-site .reference-checkout.html-checkout.html-diagnostic-checkout button{width:100%;min-height:51px;border:0;border-radius:8px;background:var(--teal);color:white;font:inherit;font-weight:750;padding:13px;cursor:pointer}
+.public-site .reference-checkout.html-checkout.html-diagnostic-checkout button:hover{background:var(--navy)}.public-site .reference-checkout.html-checkout.html-diagnostic-checkout .secure-note,.public-site .reference-checkout.html-checkout.html-diagnostic-checkout .footer{font-size:12px;color:var(--muted);text-align:center}.public-site .reference-checkout.html-checkout.html-diagnostic-checkout .secure-note{margin:12px 0 0}
+.public-site .reference-checkout.html-checkout.html-diagnostic-checkout .delivery{font-size:13px;color:var(--muted);margin:18px 2px}.public-site .reference-checkout.html-checkout.html-diagnostic-checkout .footer{margin-top:28px}.public-site .reference-checkout.html-checkout.html-diagnostic-checkout .error{display:none;color:#9b2c2c;font-size:13px;margin:0 0 12px}
+@media(max-width:420px){.public-site .reference-checkout.html-checkout.html-diagnostic-checkout main{margin-top:26px}.public-site .reference-checkout.html-checkout.html-diagnostic-checkout .panel{padding:18px}}
+
+.public-site .reference-checkout.html-checkout.html-diagnostic-checkout button:disabled {opacity:.65;cursor:wait;}
+.public-site .reference-checkout.html-checkout.html-diagnostic-checkout input:disabled {opacity:.7;}
+.public-site .reference-checkout.html-checkout.html-diagnostic-checkout button:focus-visible {outline:3px solid var(--soft);outline-offset:3px;}
+.public-site .reference-checkout.html-checkout.html-diagnostic-checkout .error:focus {outline:none;}
+.public-site .reference-checkout.html-checkout.html-room-checkout { all:initial;display:flow-root; }
+.public-site .reference-checkout.html-checkout.html-room-checkout :where(*) {all:revert;box-sizing:border-box;}
+
+.public-site .reference-checkout.html-checkout.html-room-checkout{--navy:#142B3B;--paper:#F7F7F3;--teal:#315F5B;--soft:#B8D5CE;--ink:#1c2b33;--muted:#617079;--line:#d8dfdc}
+.public-site .reference-checkout.html-checkout.html-room-checkout *{box-sizing:border-box}.public-site .reference-checkout.html-checkout.html-room-checkout{margin:0;background:var(--paper);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+.public-site .reference-checkout.html-checkout.html-room-checkout main{width:min(100% - 32px,500px);margin:35px auto 48px}.public-site .reference-checkout.html-checkout.html-room-checkout .eyebrow{color:var(--teal);font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin:0 0 8px}
+.public-site .reference-checkout.html-checkout.html-room-checkout h1{color:var(--navy);font-size:clamp(28px,5vw,35px);line-height:1.15;margin:0 0 8px}.public-site .reference-checkout.html-checkout.html-room-checkout .subtitle{color:var(--muted);margin:0 0 22px}
+.public-site .reference-checkout.html-checkout.html-room-checkout .panel{background:#fff;border:1px solid var(--line);border-radius:12px;padding:22px}
+.public-site .reference-checkout.html-checkout.html-room-checkout .product{font-weight:800;color:var(--navy)}.public-site .reference-checkout.html-checkout.html-room-checkout .price-row{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);margin-top:15px;padding-top:13px}.public-site .reference-checkout.html-checkout.html-room-checkout .price{font-size:27px;font-weight:850;color:var(--navy)}.public-site .reference-checkout.html-checkout.html-room-checkout .once{font-size:13px;color:var(--muted)}
+.public-site .reference-checkout.html-checkout.html-room-checkout label{display:block;color:var(--navy);font-size:14px;font-weight:700;margin:0 0 5px}
+.public-site .reference-checkout.html-checkout.html-room-checkout input{display:block;width:100%;min-height:47px;border:1px solid #bdc9c7;border-radius:7px;padding:10px 12px;font:inherit;margin-bottom:14px;background:#fff}
+.public-site .reference-checkout.html-checkout.html-room-checkout input:focus{outline:3px solid var(--soft);border-color:var(--teal)}
+.public-site .reference-checkout.html-checkout.html-room-checkout button{width:100%;min-height:50px;border:0;border-radius:7px;background:var(--teal);color:#fff;font:inherit;font-weight:750;padding:12px;cursor:pointer}
+.public-site .reference-checkout.html-checkout.html-room-checkout button:hover{background:var(--navy)}.public-site .reference-checkout.html-checkout.html-room-checkout .note{text-align:center;color:var(--muted);font-size:12px;margin:10px 0 0}.public-site .reference-checkout.html-checkout.html-room-checkout .error{display:none;color:#9b2c2c;font-size:13px;margin:0 0 12px}.public-site .reference-checkout.html-checkout.html-room-checkout .footer{text-align:center;color:var(--muted);font-size:12px;margin-top:23px}
+@media(max-width:420px){.public-site .reference-checkout.html-checkout.html-room-checkout main{margin-top:25px}.public-site .reference-checkout.html-checkout.html-room-checkout .panel{padding:18px}}
+
+.public-site .reference-checkout.html-checkout.html-room-checkout button:disabled {opacity:.65;cursor:wait;}
+.public-site .reference-checkout.html-checkout.html-room-checkout input:disabled {opacity:.7;}
+.public-site .reference-checkout.html-checkout.html-room-checkout button:focus-visible {outline:3px solid var(--soft);outline-offset:3px;}
+.public-site .reference-checkout.html-checkout.html-room-checkout .error:focus {outline:none;}

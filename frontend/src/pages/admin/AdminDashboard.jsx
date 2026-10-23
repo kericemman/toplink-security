@@ -12,6 +12,7 @@ import {
   Mail,
   Briefcase,
   GraduationCap,
+  ShieldCheck,
 } from "lucide-react";
 
 import { getAdminArticles } from "../../services/articleService";
@@ -21,9 +22,12 @@ import {
   getContactMessages,
   getConsultations,
   getTrainingRequests,
+  getReviewQualifications,
+  getDiagnosticSubmissions,
 } from "../../services/contactService";
 import { getSubscribers } from "../../services/subscriberService";
 import { formatCurrency } from "../../utils/formatCurrency";
+import api from "../../services/api";
 
 const AdminDashboard = () => {
   const [stats, setStats] = useState({
@@ -33,6 +37,8 @@ const AdminDashboard = () => {
     messages: 0,
     consultations: 0,
     training: 0,
+    reviewQualifications: 0,
+    diagnostics: 0,
     subscribers: 0,
     revenue: 0,
     pendingOrders: 0,
@@ -51,7 +57,10 @@ const AdminDashboard = () => {
         messages,
         consultations,
         training,
+        reviewQualifications,
+        diagnostics,
         subscribers,
+        roomResponse,
       ] = await Promise.all([
         getAdminArticles(),
         getAdminProducts(),
@@ -59,12 +68,29 @@ const AdminDashboard = () => {
         getContactMessages(),
         getConsultations(),
         getTrainingRequests(),
+        getReviewQualifications(),
+        getDiagnosticSubmissions(),
         getSubscribers(),
+        api.get("/decision-room"),
       ]);
 
       const paidRevenue = (orders || [])
         .filter((order) => order.paymentStatus === "paid")
         .reduce((total, order) => total + Number(order.amount || 0), 0);
+
+      const paidReviewRevenue = (reviewQualifications || [])
+        .filter((item) => item.paymentStatus === "paid")
+        .reduce(
+          (total, item) => total + Number(item.engagementAmount || 0),
+          0
+        );
+
+      const paidDiagnosticRevenue = (diagnostics || [])
+        .filter((item) => item.paymentStatus === "paid")
+        .reduce((total, item) => total + Number(item.paymentAmount || 0), 0);
+      const paidRoomRevenue = (roomResponse.data.data || [])
+        .filter((item) => item.paymentStatus === "paid")
+        .reduce((total, item) => total + Number(item.amount || 0), 0);
 
       const pendingOrders = (orders || [])
         .filter((order) => order.paymentStatus === "pending" || order.status === "pending")
@@ -77,8 +103,10 @@ const AdminDashboard = () => {
         messages: messages?.length || 0,
         consultations: consultations?.length || 0,
         training: training?.length || 0,
+        reviewQualifications: reviewQualifications?.length || 0,
+        diagnostics: diagnostics?.length || 0,
         subscribers: subscribers?.filter((sub) => sub.isActive)?.length || 0,
-        revenue: paidRevenue,
+        revenue: paidRevenue + paidReviewRevenue + paidDiagnosticRevenue + paidRoomRevenue,
         pendingOrders,
       });
     } catch (error) {
@@ -179,6 +207,24 @@ const AdminDashboard = () => {
       value: stats.training,
       icon: GraduationCap,
       subtitle: "Team training",
+      bgColor: "bg-slate-50",
+      hoverColor: "hover:bg-slate-100",
+      iconColor: "text-slate-600",
+    },
+    {
+      label: "Decision Reviews",
+      value: stats.reviewQualifications,
+      icon: Briefcase,
+      subtitle: "Qualification briefs",
+      bgColor: "bg-slate-50",
+      hoverColor: "hover:bg-slate-100",
+      iconColor: "text-slate-600",
+    },
+    {
+      label: "Diagnostics",
+      value: stats.diagnostics,
+      icon: ShieldCheck,
+      subtitle: "Governance checks",
       bgColor: "bg-slate-50",
       hoverColor: "hover:bg-slate-100",
       iconColor: "text-slate-600",

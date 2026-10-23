@@ -15,7 +15,7 @@ echo "Using Node.js ${node_version}"
 cd "${PROJECT_ROOT}/frontend"
 npm ci
 npm run lint
-npm run build -- --outDir dist-next
+VITE_API_URL="${VITE_API_URL:-https://toplinksecurity.co.ke/api}" npm run build -- --outDir dist-next
 
 rm -rf dist-previous
 if [[ -d dist ]]; then mv dist dist-previous; fi

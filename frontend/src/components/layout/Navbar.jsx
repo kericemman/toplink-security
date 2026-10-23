@@ -1,61 +1,41 @@
-import { Link, NavLink } from "react-router-dom";
-import { Menu, X } from "lucide-react";
-import { useEffect, useState } from "react";
-import { navLinks } from "../../data/navLinks";
+import { useEffect, useRef, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
-const Navbar = () => {
-  const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+export default function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef(null);
+  const headerRef = useRef(null);
+  const { pathname } = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 12);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const closeOutside = (event) => {
+      if (!headerRef.current?.contains(event.target)) setMenuOpen(false);
+    };
+    document.addEventListener("pointerdown", closeOutside);
+    return () => document.removeEventListener("pointerdown", closeOutside);
   }, []);
 
-  return (
-    <header className={`fixed inset-x-0 top-0 z-50 border-b transition ${scrolled ? "border-slate-200 bg-white/95 shadow-sm backdrop-blur" : "border-slate-200 bg-white"}`}>
-      <div className="container-custom flex h-20 items-center justify-between lg:h-24">
-        <Link to="/" className="flex items-center gap-3" aria-label="TopLink Security home">
-          <span className="flex h-14 w-14 items-center justify-center overflow-hidden">
-            <img src="/assets/logo-transparent.png" alt="" className="h-full w-full object-contain" />
-          </span>
-          <span className="text-lg font-black leading-none tracking-[0.08em] text-[#0B2F50] sm:text-xl">
-            TopLink Security
-          </span>
+  return <div ref={headerRef} className="reference-home reference-header-host" onKeyDown={(event) => {
+    if (event.key === "Escape" && menuOpen) {
+      setMenuOpen(false);
+      menuRef.current?.focus();
+    }
+  }}>
+    <header className="site-header">
+      <div className="wrap nav">
+        <Link className="brand" to="/" aria-label="TopLink Security homepage" onClick={() => setMenuOpen(false)}>
+          <span className="brand-mark" aria-hidden="true"><img src="/assets/logo-transparent.png" alt="" /></span>
+          <span><span className="brand-name">TOPLINK</span><span className="brand-sub">Security &amp; Risk Advisory</span></span>
         </Link>
-
-        <nav className="hidden items-center gap-7 lg:flex">
-          {navLinks.map((link) => (
-            <NavLink key={link.name} to={link.path} className={({ isActive }) => `border-b-2 py-2 text-xs font-bold uppercase tracking-[0.08em] transition ${isActive ? "border-[#0CA4B8] text-[#0B2F50]" : "border-transparent text-slate-600 hover:border-[#0CA4B8] hover:text-[#0B2F50]"}`}>
-              {link.name}
-            </NavLink>
-          ))}
+        <button ref={menuRef} type="button" className="menu-toggle" aria-label={menuOpen ? "Close navigation" : "Open navigation"} aria-expanded={menuOpen} aria-controls="primary-navigation" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? "×" : "☰"}</button>
+        <nav className={"nav-links" + (menuOpen ? " open" : "")} id="primary-navigation" aria-label="Main navigation" onClick={() => setMenuOpen(false)}>
+          <a href={pathname === "/" ? "#decision-support" : "/#decision-support"}>Decision Support</a>
+          <Link to="/services">Advisory Services</Link>
+          <Link to="/about">About</Link>
+          <Link to="/blog">Insights</Link>
+          <Link className="btn btn-dark" to="/diagnostic">Take the Diagnostic <span className="arrow">↗</span></Link>
         </nav>
-
-        <Link to="/contact" className="hidden border border-[#0B2F50] px-5 py-3 text-xs font-extrabold uppercase tracking-[0.08em] text-[#0B2F50] transition hover:bg-[#0B2F50] hover:text-white lg:inline-flex">
-          Book a Discussion
-        </Link>
-
-        <button className="p-2 text-[#0B2F50] lg:hidden" onClick={() => setOpen(!open)} aria-label="Toggle navigation">
-          {open ? <X /> : <Menu />}
-        </button>
       </div>
-
-      {open && (
-        <div className="border-t border-slate-200 bg-white px-5 py-6 lg:hidden">
-          <nav className="container-custom grid gap-1">
-            {navLinks.map((link) => (
-              <NavLink key={link.name} to={link.path} onClick={() => setOpen(false)} className="border-b border-slate-200 px-1 py-4 text-sm font-bold uppercase tracking-[0.08em] text-[#0B2F50]">
-                {link.name}
-              </NavLink>
-            ))}
-            <Link to="/contact" onClick={() => setOpen(false)} className="mt-5 bg-[#0B2F50] px-5 py-4 text-center text-xs font-extrabold uppercase tracking-[0.08em] text-white">Book a Discussion</Link>
-          </nav>
-        </div>
-      )}
     </header>
-  );
-};
-
-export default Navbar;
+  </div>;
+}

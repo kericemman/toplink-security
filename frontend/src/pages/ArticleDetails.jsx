@@ -208,7 +208,7 @@ const ArticleDetails = () => {
 
   if (loading) {
     return (
-      <section className="bg-[#F8F7F3] py-24">
+      <section className="bg-[var(--site-paper)] py-24">
         <div className="container-custom animate-pulse">
           <div className="h-10 w-40 bg-slate-200" />
           <div className="mt-10 grid gap-10 lg:grid-cols-2">
@@ -223,12 +223,12 @@ const ArticleDetails = () => {
   if (!article) {
     return (
       <section className="bg-white py-24 text-center">
-        <h1 className="text-3xl font-extrabold text-[#0B2F50]">
+        <h1 className="text-3xl font-extrabold text-[var(--site-navy)]">
           Article not found
         </h1>
         <Link
           to="/blog"
-          className="mt-8 inline-flex bg-[#0B2F50] px-5 py-3 font-semibold text-white"
+          className="mt-8 inline-flex bg-[var(--site-navy)] px-5 py-3 font-semibold text-white"
         >
           Back to Blog
         </Link>
@@ -238,11 +238,11 @@ const ArticleDetails = () => {
 
   return (
     <article className="bg-white">
-      <section className="border-b border-slate-200 bg-[#F8F7F3] py-16 lg:py-20">
+      <section className="border-b border-[var(--site-line)] bg-[var(--site-paper)] py-16 lg:py-20">
         <div className="container-custom">
           <Link
             to="/blog"
-            className="mb-10 inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-[0.1em] text-[#0CA4B8]"
+            className="mb-10 inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-[0.1em] text-[var(--site-teal)]"
           >
             <ArrowLeft size={18} />
             Back to Articles
@@ -250,19 +250,19 @@ const ArticleDetails = () => {
 
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <div>
-              <p className="mb-5 inline-flex border-l-2 border-[#B99753] pl-4 text-xs font-extrabold uppercase tracking-[0.16em] text-[#0B2F50]">
+              <p className="mb-5 inline-flex border-l-2 border-[var(--site-teal)] pl-4 text-xs font-extrabold uppercase tracking-[0.16em] text-[var(--site-navy)]">
                 {article.category}
               </p>
 
-              <h1 className="text-4xl font-extrabold leading-[1.1] text-[#0B2F50] md:text-6xl">
+              <h1 className="text-4xl font-extrabold leading-[1.1] text-[var(--site-navy)] md:text-6xl">
                 {article.title}
               </h1>
 
-              <p className="mt-6 text-lg leading-8 text-slate-600">
+              <p className="mt-6 text-lg leading-8 text-[var(--site-muted)]">
                 {article.excerpt}
               </p>
 
-              <div className="mt-6 flex flex-wrap gap-5 text-sm text-slate-500">
+              <div className="mt-6 flex flex-wrap gap-5 text-sm text-[var(--site-muted)]">
                 <span className="flex items-center gap-2">
                   <Calendar size={16} />
                   {formatDate(article.publishedAt || article.createdAt)}
@@ -310,7 +310,7 @@ const ArticleDetails = () => {
               </div>
             </div>
 
-            <div className="overflow-hidden border-t-2 border-[#0B2F50] bg-white">
+            <div className="overflow-hidden rounded-2xl border border-[var(--site-line)] bg-white">
               {article.coverImage?.url ? (
                 <img
                   src={article.coverImage.url}
@@ -318,7 +318,7 @@ const ArticleDetails = () => {
                   className="h-[320px] w-full object-cover"
                 />
               ) : (
-                <div className="flex h-[420px] items-center justify-center text-[#0CA4B8]">
+                <div className="flex h-[420px] items-center justify-center text-[var(--site-teal)]">
                   <BookOpen size={90} />
                 </div>
               )}
@@ -328,7 +328,7 @@ const ArticleDetails = () => {
       </section>
 
       <section className="py-16 lg:py-20">
-        <div className="container-custom grid gap-10 lg:grid-cols-[70%_30%]">
+        <div className="container-custom grid gap-10 lg:grid-cols-[minmax(0,1fr)_300px]">
           <main id="article-content" className="relative min-w-0 pr-0 lg:pr-6">
             <div
               className={`article-content ${
@@ -342,12 +342,12 @@ const ArticleDetails = () => {
             )}
 
             {!hasAccess && (
-              <div className="relative z-10 -mt-20 border-t-2 border-[#0B2F50] bg-[#F8F7F3] p-8 text-center shadow-lg">
-                <p className="text-xs font-extrabold uppercase tracking-[0.16em] text-[#0CA4B8]">
+              <div className="site-panel relative z-10 -mt-20 text-center shadow-lg">
+                <p className="text-xs font-extrabold uppercase tracking-[0.16em] text-[var(--site-teal)]">
                   Continue Reading
                 </p>
 
-                <h3 className="mt-3 text-lg font-semibold text-[#0B2F50]">
+                <h3 className="mt-3 text-lg font-semibold text-[var(--site-navy)]">
                   Subscribe for free to unlock the full article.
                 </h3>
 
@@ -355,7 +355,7 @@ const ArticleDetails = () => {
 
                 <button
                   onClick={() => setShowSubscribeModal(true)}
-                  className="mt-6 bg-[#0B2F50] px-6 py-3 text-xs font-extrabold uppercase tracking-[0.1em] text-white hover:bg-[#0CA4B8]"
+                  className="mt-6 bg-[var(--site-navy)] px-6 py-3 text-xs font-extrabold uppercase tracking-[0.1em] text-white hover:bg-[var(--site-teal)]"
                 >
                   Subscribe to Continue
                 </button>
@@ -364,16 +364,16 @@ const ArticleDetails = () => {
           </main>
 
           <aside className="hidden lg:block">
-            <div className="sticky top-28 border-t-2 border-[#0B2F50] bg-[#F8F7F3] p-6">
+            <div className="site-panel sticky top-28 bg-[var(--site-paper)]">
               <div className="mb-5">
-                <div className="mb-2 flex items-center justify-between text-xs font-extrabold uppercase tracking-[0.08em] text-[#0B2F50]">
+                <div className="mb-2 flex items-center justify-between text-xs font-extrabold uppercase tracking-[0.08em] text-[var(--site-navy)]">
                   <span>Reading Progress</span>
                   <span>{readProgress}%</span>
                 </div>
 
                 <div className="h-1 overflow-hidden bg-slate-200">
                   <div
-                    className="h-full bg-[#0CA4B8]"
+                    className="h-full bg-[var(--site-teal)]"
                     style={{ width: `${readProgress}%` }}
                   />
                 </div>
@@ -382,8 +382,8 @@ const ArticleDetails = () => {
               {tableOfContents.length > 0 && (
                 <>
                   <div className="mb-4 flex items-center gap-2">
-                    <List size={18} className="text-[#0B3D91]" />
-                    <h3 className="font-black text-[#020617]">
+                    <List size={18} className="text-[var(--site-navy)]" />
+                    <h3 className="font-black text-[var(--site-ink)]">
                       Table of Contents
                     </h3>
                   </div>
@@ -393,13 +393,13 @@ const ArticleDetails = () => {
                       <li key={heading.id}>
                         <button
                           onClick={() => scrollToHeading(heading.id)}
-                          className={`text-left text-sm leading-6 hover:text-[#0B3D91] ${
+                          className={`text-left text-sm leading-6 hover:text-[var(--site-navy)] ${
                             heading.level === "h3" || heading.level === "li"
-                              ? "ml-4 text-slate-500"
-                              : "font-semibold text-slate-700"
+                              ? "ml-4 text-[var(--site-muted)]"
+                              : "font-semibold text-[var(--site-muted)]"
                           }`}
                         >
-                          <span className="mr-2 font-bold text-[#0B3D91]">
+                          <span className="mr-2 font-bold text-[var(--site-navy)]">
                             {heading.number}
                           </span>
                           {heading.text}
@@ -410,8 +410,8 @@ const ArticleDetails = () => {
                 </>
               )}
 
-              <div className="mt-8 border-t border-slate-100 pt-5">
-                <p className="mb-3 text-sm font-bold text-[#020617]">
+              <div className="mt-8 border-t border-[var(--site-line)] pt-5">
+                <p className="mb-3 text-sm font-bold text-[var(--site-ink)]">
                   Share Article
                 </p>
 
@@ -448,11 +448,11 @@ const ArticleDetails = () => {
       </section>
 
       {relatedArticles.length > 0 && hasAccess && (
-        <section className="border-t border-slate-200 bg-[#F1F0EC] py-20">
+        <section className="border-t border-[var(--site-line)] bg-[var(--site-soft)] py-20">
           <div className="container-custom">
             <div className="mb-8 flex items-center gap-2">
-              <BookOpen size={22} className="text-[#0CA4B8]" />
-              <h2 className="text-3xl font-extrabold text-[#0B2F50]">
+              <BookOpen size={22} className="text-[var(--site-teal)]" />
+              <h2 className="text-3xl font-extrabold text-[var(--site-navy)]">
                 Related Articles
               </h2>
             </div>
@@ -462,7 +462,7 @@ const ArticleDetails = () => {
                 <Link
                   key={related._id}
                   to={`/blog/${related.slug}`}
-                  className="overflow-hidden border-t-2 border-[#0B2F50] bg-white transition"
+                  className="overflow-hidden rounded-xl border border-[var(--site-line)] bg-white transition"
                 >
                   {related.coverImage?.url && (
                     <img
@@ -473,15 +473,15 @@ const ArticleDetails = () => {
                   )}
 
                   <div className="p-6">
-                    <p className="mb-2 text-xs font-extrabold uppercase tracking-[0.1em] text-[#0CA4B8]">
+                    <p className="mb-2 text-xs font-extrabold uppercase tracking-[0.1em] text-[var(--site-teal)]">
                       {related.category}
                     </p>
 
-                    <h3 className="line-clamp-2 text-lg font-extrabold text-[#0B2F50]">
+                    <h3 className="line-clamp-2 text-lg font-extrabold text-[var(--site-navy)]">
                       {related.title}
                     </h3>
 
-                    <p className="mt-3 line-clamp-2 text-sm leading-6 text-slate-600">
+                    <p className="mt-3 line-clamp-2 text-sm leading-6 text-[var(--site-muted)]">
                       {related.excerpt}
                     </p>
                   </div>
@@ -496,13 +496,13 @@ const ArticleDetails = () => {
 
       {showSubscribeModal && !hasAccess && (
         <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/70 px-4">
-          <div className="w-full max-w-lg border-t-4 border-[#0CA4B8] bg-white p-8 shadow-2xl">
+          <div className="site-panel w-full max-w-lg shadow-2xl">
             <div className="text-center">
-              <div className="mx-auto flex h-16 w-16 items-center justify-center border border-[#0CA4B8] text-[#0B2F50]">
+              <div className="mx-auto flex h-16 w-16 items-center justify-center border border-[var(--site-teal)] text-[var(--site-navy)]">
                 <BookOpen size={34} />
               </div>
 
-              <p className="mt-5 text-xs font-extrabold uppercase tracking-[0.16em] text-[#0CA4B8]">
+              <p className="mt-5 text-xs font-extrabold uppercase tracking-[0.16em] text-[var(--site-teal)]">
                 Free Security Updates
               </p>
 
@@ -513,37 +513,39 @@ const ArticleDetails = () => {
 
             <form onSubmit={handleSubscribeToContinue} className="mt-7 grid gap-4">
               <div>
-                <label className="mb-2 block text-sm font-semibold text-slate-700">
+                <label htmlFor="subscribe-name" className="mb-2 block text-sm font-semibold text-[var(--site-muted)]">
                   Name
                 </label>
                 <input
-                  name="name"
+                  id="subscribe-name"
+              name="name"
                   value={subscriberForm.name}
                   onChange={handleSubscriberChange}
                   placeholder="Your name"
-                  className="w-full rounded-xl border border-slate-200 px-4 py-3 outline-none focus:border-[#0B3D91]"
+                  className="w-full rounded-xl border border-[var(--site-line)] px-4 py-3 outline-none focus:border-[var(--site-navy)]"
                 />
               </div>
 
               <div>
-                <label className="mb-2 block text-sm font-semibold text-slate-700">
+                <label htmlFor="subscribe-email" className="mb-2 block text-sm font-semibold text-[var(--site-muted)]">
                   Email *
                 </label>
                 <input
-                  name="email"
+                  id="subscribe-email"
+              name="email"
                   type="email"
                   value={subscriberForm.email}
                   onChange={handleSubscriberChange}
                   required
                   placeholder="you@example.com"
-                  className="w-full rounded-xl border border-slate-200 px-4 py-3 outline-none focus:border-[#0B3D91]"
+                  className="w-full rounded-xl border border-[var(--site-line)] px-4 py-3 outline-none focus:border-[var(--site-navy)]"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={subscribing}
-                className="rounded-xl bg-[#0B3D91] px-5 py-4 font-light text-white hover:bg-[#061A40] disabled:opacity-60"
+                className="rounded-xl bg-[var(--site-navy)] px-5 py-4 font-light text-white hover:bg-[var(--site-navy-2)] disabled:opacity-60"
               >
                 {subscribing ? "Subscribing..." : "Unlock For Free"}
               </button>
@@ -551,7 +553,7 @@ const ArticleDetails = () => {
               <button
                 type="button"
                 onClick={() => setShowSubscribeModal(false)}
-                className="text-sm font-semibold text-slate-500 hover:text-[#0B3D91]"
+                className="text-sm font-semibold text-[var(--site-muted)] hover:text-[var(--site-navy)]"
               >
                 Not now
               </button>

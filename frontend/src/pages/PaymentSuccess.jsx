@@ -68,11 +68,11 @@ const PaymentSuccess = () => {
     return (
       <section className="bg-white py-24">
         <div className="container-custom flex flex-col items-center text-center">
-          <Loader2 className="animate-spin text-[#0B3D91]" size={44} />
-          <h1 className="mt-6 text-3xl font-black text-[#020617]">
+          <Loader2 className="animate-spin text-[var(--site-navy)]" size={44} />
+          <h1 className="mt-6 text-3xl font-black text-[var(--site-ink)]">
             Verifying Your Payment
           </h1>
-          <p className="mt-3 max-w-xl text-slate-600">
+          <p className="mt-3 max-w-xl text-[var(--site-muted)]">
             Please wait while we confirm your transaction.
           </p>
         </div>
@@ -84,10 +84,10 @@ const PaymentSuccess = () => {
     return (
       <section className="bg-white py-24">
         <div className="container-custom text-center">
-          <h1 className="text-3xl font-black text-[#020617]">
+          <h1 className="text-3xl font-black text-[var(--site-ink)]">
             Payment Could Not Be Verified
           </h1>
-          <p className="mx-auto mt-3 max-w-xl text-slate-600">
+          <p className="mx-auto mt-3 max-w-xl text-[var(--site-muted)]">
             We could not verify this transaction. Please contact support if money
             was deducted.
           </p>
@@ -101,38 +101,38 @@ const PaymentSuccess = () => {
   }
 
   return (
-    <section className="bg-[#EAF2FF] py-24">
+    <section className="bg-[var(--site-paper)] py-24">
       <div className="container-custom">
         <div className="mx-auto max-w-2xl rounded-3xl bg-white p-8 text-center shadow-sm">
-          <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-blue-50 text-[#0B3D91]">
+          <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-blue-50 text-[var(--site-navy)]">
             <CheckCircle size={44} />
           </div>
 
-          <h1 className="mt-6 text-3xl font-black text-[#020617]">
+          <h1 className="mt-6 text-3xl font-black text-[var(--site-ink)]">
             Payment Successful
           </h1>
 
-          <p className="mt-3 text-slate-600">
+          <p className="mt-3 text-[var(--site-muted)]">
             Your TopLink Security resource is ready for download.
           </p>
 
           <div className="mt-8 rounded-2xl border border-blue-100 bg-blue-50 p-5 text-left">
-            <p className="text-sm text-slate-500">Product</p>
-            <h2 className="mt-1 font-bold text-[#020617]">
+            <p className="text-sm text-[var(--site-muted)]">Product</p>
+            <h2 className="mt-1 font-bold text-[var(--site-ink)]">
               {order.product?.title || "Security Resource"}
             </h2>
 
             <div className="mt-4 grid gap-4 md:grid-cols-2">
               <div>
-                <p className="text-sm text-slate-500">Reference</p>
-                <p className="break-all font-semibold text-[#020617]">
+                <p className="text-sm text-[var(--site-muted)]">Reference</p>
+                <p className="break-all font-semibold text-[var(--site-ink)]">
                   {order.reference}
                 </p>
               </div>
 
               <div>
-                <p className="text-sm text-slate-500">Status</p>
-                <p className="font-semibold capitalize text-[#0B3D91]">
+                <p className="text-sm text-[var(--site-muted)]">Status</p>
+                <p className="font-semibold capitalize text-[var(--site-navy)]">
                   {order.paymentStatus}
                 </p>
               </div>
@@ -143,14 +143,14 @@ const PaymentSuccess = () => {
             <button
               onClick={handleDownload}
               disabled={downloading || !downloadToken}
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#0B3D91] px-5 py-3 text-sm font-semibold text-white hover:bg-[#061A40] disabled:cursor-not-allowed disabled:opacity-60"
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-[var(--site-navy)] px-5 py-3 text-sm font-semibold text-white hover:bg-[var(--site-navy-2)] disabled:cursor-not-allowed disabled:opacity-60"
             >
               <Download size={18} />
               {downloading ? "Preparing..." : "Download Resource"}
             </button>
 
-            <Button to="/store" variant="lightOutline">
-              Back to Store
+            <Button to="/" variant="lightOutline">
+              Back to Website
             </Button>
           </div>
         </div>

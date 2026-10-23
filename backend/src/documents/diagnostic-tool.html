@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Executive Security Risk Governance Diagnostic™ | TopLink</title>
+<style>
+:root{--navy:#142B3B;--teal:#315F5B;--mint:#B8D5CE;--warm:#F7F7F3;--sand:#E9E2D6;--ink:#243340;--muted:#647381;--line:#D9E1E4;--white:#fff}
+*{box-sizing:border-box}body{margin:0;background:var(--warm);color:var(--ink);font:16px/1.6 Inter,"Segoe UI",Arial,sans-serif}
+header,footer{background:var(--navy);color:white;border-color:var(--teal);border-style:solid;border-width:0 0 4px}
+header .inner,main,footer .inner{width:min(1120px,calc(100% - 28px));margin:auto}
+header .inner{padding:20px 0;display:flex;justify-content:space-between;gap:16px;align-items:center}
+.brand{font-weight:800;letter-spacing:.12em;text-transform:uppercase;font-size:.9rem}.brand small{display:block;color:var(--mint);font-size:.7rem;letter-spacing:.08em}
+main{padding:24px 0 56px}.hero{background:var(--navy);color:white;border-radius:16px;padding:clamp(24px,5vw,50px)}
+.kicker{color:var(--mint);text-transform:uppercase;letter-spacing:.14em;font-weight:800;font-size:.75rem;margin:0 0 8px}
+h1{font-size:clamp(2rem,5vw,3.5rem);line-height:1.06;letter-spacing:-.04em;margin:0 0 14px}
+.hero h2{color:var(--mint);font-size:1.12rem;margin:0 0 18px}.hero p{max-width:850px;color:#e7edee}
+.tagline{border-left:3px solid var(--mint);padding-left:14px;font-weight:800;color:white!important}
+.principle,.notice{padding:16px 18px;border-radius:9px;margin:18px 0}.principle{background:var(--sand);font-weight:800;color:var(--navy)}.notice{background:#e7f0ed;border-left:4px solid var(--teal)}
+nav{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}nav a{background:white;border:1px solid var(--line);border-radius:99px;padding:8px 12px;text-decoration:none;color:var(--navy);font-weight:700;font-size:.82rem}
+section.panel{background:white;border:1px solid var(--line);border-radius:13px;padding:clamp(20px,4vw,34px);margin:18px 0}
+.kicker2{color:var(--teal);text-transform:uppercase;letter-spacing:.13em;font-size:.74rem;font-weight:850;margin:0 0 5px}
+h2{color:var(--navy);font-size:clamp(1.45rem,3vw,2rem);line-height:1.2;margin:0 0 12px}h3{color:var(--navy);font-size:1.05rem;margin:0 0 8px}p{margin:0 0 12px}.muted,.help,.small{color:var(--muted);font-size:.84rem}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.field{margin:13px 0}label,.label{display:block;color:var(--navy);font-weight:750;font-size:.9rem;margin-bottom:6px}
+input[type=text],input[type=date],textarea,select{width:100%;min-height:44px;padding:10px 11px;border:1px solid #cbd5da;border-radius:8px;background:white;color:var(--ink);font:inherit}
+textarea{min-height:86px;resize:vertical}input:focus,textarea:focus,select:focus{outline:3px solid #315f5b25;border-color:var(--teal)}
+.card,.question{border:1px solid var(--line);border-radius:10px;padding:15px;margin:12px 0;background:white}.card p{font-size:.9rem;color:#53616c;margin:0}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:9px;margin:14px 0}table{width:100%;border-collapse:collapse;min-width:720px}th,td{padding:9px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;font-size:.84rem}th{background:var(--navy);color:white}td input,td select{min-width:145px}
+.radios{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}.radios label{display:flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:7px;padding:7px 9px;font-weight:600;font-size:.84rem;margin:0}.radios input{accent-color:var(--teal)}
+.rule{background:var(--sand);border-radius:9px;padding:14px 16px;margin:14px 0;color:var(--navy)}
+.class-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.class-grid .card h3{letter-spacing:.04em}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:20px}button{border:0;border-radius:8px;padding:12px 15px;font:inherit;font-weight:800;cursor:pointer}.primary{background:var(--teal);color:white}.secondary{background:var(--sand);color:var(--navy)}.outline{background:white;border:1px solid var(--line);color:var(--navy)}
+.status{display:none;background:#e7f0ed;border-radius:8px;padding:12px;margin-top:12px}
+footer{border-width:4px 0 0;padding:22px 0}footer .inner{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;font-size:.84rem}
+@media(max-width:720px){.grid2,.grid3,.class-grid{grid-template-columns:1fr}header .inner,main,footer .inner{width:calc(100% - 22px)}.header-label{display:none}.radios label{flex:1 1 40%}}
+@media print{body{background:white;font-size:11pt}header,footer,nav,.actions{display:none!important}main{width:100%;padding:0}.hero{background:white;color:#111;border:1px solid #aaa}.hero p,.hero h2,.tagline{color:#111!important}.panel{break-inside:avoid;box-shadow:none}th{background:#eee;color:#111}}
+</style>
+</head>
+<body>
+
+<main>
+<section class="hero">
+<p class="kicker">Tool 1 · Governance Diagnostic</p><h1>WHO ACTUALLY OWNS THIS RISK?™</h1><h2>Executive Security Risk Governance Diagnostic™</h2>
+<p>A security risk can be clearly identified and still leave an organization unsure about who owns it, who has authority to act, or who is accountable for the outcome.</p>
+<p>This Diagnostic examines that relationship around one live business or security risk. Its purpose is to establish whether risk ownership, decision authority, accountability and relevant treatment responsibility are appropriately connected, based on the information available.</p>
+<p class="tagline">One real risk. One governance question. One defined result.</p>
+</section>
+<div class="principle">CORE PRINCIPLE<br>Accountability without corresponding authority is a governance problem.</div>
+<div class="notice">This is a focused diagnostic. It is not a security assessment, risk register, governance audit or decision-making service. Record what the available information establishes. Where the position cannot be established, record <strong>UNCLEAR</strong> rather than filling the gap with an assumption.</div>
+<nav><a href="#phase1">Phase 1 · Triage</a><a href="#phase2">Phase 2 · Stress-test</a><a href="#phase3">Phase 3 · Classify</a><a href="#summary">Result summary</a></nav>
+<form id="diag">
+<section class="panel">
+<p class="kicker2">Instructions</p><h2>How to Use the Diagnostic</h2>
+<p>Work on one live risk and one related business decision, activity or change. Record the governance arrangement as it currently operates. Do not redesign the arrangement or attempt to resolve the governance issue while completing the Diagnostic.</p>
+<div class="grid3"><div class="rule"><strong>PHASE 1 | TRIAGE</strong><br>Define the decision and identify the governance relationship.</div><div class="rule"><strong>PHASE 2 | STRESS-TEST</strong><br>Examine how the relationship operates and locate any material gap.</div><div class="rule"><strong>PHASE 3 | CLASSIFY</strong><br>State the governance condition and classify the overall position.</div></div>
+<p><strong>Underlying logic:</strong> DEFINE → IDENTIFY → TEST → LOCATE → STATE → CLASSIFY → INTERPRET</p>
+<div class="grid2"><div class="field"><label for="ref">Diagnostic reference</label><input id="ref" name="Diagnostic reference" type="text"></div><div class="field"><label for="date">Date completed</label><input id="date" name="Date completed" type="date"></div></div>
+</section>
+
+<section class="panel" id="phase1">
+<p class="kicker2">Phase 1 · Triage</p><h2>01 | Define the Decision</h2><p>Start with the business situation that gives the risk its significance.</p>
+<div class="field"><label for="decision">Business decision / activity / change</label><textarea id="decision" name="Business decision / activity / change" placeholder="What is the organization deciding, approving, changing or undertaking?"></textarea></div>
+<div class="field"><label for="objective">Business objective</label><textarea id="objective" name="Business objective" placeholder="What business objective, asset, operation or outcome is affected?"></textarea></div>
+<div class="field"><label for="risk">Risk</label><textarea id="risk" name="Risk" placeholder="What security or business risk is associated with the decision, activity or change?"></textarea></div>
+<div class="field"><label for="consequence">Potential consequence</label><textarea id="consequence" name="Potential consequence" placeholder="What could occur if the risk materializes?"></textarea></div>
+<div class="field"><label for="material">Material decision</label><textarea id="material" name="Material decision" placeholder="What specific decision could materially affect the risk?"></textarea></div>
+<div class="rule"><strong>Validation gate</strong><ul><li>A specific business decision, activity or change has been identified.</li><li>A specific risk has been identified.</li><li>The relationship between the business situation and the risk can be explained.</li></ul><p class="small">If any item cannot be established, record the uncertainty. Do not proceed on the basis of an assumed relationship.</p></div>
+<div class="field"><label for="validation">Validation notes / uncertainty</label><textarea id="validation" name="Validation notes / uncertainty"></textarea></div>
+<hr style="border:0;border-top:1px solid var(--line);margin:28px 0">
+<p class="kicker2">Phase 1 · Triage</p><h2>02 | Identify the Governance Relationship</h2>
+<p>Identify the roles or functions involved in the current arrangement. A role may be held by an individual, business function, committee or other authorized body. The same person may hold more than one role.</p>
+<div class="notice"><strong>Position definitions</strong><br><strong>ESTABLISHED:</strong> Available information supports the existence of the role, mandate or authority and its relevance to the matter examined.<br><strong>NOT ESTABLISHED:</strong> Available information indicates that the role, mandate or authority has not been assigned, defined or provided for in the current arrangement.<br><strong>UNCLEAR:</strong> Available information is insufficient to determine whether the role, mandate or authority exists or how it operates.<br>Do not record NOT ESTABLISHED merely because supporting documentation is unavailable. Where the actual arrangement cannot be determined, record UNCLEAR.</div>
+<div class="table-wrap"><table><thead><tr><th>Governance mandate</th><th>Active role / function holder</th><th>Position</th></tr></thead><tbody>
+<tr><td>Underlying decision / approving authority</td><td><input name="Role holder: Underlying decision / approving authority" type="text"></td><td><select name="Position: Underlying decision / approving authority"><option value="">Select</option><option>ESTABLISHED</option><option>NOT ESTABLISHED</option><option>UNCLEAR</option></select></td></tr>
+<tr><td>Business objective / asset owner</td><td><input name="Role holder: Business objective / asset owner" type="text"></td><td><select name="Position: Business objective / asset owner"><option value="">Select</option><option>ESTABLISHED</option><option>NOT ESTABLISHED</option><option>UNCLEAR</option></select></td></tr>
+<tr><td>Designated Risk Owner</td><td><input name="Role holder: Designated Risk Owner" type="text"></td><td><select name="Position: Designated Risk Owner"><option value="">Select</option><option>ESTABLISHED</option><option>NOT ESTABLISHED</option><option>UNCLEAR</option></select></td></tr>
+<tr><td>Authority over material decision</td><td><input name="Role holder: Authority over material decision" type="text"></td><td><select name="Position: Authority over material decision"><option value="">Select</option><option>ESTABLISHED</option><option>NOT ESTABLISHED</option><option>UNCLEAR</option></select></td></tr>
+<tr><td>Residual-risk acceptance authority</td><td><input name="Role holder: Residual-risk acceptance authority" type="text"></td><td><select name="Position: Residual-risk acceptance authority"><option value="">Select</option><option>ESTABLISHED</option><option>NOT ESTABLISHED</option><option>UNCLEAR</option><option>NOT APPLICABLE</option></select></td></tr>
+<tr><td>Treatment / control responsibility</td><td><input name="Role holder: Treatment / control responsibility" type="text"></td><td><select name="Position: Treatment / control responsibility"><option value="">Select</option><option>ESTABLISHED</option><option>NOT ESTABLISHED</option><option>UNCLEAR</option><option>NOT APPLICABLE</option></select></td></tr>
+<tr><td>Security / Risk adviser</td><td><input name="Role holder: Security / Risk adviser" type="text"></td><td><select name="Position: Security / Risk adviser"><option value="">Select</option><option>ESTABLISHED</option><option>NOT ESTABLISHED</option><option>UNCLEAR</option><option>NOT APPLICABLE</option></select></td></tr>
+<tr><td>Business accountability for outcome</td><td><input name="Role holder: Business accountability for outcome" type="text"></td><td><select name="Position: Business accountability for outcome"><option value="">Select</option><option>ESTABLISHED</option><option>NOT ESTABLISHED</option><option>UNCLEAR</option></select></td></tr>
+</tbody></table></div>
+<h3>Role integrity</h3><p>The roles above do not have to belong to the same person or function. The important question is whether the relationships between them work in practice.</p>
+<div class="principle">AUTHORITY → DELEGATION → ESCALATION → ACCOUNTABILITY → ACTION</div>
+<p>A Risk Owner does not necessarily have authority to approve the underlying business decision. Security or Risk may provide advice without holding approval authority or authority to accept residual risk. Do not treat a role as established merely because it appears in an organizational chart or policy. Consider whether the mandate and its connection to the decision can be established from the available information.</p>
+<div class="field"><label for="roleNotes">Role integrity observations</label><textarea id="roleNotes" name="Role integrity observations"></textarea></div>
+</section>
+
+<section class="panel" id="phase2">
+<p class="kicker2">Phase 2 · Stress-test</p><h2>03 | Test the Governance Connection</h2>
+<p>Answer each question based on the current operational arrangement, not the intended governance model. Use NOT APPLICABLE only where the question genuinely does not apply.</p>
+<div id="questions"></div>
+<div class="rule"><strong>Critical governance controls</strong><ul><li>Access to the relevant decision authority.</li><li>An effective escalation route.</li><li>Authority to accept residual risk, where applicable.</li><li>Connection between business accountability and decision authority.</li><li>The ability to act on agreed treatment.</li><li>Integration of relevant Security/Risk information into the decision process.</li></ul></div>
+<p>Record UNCLEAR where the position cannot be established. A missing formal document does not automatically prove that an arrangement is ineffective. An assumed or unverified arrangement should not be treated as established.</p>
+<div class="notice"><strong>Distinguishing related questions</strong><p>Questions 1 and 6 test different relationships. Question 1 examines whether the Risk Owner can challenge, influence or escalate a material decision. Question 6 examines whether the responsible role can influence the activity that creates or materially changes the risk.</p><p>Questions 3 and 4 also differ. Question 3 examines whether an effective escalation mechanism exists; Question 4 examines whether it provides access to the relevant decision authority. A documented route does not, by itself, demonstrate that escalation works in practice.</p></div>
+<div class="principle">DIAGNOSTIC RULE<br>Do not calculate a score from the number of YES or NO responses. A single material disconnect can establish the principal governance condition.</div>
+<p>An unanswered question is not evidence of a governance failure. An uncertain finding must remain uncertain until sufficient information is available.</p>
+<div class="field"><label for="stressNotes">Stress-test findings and evidence</label><textarea id="stressNotes" name="Stress-test findings and evidence"></textarea></div>
+<hr style="border:0;border-top:1px solid var(--line);margin:28px 0">
+<p class="kicker2">Phase 2 · Stress-test</p><h2>04 | Locate the Principal Governance Condition</h2>
+<div class="grid2">
+<div class="card"><h3>Ownership Gap</h3><p>Responsibility for the risk has not been clearly assigned or cannot be established.</p></div>
+<div class="card"><h3>Authority Gap</h3><p>The responsible role does not have access to the authority required to influence a material decision affecting the risk.</p></div>
+<div class="card"><h3>Accountability Gap</h3><p>Accountability for the affected business outcome is not appropriately connected to the authority governing the relevant decision.</p></div>
+<div class="card"><h3>Residual-Risk Acceptance Gap</h3><p>The authority to accept or retain relevant residual risk is unclear, absent or disconnected from the governance arrangement.</p></div>
+<div class="card"><h3>Treatment Responsibility Gap</h3><p>Treatment responsibility is not connected to the authority, resources or ability required to act.</p></div>
+<div class="card"><h3>Escalation Gap</h3><p>An effective route for escalating a material unresolved issue to the appropriate authority has not been established.</p></div>
+<div class="card"><h3>Decision-Integration Gap</h3><p>Relevant Security/Risk information cannot reliably reach or be considered by the authorized decision-maker.</p></div>
+<div class="card"><h3>No Material Governance Gap Identified</h3><p>The available information indicates that relevant ownership, authority, accountability and action relationships are sufficiently connected for the matter examined.</p></div>
+</div>
+<div class="grid2"><div class="field"><label for="principal">Principal governance condition</label><select id="principal" name="Principal governance condition"><option value="">Select one</option><option>Ownership Gap</option><option>Authority Gap</option><option>Accountability Gap</option><option>Residual-Risk Acceptance Gap</option><option>Treatment Responsibility Gap</option><option>Escalation Gap</option><option>Decision-Integration Gap</option><option>No Material Governance Gap Identified</option><option>UNCLEAR — insufficient information</option></select></div><div class="field"><label for="additional">Additional governance condition</label><input id="additional" name="Additional governance condition" type="text" placeholder="If applicable, or None identified"></div></div>
+<div class="field"><label for="conditionBasis">Basis for selected condition</label><textarea id="conditionBasis" name="Basis for selected condition"></textarea></div>
+<p>Where evidence supports more than one condition, identify the principal condition and record additional material conditions. If information is insufficient to establish the principal condition, record UNCLEAR and consider whether the overall classification must be UNDEFINED.</p>
+<hr style="border:0;border-top:1px solid var(--line);margin:28px 0">
+<p class="kicker2">Phase 2 · Stress-test</p><h2>05 | State the Governance Condition</h2>
+<p>Summarize the relationship established by the Diagnostic. Use language that reflects the available information; do not convert an assumption into a finding.</p>
+<div class="field"><label for="statement">Completed governance statement</label><textarea id="statement" name="Completed governance statement" style="min-height:135px" placeholder="The risk is currently owned by... Authority to make or authorize decisions materially affecting the risk is established through... The relationship between responsibility, authority and accountability is..."></textarea></div>
+<div class="grid2"><div class="field"><label for="established">Established position</label><textarea id="established" name="Established position"></textarea></div><div class="field"><label for="support">Supporting basis</label><textarea id="support" name="Supporting basis"></textarea></div></div>
+<div class="field"><label for="uncertainty">Material uncertainty, if any</label><textarea id="uncertainty" name="Material uncertainty" placeholder="Record uncertainty or state None identified."></textarea></div>
+<hr style="border:0;border-top:1px solid var(--line);margin:28px 0">
+<p class="kicker2">Phase 3 · Classify</p><h2>06 | Classify the Governance Position</h2>
+<div class="class-grid">
+<div class="card"><h3>ALIGNED</h3><p>Risk ownership, material decision authority, accountability and relevant treatment responsibility are sufficiently connected. This does not authorize the activity or establish that the risk is acceptable.</p></div>
+<div class="card"><h3>CONSTRAINED</h3><p>Risk ownership and a workable connection to decision authority are established, but a material limitation restricts the responsible role's ability to influence or act.</p></div>
+<div class="card"><h3>MISALIGNED</h3><p>A material responsibility and the authority required to influence the risk are separated, and no effective mechanism adequately connects them.</p></div>
+<div class="card"><h3>UNDEFINED</h3><p>The available information does not establish with sufficient clarity who owns the risk, who has authority, who is accountable or how the roles connect.</p></div>
+</div>
+<h3>Classification decision rule</h3><ol><li><strong>UNDEFINED:</strong> Insufficient information prevents a reliable determination of a material governance relationship.</li><li><strong>MISALIGNED:</strong> A material responsibility-authority connection is absent or ineffective and no adequate mechanism connects the roles.</li><li><strong>CONSTRAINED:</strong> The connection is established but a material limitation restricts the ability to influence or act.</li><li><strong>ALIGNED:</strong> Relevant governance relationships are established and sufficiently effective for the matter examined.</li></ol>
+<p>This is a decision framework, not a numerical scoring model. An UNCLEAR response does not automatically override an otherwise established relationship; the uncertainty must relate to a material relationship needed to determine the overall position. Where material findings conflict and the conflict cannot be resolved, record the uncertainty and consider UNDEFINED.</p>
+<div class="rule"><strong>Classification control</strong><ul><li>Is risk ownership established?</li><li>Is authority over the material decision established?</li><li>Do delegation and escalation provide a workable connection to that authority?</li><li>Is business accountability connected to the decision?</li><li>Is treatment responsibility supported by the authority and ability required to act?</li><li>Can relevant Security/Risk information inform the decision?</li><li>Does material uncertainty prevent a reliable conclusion?</li></ul></div>
+<div class="field"><span class="label">Governance classification — select one</span><div class="class-grid">
+<label class="card"><input type="radio" name="Governance classification" value="ALIGNED" required> <strong>ALIGNED</strong><p>Responsibilities and decision rights are sufficiently connected.</p></label>
+<label class="card"><input type="radio" name="Governance classification" value="CONSTRAINED"> <strong>CONSTRAINED</strong><p>A material limitation restricts the ability to act.</p></label>
+<label class="card"><input type="radio" name="Governance classification" value="MISALIGNED"> <strong>MISALIGNED</strong><p>A material responsibility-authority connection is ineffective.</p></label>
+<label class="card"><input type="radio" name="Governance classification" value="UNDEFINED"> <strong>UNDEFINED</strong><p>A material governance relationship cannot be established.</p></label>
+</div></div>
+<div class="grid2"><div class="field"><label for="classificationBasis">Basis for classification</label><textarea id="classificationBasis" name="Basis for classification"></textarea></div><div class="field"><label for="additionalMaterial">Additional material conditions</label><textarea id="additionalMaterial" name="Additional material conditions" placeholder="Record conditions or state None identified."></textarea></div></div>
+<hr style="border:0;border-top:1px solid var(--line);margin:28px 0">
+<p class="kicker2">Phase 3 · Classify</p><h2>07 | Executive Governance Check</h2>
+<p>This final check confirms the reasoning behind the classification. It does not automatically change the result.</p>
+<div id="execQuestions"></div>
+<div class="field"><label for="execObservation">Executive governance observation</label><textarea id="execObservation" name="Executive governance observation" placeholder="State what is established, what is constrained, misaligned or unknown, and how the condition affects the decision."></textarea></div>
+<div class="field"><label for="execBasis">Supporting basis</label><textarea id="execBasis" name="Executive observation supporting basis"></textarea></div>
+</section>
+
+<section class="panel" id="summary">
+<p class="kicker2">Definitive record</p><h2>Diagnostic Result Summary</h2><p>Complete this section from the findings established above. It is the definitive record of the Diagnostic result.</p>
+<div class="grid2"><div class="field"><label for="sumRisk">Risk</label><textarea id="sumRisk" name="Summary: Risk"></textarea></div><div class="field"><label for="sumDecision">Business decision / activity / change</label><textarea id="sumDecision" name="Summary: Business decision / activity / change"></textarea></div><div class="field"><label for="sumPrincipal">Principal governance condition</label><input id="sumPrincipal" name="Summary: Principal governance condition" type="text"></div><div class="field"><label for="sumAdditional">Additional governance condition</label><input id="sumAdditional" name="Summary: Additional governance condition" type="text"></div></div>
+<div class="field"><label for="sumClass">Governance classification (confirm selected classification)</label><select id="sumClass" name="Summary: Governance classification"><option value="">Select classification</option><option>ALIGNED</option><option>CONSTRAINED</option><option>MISALIGNED</option><option>UNDEFINED</option></select></div>
+<div class="field"><label for="sumSecurity">Security / Risk information to decision authority</label><select id="sumSecurity" name="Summary: Security / Risk information to decision authority"><option value="">Select</option><option>YES</option><option>NO</option><option>UNCLEAR</option><option>NOT APPLICABLE</option></select></div>
+<div class="field"><label for="sumBasis">Basis for classification</label><textarea id="sumBasis" name="Summary: Basis for classification"></textarea></div><div class="field"><label for="sumObservation">Key governance observation</label><textarea id="sumObservation" name="Summary: Key governance observation"></textarea></div><div class="field"><label for="affected">Decision affected</label><input id="affected" name="Summary: Decision affected" type="text"></div>
+<h3>Responsible next action</h3><p>Record the governance or management action identified by the organization. The Diagnostic does not prescribe the action.</p>
+<div class="grid2"><div class="field"><label for="nextAction">Action identified by the organization</label><textarea id="nextAction" name="Responsible next action"></textarea></div><div><div class="field"><label for="nextRole">Responsible role / function</label><input id="nextRole" name="Responsible role / function" type="text"></div><div class="field"><label for="target">Target date</label><input id="target" name="Target date" type="text" placeholder="Date / Not yet established"></div></div></div>
+<div class="notice"><strong>Professional boundary</strong><br>The Diagnostic does not independently verify evidence, determine risk acceptability, grant authority or make the business decision. The organization retains responsibility for decisions, risk acceptance, authority and accountability.</div>
+<div class="actions"><button type="button" class="primary" id="export">Download completed Diagnostic (JSON)</button><button type="button" class="secondary" id="print">Print / Save as PDF</button><button type="reset" class="outline">Clear form</button></div><div class="status" id="status" role="status" aria-live="polite"></div>
+<p class="small">Privacy: this standalone HTML file does not send responses to TopLink or store them on a server. Export the record or print/save it as PDF before closing. Store completed records securely.</p>
+</section>
+</form>
+
+<section class="panel">
+<p class="kicker2">Interpretation</p><h2>Risk Governance Decision Guide™</h2>
+<p>After completing the Diagnostic, use the accompanying Risk Governance Decision Guide™ to interpret the classification and consider the appropriate next step. Add the final guide URL to this section before distributing the instrument.</p>
+<div class="field"><label for="guide">Decision Guide link (to be configured by TopLink)</label><input id="guide" type="text" disabled placeholder="Guide link will be added before release"></div>
+<p class="small">The Diagnostic is a focused governance instrument. It is not a security assessment, governance audit, assurance conclusion or decision-making service.</p>
+</section>
+</main>
+
+<script>
+const qs=[
+["1","Influence over material decisions","Can the designated Risk Owner directly influence, challenge or escalate a material decision that could significantly change the risk?",["YES","NO","UNCLEAR"]],
+["2","Accountability alignment","Is accountability for the affected business outcome appropriately connected to the authority governing the relevant decision?",["YES","NO","UNCLEAR"]],
+["3","Escalation mechanism","Is there an established and usable route through which the Risk Owner or Security/Risk can escalate a material unresolved issue to the relevant decision authority?",["YES","NO","UNCLEAR"]],
+["4","Access to decision authority","Can the responsible person or function reach the person or body authorized to make or authorize the relevant decision through the available governance arrangement?",["YES","NO","UNCLEAR"]],
+["5","Residual-risk acceptance","Where residual-risk acceptance is required, is the authority to accept or retain that risk established?",["YES","NO","UNCLEAR","NOT APPLICABLE"]],
+["6","Influence over risk-generating activity","Can the relevant Risk Owner or responsible function influence the activity, change or decision that creates or materially affects the risk?",["YES","NO","UNCLEAR"]],
+["7","Treatment and investment","Is responsibility for agreed treatment connected to the authority and resources required to carry it out?",["YES","NO","UNCLEAR","NOT APPLICABLE"]],
+["8","Alternative action","Where the preferred course cannot proceed because of the risk, is there an established route for considering an alternative course?",["YES","NO","UNCLEAR","NOT APPLICABLE"]],
+["9","Security / Risk integration","Can relevant Security/Risk information be considered by the authorized decision-maker before the decision is made or materially changed?",["YES","NO","UNCLEAR"]]
+];
+function renderQuestions(targetId, data, prefix="Q"){
+ const target=document.getElementById(targetId);
+ target.innerHTML=data.map(([n,title,question,options])=>`<div class="question"><p><strong><span style="color:var(--teal)"> ${n}.</span> ${title}</strong></p><p>${question}</p><div class="radios">${options.map(v=>`<label><input type="radio" name="${prefix}${n} — ${title}" value="${v}"> ${v}</label>`).join("")}</div></div>`).join("");
+}
+renderQuestions("questions",qs,"Test");
+renderQuestions("execQuestions",[
+["1","Responsible role and authority","Is the responsible role connected to the authority required to influence the risk?",["YES","NO","UNCLEAR"]],
+["2","Escalation","Is there an established and usable escalation route for unresolved material issues?",["YES","NO","UNCLEAR"]],
+["3","Business accountability","Is accountability for the affected business outcome established and appropriately connected to the relevant decision?",["YES","NO","UNCLEAR"]],
+["4","Security / Risk information","Can relevant Security/Risk information reach the authorized decision-maker in time to inform the decision?",["YES","NO","UNCLEAR"]]
+],"Executive check");
+const form=document.getElementById("diag"), status=document.getElementById("status");
+function values(){
+ const out={product:"Executive Security Risk Governance Diagnostic™",brand:"TopLink Security | TopLink Advisory",exportedAt:new Date().toISOString(),responses:{}};
+ [...form.elements].forEach(el=>{
+  if(!el.name||["button","reset","submit"].includes(el.type))return;
+  if(["radio","checkbox"].includes(el.type)){if(el.checked)out.responses[el.name]=el.value;}
+  else out.responses[el.name]=el.value;
+ });
+ return out;
+}
+document.getElementById("export").addEventListener("click",()=>{
+ const data=values(),blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"}),url=URL.createObjectURL(blob),a=document.createElement("a");
+ const ref=(document.getElementById("ref").value||"record").replace(/[^a-z0-9_-]/gi,"-");
+ a.href=url;a.download="toplink-governance-diagnostic-"+ref+".json";document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);
+ status.textContent="Your responses have been exported to a JSON file on this device. They have not been sent to TopLink.";status.style.display="block";
+});
+document.getElementById("print").addEventListener("click",()=>window.print());
+const classRadios=()=>document.querySelector('input[name="Governance classification"]:checked');
+document.getElementById("sumClass").addEventListener("change",e=>document.querySelectorAll('input[name="Governance classification"]').forEach(r=>r.checked=r.value===e.target.value));
+document.querySelectorAll('input[name="Governance classification"]').forEach(r=>r.addEventListener("change",()=>document.getElementById("sumClass").value=r.value));
+document.getElementById("principal").addEventListener("change",e=>{if(!document.getElementById("sumPrincipal").value)document.getElementById("sumPrincipal").value=e.target.value;});
+document.getElementById("additional").addEventListener("change",e=>{if(!document.getElementById("sumAdditional").value)document.getElementById("sumAdditional").value=e.target.value;});
+document.getElementById("risk").addEventListener("change",e=>{if(!document.getElementById("sumRisk").value)document.getElementById("sumRisk").value=e.target.value;});
+document.getElementById("decision").addEventListener("change",e=>{if(!document.getElementById("sumDecision").value)document.getElementById("sumDecision").value=e.target.value;});
+document.getElementById("conditionBasis").addEventListener("change",e=>{if(!document.getElementById("sumBasis").value)document.getElementById("sumBasis").value=e.target.value;});
+document.getElementById("execObservation").addEventListener("change",e=>{if(!document.getElementById("sumObservation").value)document.getElementById("sumObservation").value=e.target.value;});
+form.addEventListener("reset",()=>{status.textContent="The form has been cleared.";status.style.display="block";setTimeout(()=>status.style.display="none",3500);});
+</script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+const express = require("express");
+const controller = require("../controllers/decisionRoomController");
+const { protect } = require("../middlewares/authMiddleware");
+const { adminOnly } = require("../middlewares/adminMiddleware");
+const paymentRateLimiter = require("../middlewares/paymentRateLimiter");
+const router = express.Router();
+router.post("/purchase", paymentRateLimiter, controller.createBooking);
+router.post("/checkout", paymentRateLimiter, controller.createCheckout);
+router.get("/payment/:token", controller.getPayment);
+router.post("/payment/:token/verify", paymentRateLimiter, controller.verifyPayment);
+router.get("/context/:token", controller.getContext);
+router.post("/context/:token", paymentRateLimiter, controller.submitContext);
+router.get("/", protect, adminOnly, controller.listBookings);
+module.exports = router;

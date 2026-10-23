@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Executive Security Risk Governance Diagnostic by TopLink Advisory. Examine risk ownership, decision authority and accountability around one live risk.">
+  <title>Who Actually Owns This Risk? | TopLink Advisory</title>
+  <style>.html-diagnostic {all:initial;display:block;} .html-diagnostic :where(*) {all:revert;box-sizing:border-box;}
+
+    .html-diagnostic {
+      --navy: #142B3B;
+      --navy-deep: #102431;
+      --teal: #315F5B;
+      --sand: #E9E2D6;
+      --ink: #263640;
+      --muted: #667780;
+      --line: #DDE4E0;
+      --paper: #ffffff;
+      --wash: #F7F7F3;
+      --radius: 16px;
+      --shadow: 0 18px 55px rgba(11, 23, 40, .08);
+    }
+    .html-diagnostic * { box-sizing: border-box; }
+    .html-diagnostic { scroll-behavior: smooth; }
+    .html-diagnostic {
+      margin: 0;
+      color: var(--ink);
+      background: var(--wash);
+      font-family: Inter, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    .html-diagnostic a { color: inherit; }
+    .html-diagnostic .topbar {
+      background: var(--navy-deep);
+      color: #fff;
+      border-bottom: 3px solid #B8D5CE;
+    }
+    .html-diagnostic .topbar-inner, .html-diagnostic main, .html-diagnostic .footer-inner {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+    .html-diagnostic .topbar-inner {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .html-diagnostic .brand {
+      font-size: .92rem;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .html-diagnostic .brand span {
+      display: block;
+      color: #B8D5CE;
+      font-size: .7rem;
+      font-weight: 600;
+      letter-spacing: .16em;
+      margin-top: 3px;
+    }
+    .html-diagnostic .top-note {
+      color: #d7dfe8;
+      font-size: .82rem;
+      text-align: right;
+    }
+    .html-diagnostic main { padding: 34px 0 64px; }
+    .html-diagnostic .hero {
+      background: var(--navy);
+      color: #fff;
+      padding: clamp(30px, 6vw, 66px);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      border-bottom: 4px solid #B8D5CE;
+      position: relative;
+      overflow: hidden;
+    }
+    .html-diagnostic .hero::after {
+      content: "";
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border: 1px solid rgba(184,213,206,.32);
+      border-radius: 50%;
+      right: -110px;
+      top: -130px;
+      box-shadow: 0 0 0 32px rgba(184,213,206,.06), 0 0 0 68px rgba(184,213,206,.045);
+      pointer-events: none;
+    }
+    .html-diagnostic .eyebrow {
+      color: #B8D5CE;
+      font-size: .76rem;
+      font-weight: 800;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      margin: 0 0 16px;
+    }
+    .html-diagnostic h1 {
+      max-width: 850px;
+      margin: 0;
+      font-size: clamp(2.1rem, 5.6vw, 4.15rem);
+      line-height: 1.04;
+      letter-spacing: -.045em;
+      font-weight: 800;
+    }
+    .html-diagnostic .hero-subtitle {
+      color: #B8D5CE;
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      font-weight: 700;
+      margin: 16px 0 26px;
+    }
+    .html-diagnostic .hero-copy {
+      max-width: 760px;
+      color: #e7edf3;
+      font-size: 1.08rem;
+    }
+    .html-diagnostic .hero-copy p { margin: 0 0 14px; }
+    .html-diagnostic .hero-tagline {
+      border-left: 3px solid #315F5B;
+      padding-left: 15px;
+      margin-top: 26px !important;
+      font-weight: 700;
+      color: #fff;
+    }
+    .html-diagnostic .purchase-panel {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 28px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      margin-top: 22px;
+      padding: clamp(24px, 4vw, 38px);
+      box-shadow: 0 8px 28px rgba(11,23,40,.035);
+    }
+    .html-diagnostic .price-label {
+      color: var(--muted);
+      font-size: .78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      margin: 0 0 5px;
+    }
+    .html-diagnostic .price {
+      color: var(--navy);
+      font-size: clamp(2.1rem, 4vw, 3rem);
+      font-weight: 850;
+      letter-spacing: -.04em;
+      line-height: 1.1;
+      margin: 0 0 18px;
+    }
+    .html-diagnostic .price small { font-size: .9rem; letter-spacing: 0; font-weight: 650; }
+    .html-diagnostic .includes-title { margin: 0 0 12px; color: var(--navy); font-size: 1.05rem; }
+    .html-diagnostic ul.clean { list-style: none; margin: 0; padding: 0; }
+    .html-diagnostic ul.clean li {
+      position: relative;
+      padding: 7px 0 7px 25px;
+      border-bottom: 1px solid #edf0f3;
+    }
+    .html-diagnostic ul.clean li:last-child { border-bottom: 0; }
+    .html-diagnostic ul.clean li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: #315F5B;
+      font-weight: 900;
+    }
+    .html-diagnostic .purchase-details {
+      background: var(--wash);
+      border-radius: 12px;
+      padding: 20px;
+      align-self: stretch;
+    }
+    .html-diagnostic .detail-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: .92rem;
+    }
+    .html-diagnostic .detail-row:last-of-type { border-bottom: 0; }
+    .html-diagnostic .detail-row span:first-child { color: var(--muted); }
+    .html-diagnostic .detail-row strong { text-align: right; color: var(--navy); }
+    .html-diagnostic .cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-height: 54px;
+      margin-top: 18px;
+      border: 0;
+      border-radius: 8px;
+      padding: 14px 20px;
+      background: #315F5B;
+      color: #ffffff;
+      text-decoration: none;
+      text-align: center;
+      font-weight: 850;
+      letter-spacing: .035em;
+      font-size: .88rem;
+      transition: transform .15s ease, background .15s ease;
+    }
+    .html-diagnostic .cta:hover { background: #244A47; transform: translateY(-1px); }
+    .html-diagnostic .cta:focus-visible, .html-diagnostic a:focus-visible { outline: 3px solid #4b8bd8; outline-offset: 3px; }
+    .html-diagnostic .cta-note { color: var(--muted); font-size: .78rem; margin: 10px 0 0; text-align: center; }
+    .html-diagnostic .section {
+      margin-top: 24px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: clamp(24px, 4vw, 40px);
+    }
+    .html-diagnostic .section-kicker {
+      color: #315F5B;
+      font-size: .74rem;
+      font-weight: 850;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      margin: 0 0 8px;
+    }
+    .html-diagnostic h2 {
+      color: var(--navy);
+      font-size: clamp(1.5rem, 3vw, 2.15rem);
+      line-height: 1.18;
+      letter-spacing: -.025em;
+      margin: 0 0 18px;
+    }
+    .html-diagnostic h3 {
+      color: var(--navy);
+      font-size: 1.08rem;
+      line-height: 1.35;
+      margin: 0 0 8px;
+    }
+    .html-diagnostic p { margin: 0 0 14px; }
+    .html-diagnostic .section > p:last-child { margin-bottom: 0; }
+    .html-diagnostic .scenario-grid, .html-diagnostic .classification-grid, .html-diagnostic .service-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 22px;
+    }
+    .html-diagnostic .mini-card {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 21px;
+      background: #fff;
+    }
+    .html-diagnostic .mini-card .number {
+      color: #315F5B;
+      font-size: .75rem;
+      font-weight: 850;
+      letter-spacing: .1em;
+      margin-bottom: 13px;
+    }
+    .html-diagnostic .mini-card p { color: #536171; font-size: .94rem; margin: 0; }
+    .html-diagnostic .classification-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .html-diagnostic .classification {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 22px;
+      background: #fff;
+    }
+    .html-diagnostic .classification h3 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      letter-spacing: .04em;
+      font-size: .94rem;
+    }
+    .html-diagnostic .classification h3::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #315F5B;
+      flex: 0 0 auto;
+    }
+    .html-diagnostic .classification p { margin: 0; color: #536171; }
+    .html-diagnostic .note {
+      background: #E9E2D6;
+      border-left: 3px solid #315F5B;
+      border-radius: 0 8px 8px 0;
+      padding: 16px 18px;
+      margin-top: 20px;
+      color: #3b3a34;
+    }
+    .html-diagnostic .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    .html-diagnostic .exam-list { margin: 14px 0 0; padding-left: 20px; }
+    .html-diagnostic .exam-list li { padding: 5px 0 5px 4px; }
+    .html-diagnostic .service-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .html-diagnostic .service-card {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+    }
+    .html-diagnostic .service-number {
+      color: #315F5B;
+      font-weight: 850;
+      font-size: .75rem;
+      letter-spacing: .12em;
+      margin-bottom: 10px;
+    }
+    .html-diagnostic .service-card p { margin: 0; color: #536171; font-size: .94rem; }
+    .html-diagnostic .service-card:first-child { border-top: 3px solid #B8D5CE; }
+    .html-diagnostic .credentials {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+    .html-diagnostic .credential-mark {
+      background: var(--navy);
+      color: #fff;
+      border-radius: 12px;
+      padding: 24px;
+    }
+    .html-diagnostic .credential-mark .years {
+      color: #B8D5CE;
+      font-size: 2.5rem;
+      line-height: 1;
+      font-weight: 850;
+      letter-spacing: -.04em;
+      margin-bottom: 10px;
+    }
+    .html-diagnostic .credential-mark p { color: #e7edf3; margin: 0; }
+    .html-diagnostic .boundary-list { columns: 2; column-gap: 32px; padding-left: 20px; margin: 12px 0 20px; }
+    .html-diagnostic .boundary-list li { break-inside: avoid; padding: 4px 0; }
+    .html-diagnostic .process {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding: 18px;
+      background: var(--wash);
+      border-radius: 10px;
+      margin: 18px 0;
+      color: var(--navy);
+      font-size: .83rem;
+      font-weight: 850;
+      letter-spacing: .04em;
+    }
+    .html-diagnostic .process span:not(:last-child)::after {
+      content: "→";
+      margin-left: 10px;
+      color: #315F5B;
+    }
+    .html-diagnostic .bottom-cta {
+      background: var(--navy);
+      color: #fff;
+      text-align: center;
+      padding: clamp(30px, 5vw, 48px);
+      border-radius: var(--radius);
+      margin-top: 24px;
+    }
+    .html-diagnostic .bottom-cta h2 { color: #fff; }
+    .html-diagnostic .bottom-cta p { color: #dce4ec; max-width: 700px; margin: 0 auto 8px; }
+    .html-diagnostic .bottom-cta .cta { max-width: 360px; }
+    .html-diagnostic footer {
+      background: var(--navy-deep);
+      color: #dce4ec;
+      padding: 28px 0;
+      border-top: 3px solid #B8D5CE;
+    }
+    .html-diagnostic .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      font-size: .86rem;
+    }
+    .html-diagnostic .footer-brand { font-weight: 800; letter-spacing: .04em; color: #fff; }
+    .html-diagnostic .footer-tagline { color: #b8c4d1; text-align: right; }
+    @media (max-width: 760px) {
+      .html-diagnostic .topbar-inner, .html-diagnostic main, .html-diagnostic .footer-inner { width: min(100% - 28px, 1120px); }
+      .html-diagnostic .topbar-inner { min-height: 68px; }
+      .html-diagnostic .top-note { display: none; }
+      .html-diagnostic main { padding-top: 16px; }
+      .html-diagnostic .hero { border-radius: 15px; }
+      .html-diagnostic .purchase-panel, .html-diagnostic .two-col, .html-diagnostic .credentials { grid-template-columns: 1fr; }
+      .html-diagnostic .scenario-grid { grid-template-columns: 1fr; }
+      .html-diagnostic .classification-grid, .html-diagnostic .service-grid { grid-template-columns: 1fr; }
+      .html-diagnostic .boundary-list { columns: 1; }
+      .html-diagnostic .footer-inner { flex-direction: column; align-items: flex-start; }
+      .html-diagnostic .footer-tagline { text-align: left; }
+    }
+    @media print {
+      .html-diagnostic { background: #fff; }
+      .html-diagnostic .topbar, .html-diagnostic footer, .html-diagnostic .hero, .html-diagnostic .bottom-cta { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+      .html-diagnostic .cta { border: 1px solid #777; }
+      .html-diagnostic .section, .html-diagnostic .purchase-panel { break-inside: avoid; box-shadow: none; }
+    }
+
+.html-diagnostic :is(a,button,input,textarea,select):focus-visible {outline:3px solid #6eaaa0;outline-offset:4px;}
+@media(prefers-reduced-motion:reduce){.html-diagnostic *{scroll-behavior:auto!important;transition:none!important;}}
+</style>
+</head>
+<body>
+
+
+  <main>
+    <section class="hero" aria-labelledby="page-title">
+      <p class="eyebrow">Executive Security Risk Governance Diagnostic™</p>
+      <h1 id="page-title">WHO ACTUALLY OWNS THIS RISK?™</h1>
+      <p class="hero-subtitle">One real risk. One governance question. One defined result.</p>
+      <div class="hero-copy">
+        <p>You have identified the risk. But who owns it, who has authority to decide what happens next, and who is accountable for the outcome?</p>
+        <p>The Executive Security Risk Governance Diagnostic™ examines the relationship between risk ownership, decision authority and accountability around one live business or security risk.</p>
+        <p>It identifies the governance position indicated by the available information and provides a Risk Governance Decision Guide™ to help determine the appropriate next step.</p>
+      </div>
+    </section>
+
+    <section class="purchase-panel" aria-labelledby="investment-title">
+      <div>
+        <p class="price-label">Your investment</p>
+        <h2 class="price" id="investment-title">US$1 <small>fixed fee</small></h2>
+        <h3 class="includes-title">Your purchase includes</h3>
+        <ul class="clean">
+          <li>The fillable HTML Diagnostic instrument</li>
+          <li>Completion guidance</li>
+          <li>Governance classification</li>
+          <li>A statement of the principal governance condition</li>
+          <li>A governance observation</li>
+          <li>The Risk Governance Decision Guide™</li>
+        </ul>
+      </div>
+      <aside class="purchase-details" aria-label="Purchase details">
+        <div class="detail-row"><span>Access</span><strong>Immediate after purchase</strong></div>
+        <div class="detail-row"><span>Format</span><strong>Fillable HTML instrument</strong></div>
+        <div class="detail-row"><span>Delivery</span><strong>Self-guided</strong></div>
+        <div class="detail-row"><span>Individual review</span><strong>Not included</strong></div>
+        <div class="detail-row"><span>Scope</span><strong>One live risk and its associated decision</strong></div>
+        <a class="cta" href="/diagnostic/checkout">PURCHASE THE DIAGNOSTIC</a>
+      </aside>
+    </section>
+
+    <section class="section" aria-labelledby="problem-title">
+      <p class="section-kicker">The governance problem</p>
+      <h2 id="problem-title">When Identifying the Risk Is Not Enough</h2>
+      <p>A security concern can be documented and escalated without resolving who has the authority to act.</p>
+      <div class="scenario-grid">
+        <article class="mini-card">
+          <div class="number">SITUATION 01</div>
+          <h3>The Disconnected Owner</h3>
+          <p>A risk owner is responsible for an exposure but cannot authorise the budget, operational change or other action needed to address it.</p>
+        </article>
+        <article class="mini-card">
+          <div class="number">SITUATION 02</div>
+          <h3>The Unconnected Authority</h3>
+          <p>A business executive can approve an activity, but the relationship between that authority, risk ownership and accountability is unclear.</p>
+        </article>
+        <article class="mini-card">
+          <div class="number">SITUATION 03</div>
+          <h3>The Isolated Security Function</h3>
+          <p>Security identifies a significant concern but cannot approve the activity, direct the business response or accept residual risk on the organisation's behalf.</p>
+        </article>
+      </div>
+      <div class="note">The Diagnostic examines these relationships without transferring business responsibility to the security function.</div>
+    </section>
+
+    <section class="section" aria-labelledby="classification-title">
+      <p class="section-kicker">The result</p>
+      <h2 id="classification-title">The Four Governance Classifications</h2>
+      <p>The Diagnostic uses four classifications to describe the relationship between risk ownership, decision authority and accountability.</p>
+      <div class="classification-grid">
+        <article class="classification">
+          <h3>ALIGNED</h3>
+          <p>The relevant responsibilities and decision rights are sufficiently connected within the information examined.</p>
+        </article>
+        <article class="classification">
+          <h3>CONSTRAINED</h3>
+          <p>Risk ownership is established, but the authority required to act is limited.</p>
+        </article>
+        <article class="classification">
+          <h3>MISALIGNED</h3>
+          <p>Risk responsibility and the authority needed to influence the decision are not effectively connected.</p>
+        </article>
+        <article class="classification">
+          <h3>UNDEFINED</h3>
+          <p>The available information does not establish the relevant ownership, authority or accountability clearly enough.</p>
+        </article>
+      </div>
+      <div class="note">These classifications describe governance conditions, not the severity or acceptability of the underlying risk. The paid Diagnostic applies the framework to one live risk. Its accompanying Decision Guide explains how to interpret the result and consider the appropriate next step.</div>
+    </section>
+
+    <section class="section" aria-labelledby="examines-title">
+      <div class="two-col">
+        <div>
+          <p class="section-kicker">Scope</p>
+          <h2 id="examines-title">What the Diagnostic Examines</h2>
+          <p>The examination focuses on the relationship between the responsibilities and decision rights involved in one live risk.</p>
+          <ul class="exam-list">
+            <li>Risk ownership</li>
+            <li>Decision authority</li>
+            <li>Accountability</li>
+            <li>Treatment responsibility</li>
+            <li>Residual-risk decisions</li>
+            <li>Escalation</li>
+            <li>Security and Risk input</li>
+          </ul>
+        </div>
+        <div>
+          <p class="section-kicker">Purpose</p>
+          <h2>What the Result Means</h2>
+          <p>These responsibilities may sit with different people or functions. The question is whether their relationship provides a clear basis for action through the organisation's established governance arrangements.</p>
+          <p>The Diagnostic does not determine who should own the risk, grant authority or prescribe the business outcome.</p>
+          <p>The detailed diagnostic questions, classification rules, treatment of incomplete information and interpretation procedures are contained in the paid instrument and accompanying guide.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="pathway-title">
+      <p class="section-kicker">The advisory pathway</p>
+      <h2 id="pathway-title">Where the Diagnostic Fits</h2>
+      <p>The Diagnostic is the entry point within TopLink's Risk Governance Systems™ approach.</p>
+      <div class="service-grid">
+        <article class="service-card">
+          <div class="service-number">01 / IDENTIFY</div>
+          <h3>Executive Security Risk Governance Diagnostic™</h3>
+          <p>Identifies and classifies the governance condition surrounding one live risk.</p>
+        </article>
+        <article class="service-card">
+          <div class="service-number">02 / INTERPRET</div>
+          <h3>Risk Governance Decision Guide™</h3>
+          <p>Interprets the classification and helps determine the appropriate next step.</p>
+        </article>
+        <article class="service-card">
+          <div class="service-number">03 / EXAMINE</div>
+          <h3>Executive Security Decision Review™</h3>
+          <p>Examines a consequential decision when its implications or available courses of action remain unclear.</p>
+        </article>
+        <article class="service-card">
+          <div class="service-number">04 / ADDRESS</div>
+          <h3>Executive Decision Sprint™</h3>
+          <p>Addresses unresolved governance arrangements when ownership, authority or accountability requires further examination and resolution.</p>
+        </article>
+      </div>
+      <div class="note">Each service has a distinct purpose. The organisation may address the Diagnostic result through existing processes. Further advisory services require separate qualification and commissioning; purchasing the Diagnostic does not commit the organisation to another TopLink service.</div>
+    </section>
+
+    <section class="section" aria-labelledby="why-title">
+      <p class="section-kicker">About the advisor</p>
+      <h2 id="why-title">Why TopLink Advisory?</h2>
+      <div class="credentials">
+        <div class="credential-mark">
+          <div class="years">22+ years</div>
+          <p>Experience across security, investigations, risk and commercial environments, including law enforcement, forensic investigations, mining, telecommunications and retail.</p>
+        </div>
+        <div>
+          <h3>Independent Security &amp; Risk Advisory</h3>
+          <p>The Diagnostic draws on established security, risk and governance disciplines, including ASIS Enterprise Security Risk Management (ESRM), ISO 31000, ISO 31010, ISO/IEC 27001 and COSO.</p>
+          <p>These disciplines inform the approach. The four classifications are part of TopLink's diagnostic framework; they are not an official classification system established by ISO or ASIS.</p>
+          <p>TopLink provides an independent perspective while the organisation retains responsibility for its decisions, risk acceptance, authority and accountability.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="boundaries-title">
+      <p class="section-kicker">Limitations</p>
+      <h2 id="boundaries-title">Scope and Professional Boundaries</h2>
+      <p>The Diagnostic is a self-guided instrument. It is not:</p>
+      <ul class="boundary-list">
+        <li>A comprehensive security risk assessment</li>
+        <li>An audit or assurance engagement</li>
+        <li>A governance redesign</li>
+        <li>A risk appetite determination</li>
+        <li>A compliance certification</li>
+        <li>Legal or regulatory advice</li>
+        <li>Specialist technical advice</li>
+        <li>An implementation engagement</li>
+        <li>A business decision-making service</li>
+      </ul>
+      <p>TopLink does not make the business decision, accept risk on the organisation's behalf, assume risk ownership or decision authority, authorise expenditure or operational activity, or implement the resulting course of action through this product.</p>
+      <p>The instrument relies on information entered by the person completing it. It does not independently verify organisational policies, formal delegations, committee mandates, approval structures, risk ownership records or statements made by participants.</p>
+      <p>Where information is incomplete, inconsistent or insufficient, that limitation must be recorded. The resulting classification is not proof of facts that have not been established.</p>
+      <p>The Diagnostic does not constitute an assurance conclusion, formal governance determination, legal opinion, regulatory determination or individual advisory opinion from TopLink.</p>
+      <p>The organisation retains responsibility for its decisions, risk acceptance, authority and accountability.</p>
+    </section>
+
+    <section class="section" aria-labelledby="after-title">
+      <p class="section-kicker">Access and use</p>
+      <h2 id="after-title">After Purchase</h2>
+      <p>Access the instrument and guide immediately after purchase. Record the relevant information, establish the classification indicated by your responses and use the guide to consider the appropriate next step.</p>
+      <div class="process" aria-label="Process">
+        <span>RECEIVE</span><span>COMPLETE</span><span>CLASSIFY</span><span>INTERPRET</span>
+      </div>
+      <p>The organisation remains responsible for checking the information, obtaining required approvals and deciding how to proceed.</p>
+    </section>
+
+    <section class="bottom-cta" id="purchase" aria-labelledby="bottom-title">
+      <p class="eyebrow">Executive Security Risk Governance Diagnostic™</p>
+      <h2 id="bottom-title">Who Actually Owns This Risk?™</h2>
+      <p>Examine the relationship between risk ownership, decision authority and accountability around one live risk.</p>
+      <p style="margin-top:18px;font-size:1.8rem;font-weight:850;color:#B8D5CE;">US$1 <span style="font-size:.9rem;font-weight:600;">fixed fee</span></p>
+      <a class="cta" href="/diagnostic/checkout">PURCHASE THE DIAGNOSTIC</a>
+    </section>
+  </main>
+
+
+</body>
+</html>

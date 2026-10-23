@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import { Mail, MapPin, Phone, Clock } from "lucide-react";
 import {
@@ -7,6 +8,7 @@ import {
   sendTrainingRequest,
 } from "../services/contactService";
 import Button from "../components/common/Button";
+import { contactServiceTopics } from "../data/contactServiceTopics";
 
 const initialForm = {
   name: "",
@@ -20,12 +22,12 @@ const initialForm = {
   message: "",
 };
 
-const Contact = () => {
+const ContactForm = ({ selectedService = "" }) => {
     useEffect(() => {
         window.scrollTo(0, 0);
       }, []);
-  const [activeTab, setActiveTab] = useState("contact");
-  const [formData, setFormData] = useState(initialForm);
+  const [activeTab, setActiveTab] = useState(selectedService ? "consultation" : "contact");
+  const [formData, setFormData] = useState(() => ({ ...initialForm, service: selectedService }));
   const [loading, setLoading] = useState(false);
 
   const tabs = [
@@ -42,7 +44,7 @@ const Contact = () => {
   };
 
   const resetForm = () => {
-    setFormData(initialForm);
+    setFormData({ ...initialForm, service: selectedService });
   };
 
   const handleSubmit = async (e) => {
@@ -95,29 +97,26 @@ const Contact = () => {
   };
 
   return (
-    <section className="contact-page bg-white py-20 lg:py-28">
+    <section className="contact-page site-section bg-[var(--site-paper)]">
       <div className="container-custom">
-        <div className="grid gap-10 border-b border-slate-300 pb-14 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
-          <div><p className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#0CA4B8]">Contact TopLink Security</p><h1 className="mt-5 text-4xl font-extrabold leading-[1.08] text-[#0B2F50] md:text-6xl">Start the conversation that leads to better security decisions.</h1></div>
-          <p className="border-l-2 border-[#B99753] pl-7 text-lg leading-8 text-slate-600">Whether you're protecting people, assets, operations, or preparing for a critical decision, we're here to help you understand your risks, evaluate your options, and identify the right next step.</p>
+        <div className="site-heading-grid">
+          <div><p className="text-xs font-extrabold uppercase tracking-[0.2em] text-[var(--site-teal)]">Contact TopLink Security</p><h1 className="mt-5 text-4xl font-extrabold leading-[1.08] text-[var(--site-navy)] md:text-6xl">Start the conversation that leads to better security decisions.</h1></div>
+          <p className="site-lead">Whether you're protecting people, assets, operations, or preparing for a critical decision, we're here to help you understand your risks, evaluate your options, and identify the right next step.</p>
         </div>
 
-        <div className="mt-14 grid gap-12 lg:grid-cols-[1.25fr_0.75fr]">
-          <div className="border-t-2 border-[#0B2F50] bg-white py-8">
-            <div className="mb-10 flex flex-wrap border-b border-slate-300">
+        <div className="mt-10 grid gap-6 lg:grid-cols-[1.25fr_0.75fr] lg:gap-8">
+          <div className="site-panel">
+            <div className="contact-tabs" aria-label="Inquiry type">
               {tabs.map((tab) => (
                 <button
                   key={tab.id}
                   type="button"
+                  aria-pressed={activeTab === tab.id}
                   onClick={() => {
                     setActiveTab(tab.id);
                     resetForm();
                   }}
-                  className={`border-b-2 px-5 py-4 text-xs font-extrabold uppercase tracking-[0.08em] transition ${
-                    activeTab === tab.id
-                      ? "border-[#0CA4B8] text-[#0B2F50]"
-                      : "border-transparent text-slate-500 hover:text-[#0B2F50]"
-                  }`}
+                  className="uppercase tracking-[0.05em] transition"
                 >
                   {tab.label}
                 </button>
@@ -127,31 +126,33 @@ const Contact = () => {
             <form onSubmit={handleSubmit} className="grid gap-5">
               <div className="grid gap-5 md:grid-cols-2">
                 <div>
-                  <label className="mb-2 block text-sm font-semibold text-slate-700">
+                  <label htmlFor="contact-name" className="mb-2 block text-sm font-semibold text-[var(--site-muted)]">
                     Name *
                   </label>
                   <input
-                    name="name"
+                    id="contact-name"
+              name="name"
                     value={formData.name}
                     onChange={handleChange}
                     required
                     placeholder="Your name"
-                    className="w-full rounded-xl border border-slate-200 px-4 py-3 outline-none focus:border-[#0B3D91]"
+                    className="w-full rounded-xl border border-[var(--site-line)] px-4 py-3 outline-none focus:border-[var(--site-navy)]"
                   />
                 </div>
 
                 <div>
-                  <label className="mb-2 block text-sm font-semibold text-slate-700">
+                  <label htmlFor="contact-email" className="mb-2 block text-sm font-semibold text-[var(--site-muted)]">
                     Email *
                   </label>
                   <input
-                    name="email"
+                    id="contact-email"
+              name="email"
                     type="email"
                     value={formData.email}
                     onChange={handleChange}
                     required
                     placeholder="you@example.com"
-                    className="w-full rounded-xl border border-slate-200 px-4 py-3 outline-none focus:border-[#0B3D91]"
+                    className="w-full rounded-xl border border-[var(--site-line)] px-4 py-3 outline-none focus:border-[var(--site-navy)]"
                   />
                 </div>
               </div>
@@ -159,28 +160,30 @@ const Contact = () => {
               {(activeTab === "consultation" || activeTab === "training") && (
                 <div className="grid gap-5 md:grid-cols-2">
                   <div>
-                    <label className="mb-2 block text-sm font-semibold text-slate-700">
+                    <label htmlFor="contact-phone" className="mb-2 block text-sm font-semibold text-[var(--site-muted)]">
                       Phone
                     </label>
                     <input
-                      name="phone"
+                      id="contact-phone"
+              name="phone"
                       value={formData.phone}
                       onChange={handleChange}
                       placeholder="+254 700 000 000"
-                      className="w-full rounded-xl border border-slate-200 px-4 py-3 outline-none focus:border-[#0B3D91]"
+                      className="w-full rounded-xl border border-[var(--site-line)] px-4 py-3 outline-none focus:border-[var(--site-navy)]"
                     />
                   </div>
 
                   <div>
-                    <label className="mb-2 block text-sm font-semibold text-slate-700">
+                    <label htmlFor="contact-organization" className="mb-2 block text-sm font-semibold text-[var(--site-muted)]">
                       Organization
                     </label>
                     <input
-                      name="organization"
+                      id="contact-organization"
+              name="organization"
                       value={formData.organization}
                       onChange={handleChange}
                       placeholder="Company / institution"
-                      className="w-full rounded-xl border border-slate-200 px-4 py-3 outline-none focus:border-[#0B3D91]"
+                      className="w-full rounded-xl border border-[var(--site-line)] px-4 py-3 outline-none focus:border-[var(--site-navy)]"
                     />
                   </div>
                 </div>
@@ -188,19 +191,19 @@ const Contact = () => {
 
               {activeTab === "contact" && (
                 <div>
-                  <label className="mb-2 block text-sm font-semibold text-slate-700">
+                  <label htmlFor="contact-subject" className="mb-2 block text-sm font-semibold text-[var(--site-muted)]">
                     Subject *
                   </label>
                   <select
-                    name="subject"
+                    id="contact-subject"
+              name="subject"
                     value={formData.subject}
                     onChange={handleChange}
                     required
-                    className="w-full rounded-xl border border-slate-200 px-4 py-3 outline-none focus:border-[#0B3D91]"
+                    className="w-full rounded-xl border border-[var(--site-line)] px-4 py-3 outline-none focus:border-[var(--site-navy)]"
                   >
                     <option value="">Select a subject</option>
                     <option value="General Inquiry">General Inquiry</option>
-                    <option value="Security Resources">Security Resources</option>
                     <option value="Technical Support">Technical Support</option>
                     <option value="Partnership">Partnership</option>
                   </select>
@@ -209,17 +212,21 @@ const Contact = () => {
 
               {activeTab === "consultation" && (
                 <div>
-                  <label className="mb-2 block text-sm font-semibold text-slate-700">
+                  <label htmlFor="contact-service" className="mb-2 block text-sm font-semibold text-[var(--site-muted)]">
                     Service *
                   </label>
                   <select
-                    name="service"
+                    id="contact-service"
+              name="service"
                     value={formData.service}
                     onChange={handleChange}
                     required
-                    className="w-full rounded-xl border border-slate-200 px-4 py-3 outline-none focus:border-[#0B3D91]"
+                    className="w-full rounded-xl border border-[var(--site-line)] px-4 py-3 outline-none focus:border-[var(--site-navy)]"
                   >
                     <option value="">Select service</option>
+                    {Object.values(contactServiceTopics).map((service) => (
+                      <option key={service} value={service}>{service}</option>
+                    ))}
                     <option value="Risk Assessment">Risk Assessment</option>
                     <option value="Physical Security Planning">
                       Physical Security Strategy &amp; Planning
@@ -238,15 +245,16 @@ const Contact = () => {
               {activeTab === "training" && (
                 <div className="grid gap-5 md:grid-cols-2">
                   <div>
-                    <label className="mb-2 block text-sm font-semibold text-slate-700">
+                    <label htmlFor="contact-trainingType" className="mb-2 block text-sm font-semibold text-[var(--site-muted)]">
                       Training Type *
                     </label>
                     <select
-                      name="trainingType"
+                      id="contact-trainingType"
+              name="trainingType"
                       value={formData.trainingType}
                       onChange={handleChange}
                       required
-                      className="w-full rounded-xl border border-slate-200 px-4 py-3 outline-none focus:border-[#0B3D91]"
+                      className="w-full rounded-xl border border-[var(--site-line)] px-4 py-3 outline-none focus:border-[var(--site-navy)]"
                     >
                       <option value="">Select training</option>
                       <option value="Security Awareness Training">
@@ -265,14 +273,15 @@ const Contact = () => {
                   </div>
 
                   <div>
-                    <label className="mb-2 block text-sm font-semibold text-slate-700">
+                    <label htmlFor="contact-teamSize" className="mb-2 block text-sm font-semibold text-[var(--site-muted)]">
                       Team Size
                     </label>
                     <select
-                      name="teamSize"
+                      id="contact-teamSize"
+              name="teamSize"
                       value={formData.teamSize}
                       onChange={handleChange}
-                      className="w-full rounded-xl border border-slate-200 px-4 py-3 outline-none focus:border-[#0B3D91]"
+                      className="w-full rounded-xl border border-[var(--site-line)] px-4 py-3 outline-none focus:border-[var(--site-navy)]"
                     >
                       <option value="">Select team size</option>
                       <option value="1-10">1-10</option>
@@ -286,17 +295,18 @@ const Contact = () => {
               )}
 
               <div>
-                <label className="mb-2 block text-sm font-semibold text-slate-700">
+                <label htmlFor="contact-message" className="mb-2 block text-sm font-semibold text-[var(--site-muted)]">
                   Message *
                 </label>
                 <textarea
-                  name="message"
+                  id="contact-message"
+              name="message"
                   value={formData.message}
                   onChange={handleChange}
                   required
                   rows="6"
                   placeholder="How can we help you?"
-                  className="w-full rounded-xl border border-slate-200 px-4 py-3 outline-none focus:border-[#0B3D91]"
+                  className="w-full rounded-xl border border-[var(--site-line)] px-4 py-3 outline-none focus:border-[var(--site-navy)]"
                 />
               </div>
 
@@ -306,15 +316,15 @@ const Contact = () => {
             </form>
           </div>
 
-          <aside className="bg-[#0B2F50] p-8 text-white lg:p-10">
-            <p className="text-xs font-extrabold uppercase tracking-[0.16em] text-[#D4B66E]">Direct Contact</p>
+          <aside className="site-panel site-panel-dark contact-details lg:sticky lg:top-28">
+            <p className="text-xs font-extrabold uppercase tracking-[0.16em] text-[var(--site-sage)]">Direct Contact</p>
             <h2 className="mt-4 text-2xl font-extrabold text-white">
               Contact Information
             </h2>
 
             <div className="mt-8 grid gap-6">
               <div className="flex gap-4">
-                <div className="p-3 text-[#0CA4B8]">
+                <div className="p-3 text-[var(--site-teal)]">
                   <MapPin size={22} />
                 </div>
                 <div>
@@ -324,17 +334,17 @@ const Contact = () => {
               </div>
 
               <div className="flex gap-4">
-                <div className="p-3 text-[#0CA4B8]">
+                <div className="p-3 text-[var(--site-teal)]">
                   <Mail size={22} />
                 </div>
                 <div>
                   <h3 className="font-bold text-white">Email</h3>
-                  <p className="text-slate-300">contact@toplinksecurity.com</p>
+                  <p className="text-slate-300">engagements@toplinksecurity.co.ke</p>
                 </div>
               </div>
 
               <div className="flex gap-4">
-                <div className="p-3 text-[#0CA4B8]">
+                <div className="p-3 text-[var(--site-teal)]">
                   <Phone size={22} />
                 </div>
                 <div>
@@ -344,7 +354,7 @@ const Contact = () => {
               </div>
 
               <div className="flex gap-4">
-                <div className="p-3 text-[#0CA4B8]">
+                <div className="p-3 text-[var(--site-teal)]">
                   <Clock size={22} />
                 </div>
                 <div>
@@ -362,6 +372,16 @@ const Contact = () => {
       </div>
     </section>
   );
+};
+
+const Contact = () => {
+  const [searchParams] = useSearchParams();
+  const serviceKey = searchParams.get("service");
+  const selectedService = Object.hasOwn(contactServiceTopics, serviceKey)
+    ? contactServiceTopics[serviceKey]
+    : "";
+
+  return <ContactForm key={selectedService} selectedService={selectedService} />;
 };
 
 export default Contact;

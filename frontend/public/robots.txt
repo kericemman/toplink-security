@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /admin
 
-Sitemap: https://toplinksecurity.com/sitemap.xml
+Sitemap: https://toplinksecurity.co.ke/sitemap.xml

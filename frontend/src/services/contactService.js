@@ -15,6 +15,21 @@ export const sendTrainingRequest = async (formData) => {
   return data;
 };
 
+export const sendReviewQualification = async (formData) => {
+  const { data } = await api.post("/review-qualifications", formData);
+  return data;
+};
+
+export const sendDiagnosticSubmission = async (formData, token) => {
+  const { data } = await api.post(`/diagnostics/complete/${token}`, formData);
+  return data.data;
+};
+
+export const getDiagnosticForm = async (token) => {
+  const { data } = await api.get(`/diagnostics/complete/${token}`);
+  return data.data;
+};
+
 export const getContactMessages = async () => {
   const { data } = await api.get("/contact");
   return data.data;
@@ -40,8 +55,30 @@ export const getTrainingRequests = async () => {
   return data.data;
 };
 
+export const getReviewQualifications = async () => {
+  const { data } = await api.get("/review-qualifications");
+  return data.data;
+};
+
+export const getDiagnosticSubmissions = async () => {
+  const { data } = await api.get("/diagnostics");
+  return data.data;
+};
+
 export const updateTrainingStatus = async (id, status) => {
   const { data } = await api.patch(`/training/${id}/status`, { status });
+  return data.data;
+};
+
+export const updateReviewQualificationStatus = async (id, status) => {
+  const { data } = await api.patch(`/review-qualifications/${id}/status`, {
+    status,
+  });
+  return data.data;
+};
+
+export const updateDiagnosticStatus = async (id, status) => {
+  const { data } = await api.patch(`/diagnostics/${id}/status`, { status });
   return data.data;
 };
 
@@ -57,5 +94,15 @@ export const deleteConsultation = async (id) => {
 
 export const deleteTrainingRequest = async (id) => {
   const { data } = await api.delete(`/training/${id}`);
+  return data;
+};
+
+export const deleteReviewQualification = async (id) => {
+  const { data } = await api.delete(`/review-qualifications/${id}`);
+  return data;
+};
+
+export const deleteDiagnosticSubmission = async (id) => {
+  const { data } = await api.delete(`/diagnostics/${id}`);
   return data;
 };

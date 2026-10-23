@@ -84,11 +84,11 @@ const Blog = () => {
 
   return (
     <>
-      <section className="bg-white py-10 lg:py-20">
+      <section className="site-section bg-[var(--site-paper)]">
         <div className="container-custom">
-          <div className="grid gap-10  pb-14 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
-            <div><p className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#0CA4B8]">Security Insights</p><h1 className="mt-5 text-4xl font-extrabold leading-[1.08] text-[#0B2F50] md:text-6xl">Perspective for leaders navigating risk, security, and resilience.</h1></div>
-            <p className="border-l-2 border-[#B99753] pl-7 text-lg leading-8 text-slate-600">Actionable analysis covering enterprise security risk management, physical asset protection, crisis preparedness, leadership, and emerging challenges.</p>
+          <div className="site-heading-grid">
+            <div><p className="text-xs font-extrabold uppercase tracking-[0.2em] text-[var(--site-teal)]">Security Insights</p><h1 className="mt-5 text-4xl font-extrabold leading-[1.08] text-[var(--site-navy)] md:text-6xl">Perspective for leaders navigating risk, security, and resilience.</h1></div>
+            <p className="site-lead">Actionable analysis covering enterprise security risk management, physical asset protection, crisis preparedness, leadership, and emerging challenges.</p>
           </div>
 
           <div className="mt-12"><ArticleFilters filters={filters} setFilters={setFilters} /></div>
@@ -98,20 +98,20 @@ const Blog = () => {
               {[1, 2, 3].map((item) => (
                 <div
                   key={item}
-                  className="h-96 animate-pulse bg-[#F1F0EC]"
+                  className="h-96 animate-pulse rounded-xl bg-[var(--site-soft)]"
                 />
               ))}
             </div>
           ) : articles.length > 0 ? (
             <>
-              <div className="mt-14 grid gap-x-8 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
+              <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {articles.map((article) => (
                   <ArticleCard key={article._id} article={article} />
                 ))}
               </div>
 
               {pagination && (
-                <p className="mt-8 text-center text-sm text-slate-500">
+                <p className="mt-8 text-center text-sm text-[var(--site-muted)]">
                   Showing {articles.length} of {pagination.total} articles
                 </p>
               )}
@@ -132,10 +132,11 @@ const Blog = () => {
 
       {showSubscribeModal && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 px-4">
-          <div className="relative w-full max-w-lg overflow-hidden bg-white shadow-2xl">
+          <div className="relative w-full max-w-lg overflow-hidden rounded-2xl bg-white shadow-2xl">
             <button
               onClick={() => setShowSubscribeModal(false)}
-              className="absolute right-4 top-4 border border-white/30 p-2 text-white hover:bg-white/10"
+              aria-label="Close subscription dialog"
+              className="absolute right-4 top-4 flex min-h-11 min-w-11 items-center justify-center rounded-lg border border-white/30 p-2 text-white hover:bg-white/10"
             >
               <X size={20} />
             </button>
@@ -157,12 +158,12 @@ const Blog = () => {
 
             <form onSubmit={handleSubscribe} className="grid gap-5 p-8">
               <div>
-                <label className="mb-2 block text-sm font-semibold text-slate-700">
+                <label className="mb-2 block text-sm font-semibold text-[var(--site-muted)]">
                   Email Address
                 </label>
 
-                <div className="flex items-center gap-3 border-b border-slate-300 px-0 py-3 focus-within:border-[#0CA4B8]">
-                  <Mail size={18} className="text-[#0CA4B8]" />
+                <div className="flex items-center gap-3 border-b border-[var(--site-line)] px-0 py-3 focus-within:border-[var(--site-teal)]">
+                  <Mail size={18} className="text-[var(--site-teal)]" />
                   <input
                     type="email"
                     value={subscriberEmail}
@@ -177,7 +178,7 @@ const Blog = () => {
               <button
                 type="submit"
                 disabled={subscribing}
-                className="bg-[#0B2F50] px-5 py-4 text-xs font-extrabold uppercase tracking-[0.1em] text-white hover:bg-[#0CA4B8] disabled:opacity-60"
+                className="bg-[var(--site-navy)] px-5 py-4 text-xs font-extrabold uppercase tracking-[0.1em] text-white hover:bg-[var(--site-teal)] disabled:opacity-60"
               >
                 {subscribing ? "Subscribing..." : "Subscribe Now"}
               </button>
@@ -185,7 +186,7 @@ const Blog = () => {
               <button
                 type="button"
                 onClick={() => setShowSubscribeModal(false)}
-                className="text-sm font-semibold text-slate-500 hover:text-[#0CA4B8]"
+                className="text-sm font-semibold text-[var(--site-muted)] hover:text-[var(--site-teal)]"
               >
                 Maybe later
               </button>

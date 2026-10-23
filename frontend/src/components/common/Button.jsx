@@ -9,7 +9,7 @@ const Button = ({
   ...props
 }) => {
   const base =
-    "inline-flex items-center justify-center gap-2 rounded-sm px-6 py-3.5 text-xs font-extrabold uppercase tracking-[0.08em]";
+    `site-button site-button-${variant} inline-flex items-center justify-center gap-2 rounded-sm px-6 py-3.5 text-xs font-extrabold uppercase tracking-[0.08em]`;
 
   const variants = {
     primary: "bg-[#0B2F50] text-white hover:bg-[#0CA4B8]",

@@ -69,15 +69,15 @@ sudo cp deploy/nginx/toplinksecurity.conf /etc/nginx/sites-available/toplinksecu
 sudo ln -s /etc/nginx/sites-available/toplinksecurity /etc/nginx/sites-enabled/toplinksecurity
 sudo nginx -t
 sudo systemctl reload nginx
-sudo certbot --nginx -d toplinksecurity.com -d www.toplinksecurity.com
+sudo certbot --nginx --redirect -d toplinksecurity.co.ke -d www.toplinksecurity.co.ke
 ```
 
 Keep port `5000` closed to the public internet. The API binds to
 `127.0.0.1`, and only Nginx should communicate with it.
 
-Set `CLIENT_URL=https://toplinksecurity.com` in `backend/.env`. If both the
-`www` and non-`www` origins serve the app without a redirect, list both as a
-comma-separated value. `PUBLIC_SITE_URL`, `PAYSTACK_CALLBACK_URL`, and
+Set `CLIENT_URL=https://toplinksecurity.co.ke,https://www.toplinksecurity.co.ke`
+in `backend/.env` while Nginx serves both hostnames. Set `PUBLIC_SITE_URL` to
+the canonical `https://toplinksecurity.co.ke`. `PAYSTACK_CALLBACK_URL` and
 `DOWNLOAD_TOKEN_SECRET` are recommended but backward-compatible fallbacks are
 provided so an existing VPS environment does not crash after an update.
 
@@ -86,6 +86,9 @@ Deploy subsequent releases from the project root:
 ```bash
 ./deploy/vps-release.sh
 ```
+
+For a clean VPS setup and the current release scope, follow
+[`docs/hostinger-fresh-deployment.md`](docs/hostinger-fresh-deployment.md).
 
 The release installs locked dependencies, runs checks, builds the frontend,
 reloads the PM2 process, validates Nginx, and confirms database readiness.

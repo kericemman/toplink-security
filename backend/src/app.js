@@ -18,6 +18,9 @@ const contactRoutes = require("./routes/contactRoutes");
 const consultationRoutes = require("./routes/consultationRoutes");
 const trainingRoutes = require("./routes/trainingRoutes");
 const subscriberRoutes = require("./routes/subscriberRoutes");
+const reviewQualificationRoutes = require("./routes/reviewQualificationRoutes");
+const diagnosticRoutes = require("./routes/diagnosticRoutes");
+const decisionRoomRoutes = require("./routes/decisionRoomRoutes");
 const { handleWebhook } = require("./controllers/paystackController");
 
 const app = express();
@@ -46,7 +49,8 @@ app.use(
 );
 
 app.use(helmet());
-app.use(morgan(process.env.NODE_ENV === "production" ? "combined" : "dev"));
+morgan.token("safe-url", (req) => req.originalUrl.replace(/[a-f0-9]{64}/gi, "[private-link]"));
+app.use(morgan(":remote-addr [:date[iso]] :method :safe-url :status :response-time ms"));
 app.post(
   "/api/paystack/webhook",
   express.raw({ type: "application/json", limit: "1mb" }),
@@ -90,6 +94,9 @@ app.use("/api/orders", orderRoutes);
 app.use("/api/contact", contactRoutes);
 app.use("/api/consultations", consultationRoutes);
 app.use("/api/training", trainingRoutes);
+app.use("/api/review-qualifications", reviewQualificationRoutes);
+app.use("/api/diagnostics", diagnosticRoutes);
+app.use("/api/decision-room", decisionRoomRoutes);
 app.use("/api/subscribers", subscriberRoutes);
 
 app.use((req, res) => {

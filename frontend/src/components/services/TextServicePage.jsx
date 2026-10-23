@@ -4,14 +4,14 @@ import { CheckCircle2 } from "lucide-react";
 
 const sectionBackgrounds = {
   white: "bg-white",
-  stone: "bg-[#F1F0EC]",
-  dark: "bg-[#0B2F50] text-white",
+  stone: "bg-[var(--site-soft)]",
+  dark: "bg-[var(--site-navy)] text-white",
 };
 
 const SectionLabel = ({ children, tone = "teal" }) => (
   <p
     className={`text-xs font-extrabold uppercase tracking-[0.2em] ${
-      tone === "gold" ? "text-[#B99753]" : "text-[#0CA4B8]"
+      tone === "sage" ? "text-[var(--site-sage)]" : "text-[var(--site-teal)]"
     }`}
   >
     {children}
@@ -19,7 +19,7 @@ const SectionLabel = ({ children, tone = "teal" }) => (
 );
 
 const IntroContent = ({ blocks = [] }) => (
-  <div className="mt-7 space-y-5 text-lg leading-8 text-slate-600">
+  <div className="mt-7 space-y-5 text-lg leading-8 text-[var(--site-muted)]">
     {blocks.map((block, index) => {
       if (block.type === "list") {
         return (
@@ -27,7 +27,7 @@ const IntroContent = ({ blocks = [] }) => (
             {block.items.map((item) => (
               <p
                 key={item}
-                className="bg-white px-4 py-3 text-base font-extrabold leading-7 text-[#0B2F50] sm:px-5 sm:py-4"
+                className="rounded-lg border border-[var(--site-line)] bg-white px-4 py-3 text-base font-semibold leading-7 text-[var(--site-navy)] sm:px-5 sm:py-4"
               >
                 {item}
               </p>
@@ -39,7 +39,7 @@ const IntroContent = ({ blocks = [] }) => (
       return (
         <p
           key={block.text}
-          className={block.emphasis ? "font-semibold text-[#0B2F50]" : ""}
+          className={block.emphasis ? "font-semibold text-[var(--site-navy)]" : ""}
         >
           {block.text}
         </p>
@@ -53,15 +53,15 @@ const ItemGrid = ({ items = [], dark = false }) => (
     {items.map((item) => (
       <li
         key={item}
-        className={`flex gap-2 p-2 sm:gap-3 sm:p-4 ${
-          dark ? "bg-white/5 text-slate-100" : "bg-white text-[#0B2F50]"
+        className={`flex gap-2 rounded-lg border p-3 sm:gap-3 sm:p-4 ${
+          dark ? "border-white/10 bg-white/5 text-slate-100" : "border-[var(--site-line)] bg-white text-[var(--site-navy)]"
         }`}
       >
         <CheckCircle2
           aria-hidden="true"
           size={19}
           className={`mt-1 shrink-0 ${
-            dark ? "text-[#D4B66E]" : "text-[#B99753]"
+            dark ? "text-[var(--site-sage)]" : "text-[var(--site-teal)]"
           }`}
         />
         <span className="font-semibold leading-6 sm:leading-7">{item}</span>
@@ -92,21 +92,21 @@ const TextServicePage = ({
 
   return (
     <>
-      <section className="border-b border-slate-200 bg-[#F8F7F3] py-16 lg:py-24">
+      <section className="site-hero">
         <div className="container-custom grid gap-12 lg:grid-cols-[minmax(0,0.92fr)_320px] lg:items-start">
           <div>
             <SectionLabel>{eyebrow}</SectionLabel>
-            <h1 className="mt-5 max-w-5xl text-2xl font-extrabold leading-[1.08] text-[#0B2F50] md:text-4xl">
+            <h1 className="mt-5 max-w-5xl text-2xl font-bold leading-tight text-[var(--site-navy)] md:text-3xl lg:text-4xl">
               {title}
             </h1>
             <IntroContent blocks={intro} />
           </div>
 
-          <aside className="hidden bg-white p-7 lg:sticky lg:top-28 lg:block">
-            <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-[#B99753]">
+          <aside className="site-panel hidden lg:sticky lg:top-28 lg:block">
+            <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-[var(--site-teal)]">
               Service Detail
             </p>
-            <p className="mt-4 text-2xl font-extrabold leading-tight text-[#0B2F50]">
+            <p className="mt-4 text-2xl font-extrabold leading-tight text-[var(--site-navy)]">
               A clear path from risk context to practical action.
             </p>
             <nav className="mt-7 grid gap-3">
@@ -114,7 +114,7 @@ const TextServicePage = ({
                 <a
                   key={item.id}
                   href={`#${item.id}`}
-                  className="text-sm font-bold text-slate-600 hover:text-[#0CA4B8]"
+                  className="text-sm font-bold text-[var(--site-muted)] hover:text-[var(--site-teal)]"
                 >
                   {item.label}
                 </a>
@@ -132,17 +132,17 @@ const TextServicePage = ({
           <section
             key={section.id}
             id={section.id}
-            className={`${sectionBackgrounds[variant]} py-10 lg:py-15`}
+            className={`${sectionBackgrounds[variant]} py-12 md:py-16`}
           >
             <div className="container-custom grid gap-12 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
               <div>
-                <SectionLabel tone={isDark ? "gold" : section.labelTone || "gold"}>
+                <SectionLabel tone={isDark ? "sage" : section.labelTone || "gold"}>
                   {section.eyebrow}
                 </SectionLabel>
                 {section.title && (
                   <h2
-                    className={`mt-4 text-2xl font-extrabold leading-tight md:text-4xl ${
-                      isDark ? "text-white" : "text-[#0B2F50]"
+                    className={`mt-4 text-2xl font-bold leading-tight md:text-3xl lg:text-4xl ${
+                      isDark ? "text-white" : "text-[var(--site-navy)]"
                     }`}
                   >
                     {section.title}
@@ -151,7 +151,7 @@ const TextServicePage = ({
                 {section.description && (
                   <p
                     className={`mt-5 leading-8 ${
-                      isDark ? "text-slate-300" : "text-slate-600"
+                      isDark ? "text-slate-300" : "text-[var(--site-muted)]"
                     }`}
                   >
                     {section.description}
@@ -168,17 +168,17 @@ const TextServicePage = ({
       {approach && (
         <section
           id="our-approach"
-          className="border-y border-slate-200 bg-[#F1F0EC] py-10 lg:py-15"
+          className="border-y border-[var(--site-line)] bg-[var(--site-soft)] py-10 lg:py-15"
         >
           <div className="container-custom grid gap-12 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
             <div>
               <SectionLabel tone="gold">{approach.eyebrow}</SectionLabel>
-              <h2 className="mt-4 text-2xl font-extrabold leading-tight text-[#0B2F50] md:text-4xl">
+              <h2 className="mt-4 text-2xl font-bold leading-tight text-[var(--site-navy)] md:text-3xl lg:text-4xl">
                 {approach.title}
               </h2>
             </div>
 
-            <div className="space-y-5 bg-white p-7 text-lg leading-8 text-slate-600 md:p-9">
+            <div className="site-panel space-y-5 text-lg leading-8 text-[var(--site-muted)]">
               {approach.paragraphs.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
@@ -189,11 +189,11 @@ const TextServicePage = ({
 
       {cta && (
         <section className="bg-white py-10 lg:py-15">
-          <div className="container-custom bg-[#0B2F50] p-8 text-white md:p-12 lg:p-16">
+          <div className="container-custom site-panel site-panel-dark p-8 md:p-12 lg:p-16">
             <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
               <div>
-                <SectionLabel tone="gold">{cta.eyebrow}</SectionLabel>
-                <h2 className="mt-4 max-w-3xl text-2xl font-extrabold leading-tight md:text-4xl">
+                <SectionLabel tone="sage">{cta.eyebrow}</SectionLabel>
+                <h2 className="mt-4 max-w-3xl text-2xl font-bold leading-tight md:text-3xl lg:text-4xl">
                   {cta.title}
                 </h2>
                 {cta.text && (

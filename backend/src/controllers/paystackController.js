@@ -1,6 +1,10 @@
 const crypto = require("crypto");
 const Product = require("../models/Product");
 const Order = require("../models/Order");
+const ReviewQualification = require("../models/ReviewQualification");
+const DiagnosticSubmission = require("../models/DiagnosticSubmission");
+const DecisionRoomBooking = require("../models/DecisionRoomBooking");
+const { fulfillDecisionRoomPayment } = require("./decisionRoomController");
 const asyncHandler = require("../utils/asyncHandler");
 const apiResponse = require("../utils/apiResponse");
 const { createDownloadToken } = require("../utils/downloadToken");
@@ -11,6 +15,10 @@ const {
 const { sendEmail } = require("../services/emailService");
 const { orderEmail } = require("../templates/orderEmail");
 const { adminOrderEmail } = require("../templates/adminOrderEmail");
+const {
+  fulfillDiagnosticPayment,
+  transactionMatchesDiagnosticSubmission,
+} = require("./diagnosticController");
 
 const publicOrder = (order) => ({
   reference: order.reference,
@@ -37,6 +45,23 @@ const transactionMatchesOrder = (transaction, order) => {
     Number(transaction.amount) === Math.round(order.amount * 100) &&
     String(transaction.currency).toUpperCase() === order.currency.toUpperCase() &&
     (!verifiedOrderId || verifiedOrderId === order._id.toString())
+  );
+};
+
+const transactionMatchesReviewQualification = (
+  transaction,
+  reviewQualification
+) => {
+  const verifiedReviewQualificationId = transaction.metadata?.reviewQualificationId;
+
+  return (
+    transaction.reference === reviewQualification.paymentReference &&
+    Number(transaction.amount) ===
+      Math.round(reviewQualification.engagementAmount * 100) &&
+    String(transaction.currency).toUpperCase() ===
+      reviewQualification.engagementCurrency.toUpperCase() &&
+    (!verifiedReviewQualificationId ||
+      verifiedReviewQualificationId === reviewQualification._id.toString())
   );
 };
 
@@ -230,11 +255,60 @@ exports.handleWebhook = asyncHandler(async (req, res) => {
     reference: transaction.reference,
   }).populate("product", "title slug file");
 
-  if (!order || !transactionMatchesOrder(transaction, order)) {
-    res.statusCode = 400;
-    throw new Error("Payment webhook did not match an order");
+  if (order) {
+    if (!transactionMatchesOrder(transaction, order)) {
+      res.statusCode = 400;
+      throw new Error("Payment webhook did not match an order");
+    }
+
+    await fulfillOrder(order, transaction);
+    return apiResponse(res, 200, "Webhook processed");
   }
 
-  await fulfillOrder(order, transaction);
-  return apiResponse(res, 200, "Webhook processed");
+  const reviewQualification = await ReviewQualification.findOne({
+    paymentReference: transaction.reference,
+  });
+
+  if (reviewQualification) {
+    if (
+      !transactionMatchesReviewQualification(transaction, reviewQualification)
+    ) {
+      res.statusCode = 400;
+      throw new Error("Payment webhook did not match a review engagement");
+    }
+
+    reviewQualification.paymentStatus = "paid";
+    reviewQualification.status = "paid";
+    reviewQualification.paidAt =
+      reviewQualification.paidAt ||
+      new Date(transaction.paid_at || Date.now());
+    await reviewQualification.save();
+
+    return apiResponse(res, 200, "Webhook processed");
+  }
+
+  const diagnosticSubmission = await DiagnosticSubmission.findOne({
+    paymentReference: transaction.reference,
+  });
+
+  if (diagnosticSubmission) {
+    if (
+      !transactionMatchesDiagnosticSubmission(transaction, diagnosticSubmission)
+    ) {
+      res.statusCode = 400;
+      throw new Error("Payment webhook did not match a diagnostic engagement");
+    }
+
+    await fulfillDiagnosticPayment(diagnosticSubmission, transaction);
+    return apiResponse(res, 200, "Webhook processed");
+  }
+
+  const booking = await DecisionRoomBooking.findOne({ paymentReference: transaction.reference });
+  if (booking) {
+    await fulfillDecisionRoomPayment(booking, transaction);
+    return apiResponse(res, 200, "Webhook processed");
+  }
+
+  res.statusCode = 400;
+  throw new Error("Payment webhook did not match a known transaction");
 });

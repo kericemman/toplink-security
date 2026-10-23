@@ -22,7 +22,8 @@ const adminLinks = [
   { name: "Products", path: "/admin/products", icon: BookOpen },
   { name: "Orders", path: "/admin/orders", icon: Package },
   { name: "Messages", path: "/admin/messages", icon: MessageSquare },
-  { name: "Consultations", path: "/admin/consultations", icon: Inbox },
+  { name: "Requests", path: "/admin/consultations", icon: Inbox },
+  { name: "Decision Room", path: "/admin/decision-room", icon: ShieldCheck },
   { name: "Subscribers", path: "/admin/subscribers", icon: Users },
 ];
 

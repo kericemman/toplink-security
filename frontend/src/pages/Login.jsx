@@ -9,7 +9,7 @@ const Login = () => {
   const { login, isAuthenticated, isAdmin } = useAuth();
 
   const [formData, setFormData] = useState({
-    email: "info@toplinksecurity.com",
+    email: "engagements@toplinksecurity.co.ke",
     password: "",
   });
 
@@ -42,53 +42,55 @@ const Login = () => {
   };
 
   return (
-    <section className="flex min-h-[80vh] items-center justify-center bg-[#EAF2FF] px-4 py-16">
+    <section className="flex min-h-[80vh] items-center justify-center bg-[var(--site-paper)] px-4 py-16">
       <div className="w-full max-w-md rounded-3xl bg-white p-8 shadow-sm">
         <div className="mb-8 text-center">
-          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#0B3D91] text-white">
+          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--site-navy)] text-white">
             <ShieldCheck />
           </div>
 
-          <h1 className="text-2xl font-black text-[#020617]">Admin Login</h1>
-          <p className="mt-2 text-slate-600">
+          <h1 className="text-2xl font-black text-[var(--site-ink)]">Admin Login</h1>
+          <p className="mt-2 text-[var(--site-muted)]">
             Access the TopLink Security dashboard.
           </p>
         </div>
 
         <form onSubmit={handleSubmit} className="grid gap-5">
           <div>
-            <label className="mb-2 block text-sm font-semibold text-slate-700">
+            <label htmlFor="login-email" className="mb-2 block text-sm font-semibold text-[var(--site-muted)]">
               Email
             </label>
             <input
+              id="login-email"
               name="email"
               type="email"
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full rounded-xl border border-slate-200 px-4 py-3 outline-none focus:border-[#0B3D91]"
+              className="w-full rounded-xl border border-[var(--site-line)] px-4 py-3 outline-none focus:border-[var(--site-navy)]"
             />
           </div>
 
           <div>
-            <label className="mb-2 block text-sm font-semibold text-slate-700">
+            <label htmlFor="login-password" className="mb-2 block text-sm font-semibold text-[var(--site-muted)]">
               Password
             </label>
             <input
+              id="login-password"
               name="password"
               type="password"
               value={formData.password}
               onChange={handleChange}
               required
               placeholder="Enter password"
-              className="w-full rounded-xl border border-slate-200 px-4 py-3 outline-none focus:border-[#0B3D91]"
+              className="w-full rounded-xl border border-[var(--site-line)] px-4 py-3 outline-none focus:border-[var(--site-navy)]"
             />
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="rounded-xl bg-[#0B3D91] px-5 py-3 font-semibold text-white hover:bg-[#061A40] disabled:opacity-60"
+            className="rounded-xl bg-[var(--site-navy)] px-5 py-3 font-semibold text-white hover:bg-[var(--site-navy-2)] disabled:opacity-60"
           >
             {loading ? "Signing in..." : "Login"}
           </button>

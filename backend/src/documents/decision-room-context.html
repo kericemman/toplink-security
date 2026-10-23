@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Decision Room™ brief situation context form for a private advisory session with TopLink Advisory.">
+<title>Decision Room™ | Brief Situation Context</title>
+<style>
+:root{color-scheme:light;--navy:#10283f;--navy2:#183b58;--gold:#c7a66a;--ink:#172536;--muted:#627184;--line:#dce3eb;--paper:#fff;--canvas:#f3f6fa;--soft:#f7f9fc;--focus:#dbeafe;--green:#17633d}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--canvas);color:var(--ink);font:16px/1.6 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.topbar{background:var(--navy);color:#fff;border-bottom:3px solid var(--gold)}.topbar-inner{max-width:960px;margin:auto;padding:17px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px}.wordmark{font-size:.82rem;font-weight:800;letter-spacing:.17em;text-transform:uppercase}.service-tag{font-size:.76rem;letter-spacing:.09em;text-transform:uppercase;color:#e7d5b2;border:1px solid #617487;border-radius:99px;padding:5px 11px;white-space:nowrap}
+.wrap{max-width:860px;margin:0 auto;padding:42px 20px 54px}.eyebrow{display:flex;align-items:center;gap:10px;color:var(--navy2);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;font-weight:800}.eyebrow:before{content:"";display:block;width:28px;height:2px;background:var(--gold)}h1{font-size:clamp(2rem,5vw,3rem);line-height:1.1;letter-spacing:-.045em;margin:13px 0 15px;color:var(--navy);font-weight:760}.lead{font-size:1.08rem;max-width:700px;color:#405168;margin:0}.sublead{max-width:700px;color:var(--muted);margin:10px 0 0}
+.session-strip{display:flex;flex-wrap:wrap;gap:12px 24px;margin:24px 0 20px;padding:15px 18px;background:#eaf0f6;border:1px solid #d9e2ec;border-radius:12px}.session-item{display:flex;align-items:center;gap:9px;color:var(--navy);font-size:.9rem;font-weight:650}.session-item svg{width:18px;height:18px;flex:none;color:var(--navy2)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:18px;box-shadow:0 16px 40px rgba(16,40,63,.07);overflow:hidden}.card-head{padding:24px 30px 20px;border-bottom:1px solid var(--line);background:linear-gradient(120deg,#fff 0%,#f9fbfd 100%)}.card-head h2{font-size:1.15rem;color:var(--navy);margin:0 0 5px}.card-head p{color:var(--muted);margin:0;font-size:.93rem}.form-body{padding:8px 30px 28px}.notice{display:flex;gap:13px;margin:22px 0 26px;padding:15px 17px;border:1px solid #e5d9bd;background:#fbf8f1;border-radius:12px}.notice-icon{flex:none;width:25px;height:25px;display:grid;place-items:center;border-radius:50%;background:#efe3c9;color:#6b5428;font-weight:800}.notice strong{display:block;color:#4f432b;font-size:.91rem;margin-bottom:2px}.notice p{margin:0;color:#655a45;font-size:.9rem}
+.field{padding:22px 0;border-bottom:1px solid #edf0f4}.field:last-of-type{border-bottom:0}.field-top{display:flex;gap:14px;align-items:flex-start}.number{flex:none;width:34px;height:34px;display:grid;place-items:center;border-radius:10px;background:#edf2f7;color:var(--navy);font-size:.88rem;font-weight:800}.field-main{flex:1;min-width:0}.field label{display:block;color:var(--navy);font-weight:750;font-size:1rem;margin:3px 0 4px}.hint{margin:0 0 12px;color:var(--muted);font-size:.91rem}textarea{display:block;width:100%;min-height:108px;resize:vertical;border:1px solid #cbd5e1;border-radius:10px;padding:13px 14px;font:inherit;font-size:.96rem;line-height:1.55;color:var(--ink);background:#fff;transition:border-color .15s,box-shadow .15s}textarea::placeholder{color:#9aa6b5}textarea:focus{outline:none;border-color:#547a9a;box-shadow:0 0 0 4px var(--focus)}
+.actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:26px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:12px 20px;border:1px solid var(--navy);border-radius:10px;font:inherit;font-size:.94rem;font-weight:750;cursor:pointer;transition:transform .15s,background .15s}.btn:hover{transform:translateY(-1px)}.btn:focus-visible{outline:3px solid var(--focus);outline-offset:3px}.primary{background:var(--navy);color:#fff}.primary:hover{background:var(--navy2)}.secondary{background:#fff;color:var(--navy)}.secondary:hover{background:#f2f6fa}.btn:disabled{opacity:.55;cursor:not-allowed;transform:none}.privacy-foot{font-size:.83rem;color:var(--muted);margin:14px 0 0}.next{margin-top:24px;display:grid;grid-template-columns:42px 1fr;gap:14px;padding:22px 24px;border:1px solid #d9e2ec;background:#edf2f7;border-radius:14px}.next-icon{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:var(--navy);color:#fff}.next h2{font-size:1rem;color:var(--navy);margin:0 0 5px}.next p{font-size:.91rem;color:#4f6074;margin:0}.hidden{display:none!important}.response-heading{font-size:.96rem;color:var(--navy);margin:20px 0 7px}.response{white-space:pre-wrap;overflow-wrap:anywhere;background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:14px 15px;color:var(--ink);min-height:48px}.status{margin-top:18px;padding:14px 16px;border-radius:10px;background:#fbf4e5;border:1px solid #e9d5a8;color:#6c4c12}.status.success{background:#edf8f1;border-color:#b9dfc6;color:var(--green)}.footer{text-align:center;color:#748195;font-size:.82rem;margin:25px 0 0}.footer strong{color:var(--navy);font-weight:750}
+@media(max-width:600px){.topbar-inner{padding:15px 17px}.service-tag{font-size:.68rem}.wrap{padding:29px 12px 36px}.card{border-radius:14px}.card-head{padding:21px 18px 17px}.form-body{padding:5px 18px 22px}.session-strip{padding:13px 14px;gap:10px 16px}.field{padding:19px 0}.field-top{gap:10px}.number{width:30px;height:30px;border-radius:8px}.field label{margin-top:1px}.actions{gap:9px}.btn{width:100%}.next{padding:18px 16px;grid-template-columns:36px 1fr;gap:11px}.next-icon{width:36px;height:36px}.notice{padding:13px 14px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<main class="wrap">
+  <div class="eyebrow">Decision Room™</div>
+  <h1>Brief Situation Context</h1>
+  <p class="lead">Your payment is confirmed. Please provide a brief account of the matter you would like to discuss during your private 45-minute advisory session.</p>
+  <p class="sublead">Your responses help TopLink understand the situation before the conversation. Brief, practical answers are sufficient.</p>
+  <div class="session-strip" aria-label="Session details">
+    <div class="session-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>45-minute private session</div>
+    <div class="session-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>Context reviewed before the session</div>
+  </div>
+  <section class="card" aria-labelledby="form-heading">
+    <div class="card-head"><h2 id="form-heading">Tell us about your situation</h2><p>Complete all five prompts, then review your responses before proceeding.</p></div>
+    <div class="form-body">
+      <div class="notice"><div class="notice-icon" aria-hidden="true">i</div><div><strong>Confidentiality notice</strong><p>Please provide only the context needed to explain the situation. Do not include confidential personal information, sensitive operational details or restricted security information.</p></div></div>
+      <form id="context-form">
+        <div class="field"><div class="field-top"><div class="number">01</div><div class="field-main"><label for="q1">What is the situation?</label><p class="hint">Describe the security, risk or business issue.</p><textarea id="q1" name="situation" required maxlength="5000" placeholder="Briefly describe the situation you are dealing with…"></textarea></div></div></div>
+        <div class="field"><div class="field-top"><div class="number">02</div><div class="field-main"><label for="q2">What needs to be decided or resolved?</label><p class="hint">Identify the outstanding decision, question or issue.</p><textarea id="q2" name="decision" required maxlength="5000" placeholder="What decision or resolution is needed?…"></textarea></div></div></div>
+        <div class="field"><div class="field-top"><div class="number">03</div><div class="field-main"><label for="q3">What is your role, and what has happened so far?</label><p class="hint">Outline your involvement, action taken and outstanding issues.</p><textarea id="q3" name="role" required maxlength="5000" placeholder="Describe your role and any steps already taken…"></textarea></div></div></div>
+        <div class="field"><div class="field-top"><div class="number">04</div><div class="field-main"><label for="q4">What is preventing progress?</label><p class="hint">Identify the main obstacle.</p><textarea id="q4" name="obstacle" required maxlength="5000" placeholder="What is making the issue difficult to resolve?…"></textarea></div></div></div>
+        <div class="field"><div class="field-top"><div class="number">05</div><div class="field-main"><label for="q5">What would make this conversation useful to you?</label><p class="hint">Describe what you want to clarify or establish.</p><textarea id="q5" name="outcome" required maxlength="5000" placeholder="What would you like to leave the session understanding or deciding?…"></textarea></div></div></div>
+        <div class="actions"><button class="btn primary" type="submit">Preview Responses <span aria-hidden="true">→</span></button></div>
+        <p class="privacy-foot">Please keep your answers focused on the matter you want to address during the session.</p>
+      </form>
+      <section id="preview" class="hidden" aria-labelledby="preview-title" aria-live="polite">
+        <div class="next" style="margin-top:8px"><div class="next-icon" aria-hidden="true">✓</div><div><h2 id="preview-title">Review your responses</h2><p>Check each answer before proceeding. Select “Edit Responses” to make changes.</p></div></div>
+        <div id="preview-content"></div>
+        <div class="actions"><button type="button" class="btn secondary" id="edit">Edit Responses</button><button type="button" class="btn primary" id="submit">Submit to TopLink <span aria-hidden="true">→</span></button></div>
+        <div id="submit-status" class="status hidden" role="status"></div>
+      </section>
+    </div>
+  </section>
+  <section class="next" aria-labelledby="next-title"><div class="next-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12.5 9.5 17 19 7.5"/></svg></div><div><h2 id="next-title">What happens next</h2><p>TopLink reviews your submitted context before the session. After arrangements are confirmed, you will receive the session date, time and private Zoom link.</p></div></section>
+</main>
+<script>
+(function(){
+  const form=document.getElementById('context-form');
+  const preview=document.getElementById('preview');
+  const content=document.getElementById('preview-content');
+  const status=document.getElementById('submit-status');
+  const fields=[['q1','What is the situation?'],['q2','What needs to be decided or resolved?'],['q3','What is your role, and what has happened so far?'],['q4','What is preventing progress?'],['q5','What would make this conversation useful to you?']];
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(!form.reportValidity()) return;
+    content.replaceChildren();
+    fields.forEach(function(item){
+      const heading=document.createElement('h3'); heading.className='response-heading'; heading.textContent=item[1];
+      const answer=document.createElement('div'); answer.className='response'; answer.textContent=document.getElementById(item[0]).value.trim();
+      content.append(heading,answer);
+    });
+    status.classList.add('hidden'); status.textContent='';
+    preview.classList.remove('hidden');
+    form.classList.add('hidden');
+    preview.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+  document.getElementById('edit').addEventListener('click',function(){
+    preview.classList.add('hidden');
+    form.classList.remove('hidden');
+    document.getElementById('q1').focus();
+    form.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+  document.getElementById('submit').addEventListener('click',function(){
+    if(!form.reportValidity()) return;
+    status.className='status';
+    status.textContent='Sending your context securely…';
+    document.getElementById('submit').disabled=true;
+    document.getElementById('edit').disabled=true;
+    const answers=Object.fromEntries(Array.from(form.querySelectorAll('textarea'),el=>[el.name,el.value.trim()]));
+    parent.postMessage({type:'toplink:submit-context',answers},'*');
+    status.classList.remove('hidden');
+    status.scrollIntoView({behavior:'smooth',block:'nearest'});
+  });
+  window.addEventListener('message',function(event){
+    if(event.source!==parent || event.data?.type!=='toplink:context-result') return;
+    const success=event.data.success===true;
+    status.className=success?'status success':'status';
+    status.textContent=success?'Your brief situation context has been received. TopLink will review it before your session. After arrangements are confirmed, you will receive the date, time and private Zoom link.':(event.data.error||'Your context has not been sent. Please try again.');
+    document.getElementById('submit').disabled=success;
+    document.getElementById('edit').disabled=success;
+  });
+})();
+</script>
+</body>
+</html>
