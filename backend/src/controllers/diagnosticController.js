@@ -507,6 +507,16 @@ exports.initializeDiagnosticPayment = asyncHandler(async (req, res) => {
     throw new Error("This engagement has already been paid");
   }
 
+  if (
+    diagnostic.purchaseKind === "diagnostic" &&
+    diagnostic.paymentCurrency !== "USD"
+  ) {
+    res.statusCode = 409;
+    throw new Error(
+      "This payment link was created in a different currency. Please return to Diagnostic checkout and create a new USD payment."
+    );
+  }
+
   if (!authorizedClientRepresentative?.trim() || !authorizedClientRole?.trim()) {
     res.statusCode = 400;
     throw new Error("Authorized representative name and role are required");

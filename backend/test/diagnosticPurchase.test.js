@@ -237,6 +237,22 @@ test("Paystack checkout uses the recorded USD price and requires all terms", asy
   assert.equal(checkouts[0].metadata.type, "diagnostic-purchase");
 });
 
+test("legacy KES Diagnostic payment links cannot initialize a KES checkout", async () => {
+  const record = await purchase();
+  record.paymentCurrency = "KES";
+  records.set(record._id.toString(), record);
+
+  const response = await request(`/diagnostics/payment/${record.paymentToken}/initialize`, {
+    authorizedClientRepresentative: buyer.name,
+    authorizedClientRole: buyer.titleRole,
+    acceptance,
+  });
+
+  assert.equal(response.status, 409);
+  assert.match(response.message, /create a new USD payment/);
+  assert.equal(checkouts.length, 0);
+});
+
 test("a mismatched amount, currency, purchase ID or unsuccessful transaction cannot unlock access", async () => {
   const record = await beginPayment(await purchase());
   const variants = [
