@@ -11,7 +11,7 @@ actual installation path.
   content while retaining the existing TopLink logo and Insights preview.
 - Updated shared navigation and footer, public page styling, and internal links
   across the retained site pages. The public resources/store route is hidden.
-- Added direct branded checkout screens for the US$395 Executive Security Risk
+- Added direct branded checkout screens for the temporarily US$2 Executive Security Risk
   Governance Diagnostic and the US$295 Decision Room session. Each collects
   name, email, and country, then initializes Paystack directly.
 - Kept payment confirmation server-side through Paystack verification and
@@ -114,7 +114,7 @@ publicly. After Certbot, confirm HTTPS redirects and certificate renewal.
 - Open the homepage, About, Services, Contact, Insights, Decision Review,
   Diagnostic checkout and Decision Room checkout on desktop and mobile.
 - Confirm `/diagnostic/checkout` and `/decision-room/checkout` build against
-  `/api`, not localhost. Confirm Diagnostic shows US$395 (USD) and Decision Room shows USD 295.
+  `/api`, not localhost. Confirm Diagnostic shows US$2 (USD) and Decision Room shows USD 295.
 - Confirm `/api/paystack/webhook` is configured in Paystack and server-side
   verification gates every paid instrument and intake route.
 - Test email delivery and sender authorization with a controlled test before
