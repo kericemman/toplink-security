@@ -18,7 +18,7 @@ const {
 } = require("../templates/diagnosticEmail");
 
 const PAYMENT_TOKEN_DAYS = 30;
-const DIAGNOSTIC_PRICE_KES = 200;
+const DIAGNOSTIC_PRICE_USD = 395;
 const DIAGNOSTIC_SERVICE_NAME = "Executive Security Risk Governance Diagnostic™";
 const diagnosticFields = [
   "titleRole", "telephone", "countryLocation", "relationshipToRisk",
@@ -227,8 +227,8 @@ exports.createDiagnosticPurchase = asyncHandler(async (req, res) => {
     paymentToken: createPaymentToken(),
     paymentTokenExpiresAt: getTokenExpiryDate(),
     paymentServiceName: DIAGNOSTIC_SERVICE_NAME,
-    paymentAmount: DIAGNOSTIC_PRICE_KES,
-    paymentCurrency: "KES",
+    paymentAmount: DIAGNOSTIC_PRICE_USD,
+    paymentCurrency: "USD",
     status: "purchase_pending",
   });
 
@@ -252,8 +252,8 @@ exports.createDiagnosticCheckout = asyncHandler(async (req, res) => {
     paymentToken: createPaymentToken(),
     paymentTokenExpiresAt: getTokenExpiryDate(),
     paymentServiceName: DIAGNOSTIC_SERVICE_NAME,
-    paymentAmount: DIAGNOSTIC_PRICE_KES,
-    paymentCurrency: "KES",
+    paymentAmount: DIAGNOSTIC_PRICE_USD,
+    paymentCurrency: "USD",
     status: "purchase_pending",
   });
   const checkout = await initializeDiagnosticCheckout(diagnostic);

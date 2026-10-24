@@ -324,7 +324,7 @@ const DiagnosticPayment = () => {
                   "Service Page",
                   "Qualification / Engagement Confirmation",
                   "Terms of Engagement",
-                  "Paystack checkout — KES 200",
+                  "Paystack USD payment — US$395",
                   "Server-side payment verification",
                   "Payment Confirmation",
                   "Secure Client Intake",
