@@ -18,7 +18,7 @@ const {
 } = require("../templates/diagnosticEmail");
 
 const PAYMENT_TOKEN_DAYS = 30;
-const DIAGNOSTIC_PRICE_USD = 2;
+const DIAGNOSTIC_PRICE_USD = 395;
 const DIAGNOSTIC_SERVICE_NAME = "Executive Security Risk Governance Diagnostic™";
 const diagnosticFields = [
   "titleRole", "telephone", "countryLocation", "relationshipToRisk",

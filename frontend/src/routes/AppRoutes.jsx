@@ -18,6 +18,9 @@ const ReviewEngagementPayment = lazy(
   () => import("../pages/ReviewEngagementPayment")
 );
 const Diagnostic = lazy(() => import("../pages/Diagnostic"));
+const DiagnosticWorkedExample = lazy(
+  () => import("../pages/DiagnosticWorkedExample")
+);
 const DiagnosticTool = lazy(() => import("../pages/DiagnosticTool"));
 const DecisionRoom = lazy(() => import("../pages/DecisionRoom"));
 const Checkout = lazy(() => import("../pages/Checkout"));
@@ -97,6 +100,10 @@ const AppRoutes = () => (
         element={<ReviewEngagementPayment />}
       />
       <Route path="/diagnostic" element={<Diagnostic />} />
+      <Route
+        path="/diagnostic/worked-example"
+        element={<DiagnosticWorkedExample />}
+      />
       <Route path="/diagnostics" element={<Navigate to="/diagnostic" replace />} />
       <Route
         path="/who-owns-this-risk"

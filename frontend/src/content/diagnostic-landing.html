@@ -204,6 +204,16 @@
       transition: transform .15s ease, background .15s ease;
     }
     .html-diagnostic .cta:hover { background: #244A47; transform: translateY(-1px); }
+    .html-diagnostic .worked-example-link {
+      margin-top: 10px;
+      border: 1px solid #315F5B;
+      background: transparent;
+      color: #315F5B;
+    }
+    .html-diagnostic .worked-example-link:hover {
+      background: #edf3f1;
+      color: #244A47;
+    }
     .html-diagnostic .cta:focus-visible, .html-diagnostic a:focus-visible { outline: 3px solid #4b8bd8; outline-offset: 3px; }
     .html-diagnostic .cta-note { color: var(--muted); font-size: .78rem; margin: 10px 0 0; text-align: center; }
     .html-diagnostic .section {
@@ -364,6 +374,14 @@
     .html-diagnostic .bottom-cta h2 { color: #fff; }
     .html-diagnostic .bottom-cta p { color: #dce4ec; max-width: 700px; margin: 0 auto 8px; }
     .html-diagnostic .bottom-cta .cta { max-width: 360px; }
+    .html-diagnostic .bottom-cta .worked-example-link {
+      color: #fff;
+      border-color: #B8D5CE;
+    }
+    .html-diagnostic .bottom-cta .worked-example-link:hover {
+      color: #fff;
+      background: rgba(184, 213, 206, .12);
+    }
     .html-diagnostic footer {
       background: var(--navy-deep);
       color: #dce4ec;
@@ -421,7 +439,7 @@
     <section class="purchase-panel" aria-labelledby="investment-title">
       <div>
         <p class="price-label">Your investment</p>
-        <h2 class="price" id="investment-title">US$2 <small>temporary test fee</small></h2>
+        <h2 class="price" id="investment-title">US$395 <small>fixed fee</small></h2>
         <h3 class="includes-title">Your purchase includes</h3>
         <ul class="clean">
           <li>The fillable HTML Diagnostic instrument</li>
@@ -439,6 +457,7 @@
         <div class="detail-row"><span>Individual review</span><strong>Not included</strong></div>
         <div class="detail-row"><span>Scope</span><strong>One live risk and its associated decision</strong></div>
         <a class="cta" href="/diagnostic/checkout">PURCHASE THE DIAGNOSTIC</a>
+        <a class="cta worked-example-link" href="/diagnostic/worked-example">READ THE WORKED EXAMPLE</a>
       </aside>
     </section>
 
@@ -599,8 +618,9 @@
       <p class="eyebrow">Executive Security Risk Governance Diagnostic™</p>
       <h2 id="bottom-title">Who Actually Owns This Risk?™</h2>
       <p>Examine the relationship between risk ownership, decision authority and accountability around one live risk.</p>
-      <p style="margin-top:18px;font-size:1.8rem;font-weight:850;color:#B8D5CE;">US$2 <span style="font-size:.9rem;font-weight:600;">temporary test fee</span></p>
+      <p style="margin-top:18px;font-size:1.8rem;font-weight:850;color:#B8D5CE;">US$395 <span style="font-size:.9rem;font-weight:600;">fixed fee</span></p>
       <a class="cta" href="/diagnostic/checkout">PURCHASE THE DIAGNOSTIC</a>
+      <a class="cta worked-example-link" href="/diagnostic/worked-example">READ THE WORKED EXAMPLE</a>
     </section>
   </main>
 
