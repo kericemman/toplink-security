@@ -21,7 +21,7 @@ const ReferenceHomepage = () => {
     <div className="reference-home">
       <main id="top">
         <div dangerouslySetInnerHTML={{ __html: mainHtml }} />
-        <BlogPreview className="reference-insights" />
+        <BlogPreview />
         <div dangerouslySetInnerHTML={{ __html: closeHtml }} />
       </main>
     </div>
