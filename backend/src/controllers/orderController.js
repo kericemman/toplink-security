@@ -7,7 +7,8 @@ const apiResponse = require("../utils/apiResponse");
 const { verifyDownloadToken } = require("../utils/downloadToken");
 
 exports.getAdminOrders = asyncHandler(async (req, res) => {
-  const orders = await Order.find()
+  // The admin payment ledger only displays Paystack-verified successful payments.
+  const orders = await Order.find({ paymentStatus: "paid" })
     .populate("product", "title price currency")
     .populate("user", "name email")
     .sort({ createdAt: -1 });

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import {
   FileText,
@@ -7,12 +8,12 @@ import {
   Users,
   TrendingUp,
   ShoppingBag,
-  DollarSign,
   Newspaper,
   Mail,
   Briefcase,
   GraduationCap,
   ShieldCheck,
+  RefreshCw,
 } from "lucide-react";
 
 import { getAdminArticles } from "../../services/articleService";
@@ -26,8 +27,6 @@ import {
   getDiagnosticSubmissions,
 } from "../../services/contactService";
 import { getSubscribers } from "../../services/subscriberService";
-import { formatCurrency } from "../../utils/formatCurrency";
-import api from "../../services/api";
 
 const AdminDashboard = () => {
   const [stats, setStats] = useState({
@@ -40,11 +39,10 @@ const AdminDashboard = () => {
     reviewQualifications: 0,
     diagnostics: 0,
     subscribers: 0,
-    revenue: 0,
-    pendingOrders: 0,
   });
 
   const [loading, setLoading] = useState(true);
+  const [lastUpdated, setLastUpdated] = useState(null);
 
   const fetchDashboardStats = async () => {
     try {
@@ -60,7 +58,6 @@ const AdminDashboard = () => {
         reviewQualifications,
         diagnostics,
         subscribers,
-        roomResponse,
       ] = await Promise.all([
         getAdminArticles(),
         getAdminProducts(),
@@ -71,30 +68,7 @@ const AdminDashboard = () => {
         getReviewQualifications(),
         getDiagnosticSubmissions(),
         getSubscribers(),
-        api.get("/decision-room"),
       ]);
-
-      const paidRevenue = (orders || [])
-        .filter((order) => order.paymentStatus === "paid")
-        .reduce((total, order) => total + Number(order.amount || 0), 0);
-
-      const paidReviewRevenue = (reviewQualifications || [])
-        .filter((item) => item.paymentStatus === "paid")
-        .reduce(
-          (total, item) => total + Number(item.engagementAmount || 0),
-          0
-        );
-
-      const paidDiagnosticRevenue = (diagnostics || [])
-        .filter((item) => item.paymentStatus === "paid")
-        .reduce((total, item) => total + Number(item.paymentAmount || 0), 0);
-      const paidRoomRevenue = (roomResponse.data.data || [])
-        .filter((item) => item.paymentStatus === "paid")
-        .reduce((total, item) => total + Number(item.amount || 0), 0);
-
-      const pendingOrders = (orders || [])
-        .filter((order) => order.paymentStatus === "pending" || order.status === "pending")
-        .length;
 
       setStats({
         articles: articles?.length || 0,
@@ -106,9 +80,8 @@ const AdminDashboard = () => {
         reviewQualifications: reviewQualifications?.length || 0,
         diagnostics: diagnostics?.length || 0,
         subscribers: subscribers?.filter((sub) => sub.isActive)?.length || 0,
-        revenue: paidRevenue + paidReviewRevenue + paidDiagnosticRevenue + paidRoomRevenue,
-        pendingOrders,
       });
+      setLastUpdated(new Date());
     } catch (error) {
       toast.error(
         error?.response?.data?.message || "Failed to load dashboard stats"
@@ -124,21 +97,12 @@ const AdminDashboard = () => {
 
   const mainCards = [
     {
-      label: "Total Revenue",
-      value: formatCurrency(stats.revenue, "USD"),
-      icon: DollarSign,
-      trend: "+12%",
-      trendUp: true,
-      color: "from-emerald-500 to-teal-500",
-      bgColor: "bg-emerald-50",
-      iconColor: "text-emerald-600",
-    },
-    {
-      label: "Total Orders",
+      label: "Successful Test Payments",
       value: stats.orders,
       icon: ShoppingBag,
-      trend: `${stats.pendingOrders} pending`,
+      trend: "Paystack test transactions",
       trendUp: null,
+      to: "/admin/orders",
       color: "from-blue-500 to-indigo-500",
       bgColor: "bg-blue-50",
       iconColor: "text-blue-600",
@@ -168,6 +132,7 @@ const AdminDashboard = () => {
   const detailCards = [
     {
       label: "Articles",
+      to: "/admin/articles",
       value: stats.articles,
       icon: FileText,
       subtitle: "Published content",
@@ -177,6 +142,7 @@ const AdminDashboard = () => {
     },
     {
       label: "Products",
+      to: "/admin/products",
       value: stats.products,
       icon: BookOpen,
       subtitle: "Available items",
@@ -186,6 +152,7 @@ const AdminDashboard = () => {
     },
     {
       label: "Messages",
+      to: "/admin/messages",
       value: stats.messages,
       icon: MessageSquare,
       subtitle: "Contact form",
@@ -195,6 +162,7 @@ const AdminDashboard = () => {
     },
     {
       label: "Consultations",
+      to: "/admin/consultations",
       value: stats.consultations,
       icon: Briefcase,
       subtitle: "Service requests",
@@ -204,6 +172,7 @@ const AdminDashboard = () => {
     },
     {
       label: "Training Requests",
+      to: "/admin/consultations",
       value: stats.training,
       icon: GraduationCap,
       subtitle: "Team training",
@@ -213,6 +182,7 @@ const AdminDashboard = () => {
     },
     {
       label: "Decision Reviews",
+      to: "/admin/consultations",
       value: stats.reviewQualifications,
       icon: Briefcase,
       subtitle: "Qualification briefs",
@@ -222,6 +192,7 @@ const AdminDashboard = () => {
     },
     {
       label: "Diagnostics",
+      to: "/admin/consultations",
       value: stats.diagnostics,
       icon: ShieldCheck,
       subtitle: "Governance checks",
@@ -231,6 +202,7 @@ const AdminDashboard = () => {
     },
     {
       label: "Email Subscribers",
+      to: "/admin/subscribers",
       value: stats.subscribers,
       icon: Mail,
       subtitle: "Newsletter list",
@@ -253,10 +225,11 @@ const AdminDashboard = () => {
               Overview of your security platform performance
             </p>
           </div>
-          <div className="hidden md:block">
-            <div className="rounded-lg bg-slate-100 px-3 py-1.5 text-xs text-slate-600">
-              Last updated: {new Date().toLocaleDateString()}
-            </div>
+          <div className="flex items-center gap-3">
+            {lastUpdated && <span className="hidden rounded-lg bg-slate-100 px-3 py-1.5 text-xs text-slate-600 md:inline">Updated {lastUpdated.toLocaleTimeString()}</span>}
+            <button type="button" onClick={fetchDashboardStats} disabled={loading} className="inline-flex min-h-10 items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 text-sm font-semibold text-slate-700 hover:bg-slate-50 disabled:opacity-50" aria-label="Refresh dashboard">
+              <RefreshCw size={16} className={loading ? "animate-spin" : ""} /> Refresh
+            </button>
           </div>
         </div>
       </div>
@@ -275,14 +248,14 @@ const AdminDashboard = () => {
       ) : (
         <>
           {/* Main Stats Cards */}
-          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {mainCards.map((card) => {
               const Icon = card.icon;
 
               return (
-                <div
+                <Link to={card.to || "/admin/orders"}
                   key={card.label}
-                  className="group relative overflow-hidden rounded-xl bg-white p-6 shadow-sm transition-all duration-200 hover:shadow-md"
+                  className="group relative overflow-hidden rounded-xl bg-white p-6 shadow-sm transition-all duration-200 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
                 >
                   <div className="absolute top-0 right-0 h-32 w-32 -translate-y-8 translate-x-8 rounded-full bg-gradient-to-br opacity-5 blur-2xl transition-all group-hover:scale-150"
                     style={{ backgroundImage: `linear-gradient(to bottom right, ${card.color})` }}
@@ -312,7 +285,7 @@ const AdminDashboard = () => {
                       {card.value}
                     </h2>
                   </div>
-                </div>
+                </Link>
               );
             })}
           </div>
@@ -327,9 +300,9 @@ const AdminDashboard = () => {
                 const Icon = card.icon;
 
                 return (
-                  <div
+                  <Link to={card.to}
                     key={card.label}
-                    className={`group rounded-lg ${card.bgColor} p-4 transition-all duration-200 ${card.hoverColor} cursor-pointer`}
+                    className={`group rounded-lg ${card.bgColor} p-4 transition-all duration-200 ${card.hoverColor} focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700`}
                   >
                     <div className="flex items-start justify-between">
                       <div>
@@ -345,7 +318,7 @@ const AdminDashboard = () => {
                       </div>
                       <Icon size={16} className={card.iconColor} />
                     </div>
-                  </div>
+                  </Link>
                 );
               })}
             </div>
@@ -357,18 +330,10 @@ const AdminDashboard = () => {
               Quick Actions
             </h3>
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-              <button className="rounded-lg bg-slate-50 px-4 py-2 text-left text-sm text-slate-700 transition-all hover:bg-slate-100">
-                ✍️ Create New Article
-              </button>
-              <button className="rounded-lg bg-slate-50 px-4 py-2 text-left text-sm text-slate-700 transition-all hover:bg-slate-100">
-                📦 Add New Product
-              </button>
-              <button className="rounded-lg bg-slate-50 px-4 py-2 text-left text-sm text-slate-700 transition-all hover:bg-slate-100">
-                📧 View Messages
-              </button>
-              <button className="rounded-lg bg-slate-50 px-4 py-2 text-left text-sm text-slate-700 transition-all hover:bg-slate-100">
-                👥 Manage Subscribers
-              </button>
+              <Link to="/admin/articles/create" className="rounded-lg bg-slate-50 px-4 py-3 text-sm text-slate-700 transition-all hover:bg-slate-100">Create New Article</Link>
+              <Link to="/admin/products/create" className="rounded-lg bg-slate-50 px-4 py-3 text-sm text-slate-700 transition-all hover:bg-slate-100">Add New Product</Link>
+              <Link to="/admin/messages" className="rounded-lg bg-slate-50 px-4 py-3 text-sm text-slate-700 transition-all hover:bg-slate-100">View Messages</Link>
+              <Link to="/admin/subscribers" className="rounded-lg bg-slate-50 px-4 py-3 text-sm text-slate-700 transition-all hover:bg-slate-100">Manage Subscribers</Link>
             </div>
           </div>
         </>

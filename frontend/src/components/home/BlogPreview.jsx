@@ -1,6 +1,4 @@
-import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import insightsImage from "../../assets/home/risk-decision-review.jpg";
 
 const BlogPreview = () => (
   <section
@@ -9,27 +7,22 @@ const BlogPreview = () => (
     className="reference-insights"
   >
     <div className="wrap">
-      <div className="insights-feature">
-        <div className="insights-feature-copy">
-          <p className="home-insights-eyebrow">Security Insights</p>
-          <h2 id="home-insights-title">Actionable knowledge for security leaders.</h2>
-          <p className="insights-feature-description">
-            Explore perspectives on enterprise security risk management, physical
-            asset protection, crisis preparedness, security leadership, and
-            emerging security challenges.
-          </p>
-          <Link to="/blog" className="home-btn home-btn-outline">
-            Explore Insights <ArrowRight size={16} aria-hidden="true" />
-          </Link>
-        </div>
-        <div className="insights-feature-image">
-          <img
-            src={insightsImage}
-            alt="Security leaders discussing risk and organizational priorities"
-            loading="lazy"
-            decoding="async"
-          />
-        </div>
+      <div className="insights-inner">
+        <h2 id="home-insights-title" className="insights-heading">Explore Insights &amp; Publications</h2>
+        <p className="insights-description">
+          Access research papers, executive briefings, expert articles and practical resources
+          on security risk governance, executive accountability and organisational decision-making.
+        </p>
+        <nav className="insights-category-nav" aria-label="Insights and publication categories">
+          {[
+            ["Research Papers", "/blog?category=Research%20Papers"],
+            ["Executive Briefings", "/blog?category=Executive%20Briefings"],
+            ["Expert Articles", "/blog?category=Expert%20Articles"],
+            ["Practical Resources", "/blog?category=Practical%20Resources"],
+          ].map(([label, to]) => (
+            <Link className="insights-category-link" key={label} to={to}>{label}</Link>
+          ))}
+        </nav>
       </div>
     </div>
   </section>

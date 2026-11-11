@@ -44,11 +44,17 @@ exports.createArticle = asyncHandler(async (req, res) => {
     status,
     isFeatured,
     coverImage,
+    pdfDocument,
   } = req.body;
 
-  if (!title || !excerpt || !content) {
+  const pdfCategory = ["Research Papers", "Executive Briefings"].includes(category);
+  if (!title || !excerpt || (!content && !(pdfCategory && pdfDocument?.url))) {
     res.statusCode = 400;
-    throw new Error("Title, excerpt and content are required");
+    throw new Error("Title, excerpt and article content or a PDF are required");
+  }
+  if (pdfDocument?.url && (!pdfCategory || pdfDocument.mimeType !== "application/pdf")) {
+    res.statusCode = 400;
+    throw new Error("PDF uploads are only supported for Research Papers and Executive Briefings");
   }
 
   const baseSlug = slugifyText(title);
@@ -70,6 +76,7 @@ exports.createArticle = asyncHandler(async (req, res) => {
     status,
     isFeatured,
     coverImage,
+    pdfDocument,
     author: req.user._id,
     publishedAt: status === "published" ? new Date() : null,
   });
@@ -199,6 +206,7 @@ exports.updateArticle = asyncHandler(async (req, res) => {
     status,
     isFeatured,
     coverImage,
+    pdfDocument,
   } = req.body;
 
   if (title && title !== article.title) {
@@ -222,6 +230,17 @@ exports.updateArticle = asyncHandler(async (req, res) => {
   article.isFeatured =
     typeof isFeatured === "boolean" ? isFeatured : article.isFeatured;
   article.coverImage = coverImage || article.coverImage;
+  const resultingCategory = category || article.category;
+  const pdfCategory = ["Research Papers", "Executive Briefings"].includes(resultingCategory);
+  if (pdfDocument) {
+    if (pdfDocument.url && (!pdfCategory || pdfDocument.mimeType !== "application/pdf")) {
+      res.statusCode = 400;
+      throw new Error("PDF uploads are only supported for Research Papers and Executive Briefings");
+    }
+    article.pdfDocument = pdfDocument;
+  } else if (pdfDocument === null || !pdfCategory) {
+    article.pdfDocument = undefined;
+  }
 
   if (status) {
     article.status = status;

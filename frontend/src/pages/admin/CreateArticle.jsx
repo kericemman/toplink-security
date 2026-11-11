@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import { Upload } from "lucide-react";
+import { FileText, Upload } from "lucide-react";
 import TiptapEditor from "../../editor/TiptapEditor";
 import { createArticle } from "../../services/articleService";
-import { uploadImage } from "../../services/uploadService";
+import { uploadDocument, uploadImage } from "../../services/uploadService";
+import { ARTICLE_CATEGORIES, PDF_ARTICLE_CATEGORIES } from "../../data/articleCategories";
 
 const CreateArticle = () => {
   const navigate = useNavigate();
@@ -13,16 +14,19 @@ const CreateArticle = () => {
     title: "",
     excerpt: "",
     content: "",
-    category: "Security Insights",
+    category: "Expert Articles",
     tags: "",
     status: "draft",
     isFeatured: false,
     coverImage: null,
+    pdfDocument: null,
   });
 
   const [imagePreview, setImagePreview] = useState("");
   const [uploading, setUploading] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [uploadingPdf, setUploadingPdf] = useState(false);
+  const needsPdf = PDF_ARTICLE_CATEGORIES.includes(formData.category);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -67,6 +71,27 @@ const CreateArticle = () => {
     }
   };
 
+  const handlePdfUpload = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (file.type !== "application/pdf") {
+      toast.error("Please select a PDF file");
+      e.target.value = "";
+      return;
+    }
+    try {
+      setUploadingPdf(true);
+      const result = await uploadDocument(file);
+      setFormData((prev) => ({ ...prev, pdfDocument: result }));
+      toast.success("PDF uploaded");
+    } catch (error) {
+      toast.error(error?.response?.data?.message || "PDF upload failed");
+    } finally {
+      setUploadingPdf(false);
+      e.target.value = "";
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -75,8 +100,8 @@ const CreateArticle = () => {
       ?.replace(/<p>\s*<\/p>/g, "")
       ?.trim();
 
-    if (!cleanContent) {
-      toast.error("Article content is required");
+    if (!cleanContent && !(needsPdf && formData.pdfDocument?.url)) {
+      toast.error(needsPdf ? "Upload a PDF or add article content" : "Article content is required");
       return;
     }
 
@@ -86,7 +111,7 @@ const CreateArticle = () => {
       await createArticle({
         title: formData.title,
         excerpt: formData.excerpt,
-        content: formData.content,
+        content: cleanContent || "",
         category: formData.category,
         tags: formData.tags
           .split(",")
@@ -95,6 +120,7 @@ const CreateArticle = () => {
         status: formData.status,
         isFeatured: formData.isFeatured,
         coverImage: formData.coverImage,
+        pdfDocument: needsPdf ? formData.pdfDocument : null,
       });
 
       toast.success("Article created successfully");
@@ -188,13 +214,7 @@ const CreateArticle = () => {
               onChange={handleChange}
               className="w-full rounded-xl border border-slate-200 px-4 py-3 outline-none focus:border-[#0B3D91]"
             >
-              <option value="Security Insights">Security Insights</option>
-              <option value="Risk Assessment">Risk Assessment</option>
-              <option value="Physical Security">Physical Security</option>
-              <option value="Security Awareness">Security Awareness</option>
-              <option value="Emergency Preparedness">
-                Emergency Preparedness
-              </option>
+              {ARTICLE_CATEGORIES.map((category) => <option key={category} value={category}>{category}</option>)}
             </select>
 
             <label className="mb-2 mt-5 block text-sm font-semibold text-slate-700">
@@ -232,6 +252,16 @@ const CreateArticle = () => {
             </label>
           </div>
 
+          {needsPdf && <div className="rounded-3xl bg-white p-6 shadow-sm">
+            <label className="mb-3 block text-sm font-semibold text-slate-700">PDF Document *</label>
+            {formData.pdfDocument?.url && <p className="mb-3 flex items-center gap-2 break-all text-sm text-emerald-700"><FileText size={18} />{formData.pdfDocument.originalName || "PDF uploaded"}</p>}
+            <label className="flex cursor-pointer items-center justify-center gap-2 rounded-xl border border-dashed border-blue-200 bg-blue-50 px-5 py-5 text-center font-semibold text-[#0B3D91] hover:bg-blue-100">
+              <Upload size={18} />{uploadingPdf ? "Uploading PDF..." : formData.pdfDocument ? "Replace PDF" : "Upload PDF"}
+              <input type="file" accept="application/pdf,.pdf" onChange={handlePdfUpload} className="hidden" />
+            </label>
+            <p className="mt-3 text-xs leading-5 text-slate-500">PDF only, up to 10 MB. Readers can open or download it from the published page.</p>
+          </div>}
+
           <div className="rounded-3xl bg-white p-6 shadow-sm">
             <label className="mb-3 block text-sm font-semibold text-slate-700">
               Cover Image
@@ -263,7 +293,7 @@ const CreateArticle = () => {
 
           <button
             type="submit"
-            disabled={saving || uploading}
+            disabled={saving || uploading || uploadingPdf}
             className="rounded-xl bg-[#0B3D91] px-5 py-4 font-semibold text-white hover:bg-[#061A40] disabled:cursor-not-allowed disabled:opacity-60"
           >
             {saving ? "Saving..." : "Create Article"}

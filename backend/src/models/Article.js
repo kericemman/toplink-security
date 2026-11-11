@@ -30,6 +30,14 @@ const articleSchema = new mongoose.Schema(
       publicId: String,
     },
 
+    pdfDocument: {
+      url: String,
+      publicId: String,
+      originalName: String,
+      mimeType: String,
+      format: String,
+    },
+
     category: {
       type: String,
       default: "Security Insights",

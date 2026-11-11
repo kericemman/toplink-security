@@ -7,6 +7,8 @@ import {
   Clock,
   Link as LinkIcon,
   List,
+  FileText,
+  Download,
 } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -330,6 +332,26 @@ const ArticleDetails = () => {
       <section className="py-16 lg:py-20">
         <div className="container-custom grid gap-10 lg:grid-cols-[minmax(0,1fr)_300px]">
           <main id="article-content" className="relative min-w-0 pr-0 lg:pr-6">
+            {article.pdfDocument?.url && (
+              <section className="mb-8 rounded-xl border border-[var(--site-line)] bg-[var(--site-paper)] p-5 sm:p-7" aria-labelledby="article-pdf-title">
+                <div className="flex items-start gap-4">
+                  <FileText className="mt-1 shrink-0 text-[var(--site-teal)]" size={26} aria-hidden="true" />
+                  <div className="min-w-0 flex-1">
+                    <h2 id="article-pdf-title" className="text-lg font-extrabold text-[var(--site-navy)]">Read the full document</h2>
+                    <p className="mt-1 break-words text-sm text-[var(--site-muted)]">{article.pdfDocument.originalName || "PDF document"}</p>
+                    <div className="mt-4 flex flex-wrap gap-3">
+                      <a href={article.pdfDocument.url} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center gap-2 rounded bg-[var(--site-navy)] px-4 py-2 text-sm font-semibold text-white hover:bg-[var(--site-teal)]">
+                        <FileText size={16} aria-hidden="true" /> Read PDF
+                      </a>
+                      <a href={article.pdfDocument.url} download={article.pdfDocument.originalName || true} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center gap-2 rounded border border-[var(--site-navy)] px-4 py-2 text-sm font-semibold text-[var(--site-navy)] hover:bg-white">
+                        <Download size={16} aria-hidden="true" /> Download PDF
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <iframe title={`Read ${article.title}`} src={article.pdfDocument.url} className="mt-6 hidden h-[75vh] w-full rounded border border-[var(--site-line)] lg:block" />
+              </section>
+            )}
             <div
               className={`article-content ${
                 !hasAccess ? "max-h-[760px] overflow-hidden" : ""

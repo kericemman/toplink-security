@@ -13,7 +13,7 @@ const AdminOrders = () => {
     try {
       setLoading(true);
       const result = await getAdminOrders();
-      setOrders(result || []);
+      setOrders((result || []).filter((order) => order.paymentStatus === "paid"));
     } catch (error) {
       toast.error(error?.response?.data?.message || "Failed to load orders");
     } finally {
@@ -43,13 +43,13 @@ const AdminOrders = () => {
   return (
     <div>
       <h1 className="text-3xl font-black text-[#020617]">Orders</h1>
-      <p className="mt-2 text-slate-600">View digital product purchases.</p>
+      <p className="mt-2 text-slate-600">Successful Paystack-confirmed payments only.</p>
 
       <div className="mt-8 overflow-hidden rounded-3xl bg-white shadow-sm">
         {loading ? (
           <p className="p-6 text-slate-600">Loading orders...</p>
         ) : orders.length === 0 ? (
-          <p className="p-6 text-slate-600">No orders found.</p>
+          <p className="p-6 text-slate-600">No successful payments recorded yet.</p>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full min-w-[900px] text-left">
@@ -88,14 +88,10 @@ const AdminOrders = () => {
                     <td className="px-5 py-4">
                       <span
                         className={`rounded-full px-3 py-1 text-xs font-bold capitalize ${
-                          order.paymentStatus === "paid"
-                            ? "bg-green-50 text-green-700"
-                            : order.paymentStatus === "failed"
-                            ? "bg-red-50 text-red-600"
-                            : "bg-yellow-50 text-yellow-700"
+                          "bg-green-50 text-green-700"
                         }`}
                       >
-                        {order.paymentStatus}
+                        Successful
                       </span>
                     </td>
 
